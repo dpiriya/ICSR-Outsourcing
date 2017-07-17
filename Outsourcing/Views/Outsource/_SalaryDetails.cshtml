@@ -1,0 +1,202 @@
+﻿@model Outsourcing.ViewModel.SalaryDetailsView
+
+<table>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.BasicSalary)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.BasicSalary, new { @id = "BasicSalary" })
+                @Html.ValidationMessageFor(model => model.BasicSalary)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.HRA)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.HRA, new { @id = "HRA" })
+                @Html.ValidationMessageFor(model => model.HRA)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Bonus)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Bonus, new { @id = "Bonus" })
+                @Html.ValidationMessageFor(model => model.Bonus)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SpecialAllowance)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SpecialAllowance, new { @id = "SpecialAllowance" })
+                @Html.ValidationMessageFor(model => model.SpecialAllowance)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.GrossSalary)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.GrossSalary, new { @id = "GrossSalary" })
+                @Html.ValidationMessageFor(model => model.GrossSalary)
+            </div>
+        </td>
+    </tr>
+    <tr><th colspan="2">Deduction</th></tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EmployeePF)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.EmployeePF, new { @id = "EmployeePF" })
+                @Html.ValidationMessageFor(model => model.EmployeePF)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EmployeeESIC)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.EmployeeESIC, new { @id = "EmployeeESIC" })
+                @Html.ValidationMessageFor(model => model.EmployeeESIC)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProfessionalTax)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.ProfessionalTax, new { @id = "ProfessionalTax" })
+                @Html.ValidationMessageFor(model => model.ProfessionalTax)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TotalDeduction)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.TotalDeduction, new { @id = "TotalDeduction" })
+                @Html.ValidationMessageFor(model => model.TotalDeduction)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.NetSalary)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.NetSalary, new { @id = "NetSalary" })
+                @Html.ValidationMessageFor(model => model.NetSalary)
+            </div>
+        </td>
+    </tr>
+    <tr><th colspan="2">Contribution</th></tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EmployerPF)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.EmployerPF, new { @id = "EmployerPF" })
+                @Html.ValidationMessageFor(model => model.EmployerPF)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EmployerESIC)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.EmployerESIC, new { @id = "EmployerESIC" })
+                @Html.ValidationMessageFor(model => model.EmployerESIC)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Insurance)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Insurance, new { @id = "Insurance" })
+                @Html.ValidationMessageFor(model => model.Insurance)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TotalContribution)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.TotalContribution, new { @id = "TotalContribution" })
+                @Html.ValidationMessageFor(model => model.TotalContribution)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.GrossTotal)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.GrossTotal, new { @id = "GrossTotal" })
+                @Html.ValidationMessageFor(model => model.GrossTotal)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AgencyFee)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.AgencyFee, new { @id = "AgencyFee" })
+                @Html.ValidationMessageFor(model => model.AgencyFee)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.GrossTotalwithAgencyFee)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.GrossTotalwithAgencyFee, new { @id = "GrossTotalwithAgencyFee" })
+                @Html.ValidationMessageFor(model => model.GrossTotalwithAgencyFee)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ServiceTax)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.ServiceTax, new { @id = "ServiceTax" })
+                @Html.ValidationMessageFor(model => model.ServiceTax)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TotalSalary)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.TotalSalary, new { @id = "TotalSalary" })
+                @Html.ValidationMessageFor(model => model.TotalSalary)
+            </div>
+        </td>
+    </tr>
+</table>

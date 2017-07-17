@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Outsourcing.ViewModel.OfferProcessingView>
+<link href="~/Content/TableView.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "OfferProcessing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="titleView">
+    <h3>Offer Processing</h3>
+</div>
+    <table class="Table1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CandidateName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DesignationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GrossSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationInMonth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfferRequestDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfferReceivedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JoiningDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MeetingID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CandidateName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DesignationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrossSalary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DurationInMonth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OfferRequestDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OfferReceivedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JoiningDate)
+                </td>
+                <td class="actionColumn">
+                        @using (@Html.BeginForm("", "Outsource", new { EmployeeID = "", MeetingID = item.MeetingID, OrderID = 0, cmd = "New" }))
+                        {
+                            if (item.OfferReceivedDate == null)
+                            {
+                                <input type="submit" class="SubmitBlue" value="Receiving Offer" name="action:ReceivingOffer" onclick="target = '_self';" />
+                            }
+                            if (item.JoiningDate == null)
+                            {
+                                <input type="submit" class="SubmitBlue" value="Joining Report" name="action:JoiningReport" onclick="target = '_self';" />
+                                <input type="submit" class="SubmitBlue" value="Cancel Offer" name="action:CancelOffer" onclick="target = '_self';" />
+                            }
+                            if (item.JoiningDate != null && (item.OfferStatus == null || item.OfferStatus == ""))
+                            {
+                                <input type="submit" class="SubmitBlue" value="Appointment" name="action:NewAppointment" onclick="target = '_self';" />
+
+                            }
+                            if (item.JoiningDate != null)
+                            {
+                                <input type="submit" class="SubmitBlue" value="Office Order" name="action:OfficeOrder" onclick="target = '_self';" />
+                            }
+                        }                                                 
+                </td>
+            </tr>        
+    }
+
+</table>
+

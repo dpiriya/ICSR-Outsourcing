@@ -1,0 +1,197 @@
+﻿@model Outsourcing.ViewModel.MasterReport
+@{
+    ViewBag.Title = "MasterReport";
+}
+
+<h2>Master Report</h2>
+
+@using (Html.BeginForm("MasterReport", "OutsourceReport"))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <td>
+                @Html.Label("Select the required tables")
+            </td>
+            <td>
+                @Html.DropDownListFor(m => m.DBList1, Model.DBList, new { @id = "tables", multiple = "multiple", onChange = "getDB(this)" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="10">
+                <span class="tag label label-info" id="spanDBId" style="display:none">
+                </span>
+            </td>
+        </tr>
+    </table>
+    <div id="divAppointmentMaster" class="hidden">
+        <table>
+            <tr>
+
+                <td>
+                    @Html.Label("Appointment Master")
+                </td>
+                <td>
+                    @Html.DropDownListFor(m => m.am1, Model.am, new { @id = "idAppointmentMaster", multiple = "multiple", onChange = "getDBField(this)" })
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="20">
+                    <span class="tag label label-info" id="spanAppointmentMaster" style="display:none">
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+        <div id="divAppointmentProject" >
+            <table>
+                <tr>
+                    <td>
+                        @Html.Label("Appointment Project")
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.ap1, Model.ap, new { @id = "idAppointmentProject", multiple = "multiple", onChange = "getDBField(this)" })
+                        @*<select id="app" multiple="multiple">
+                                @foreach (var item in Model.ap)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </select>*@
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="20">
+                        <span class="tag label label-info" id="spanAppointmentProject" style="display:none">
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="divOutsourcingMeeting" class="hidden">
+            <table>
+                <tr>
+                    <td>
+                        @Html.Label("OutsourcingMeeting")
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.om1, Model.om, new { @id = "idOutsourcingMeeting", multiple = "multiple", onChange = "getDBField(this)" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="20">
+                        <span class="tag label label-info" id="spanOutsourcingMeeting" style="display:none">
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="divEmployeeDetails" class="hidden">
+            <table>
+                <tr>
+                    <td>
+                        @Html.Label("OutsourcingEmployeeDetails")
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.oe1, Model.oe, new { @id = "idEmployeeDetails", multiple = "multiple", onChange = "getDBField(this)" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="20">
+                        <span class="tag label label-info" id="spanEmployeeDetails" style="display:none">
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="divSalaryDetails" class="hidden">
+            <table>
+                <tr>
+                    <td>
+                        @Html.Label("SalaryDetails")
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.sal1, Model.Sal, new { @id = "idSalaryDetails", multiple = "multiple", onChange = "getDBField(this)" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="20">
+                        <span class="tag label label-info" id="spanSalaryDetails" style="display:none">
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <input type="submit" id="btnSelected" value="Get Selected" onclick="ViewReport()" />
+}
+@*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
+@*<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
+      rel="stylesheet" type="text/css" />*@
+@*<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>*@
+@*<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+      rel="stylesheet" type="text/css" />
+<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+        type="text/javascript"></script>*@
+
+<script type="text/javascript">
+    $(function () {      
+
+        $('#tables').multiselect({
+            includeSelectAllOption: true
+        });
+        $('#idAppointmentMaster').multiselect({
+            includeSelectAllOption: true
+        });
+        $('#idAppointmentProject').multiselect({
+            includeSelectAllOption: true
+        });
+        $('#idOutsourcingMeeting').multiselect({
+            includeSelectAllOption: true
+        });
+        $('#idEmployeeDetails').multiselect({
+            includeSelectAllOption: true
+        });
+        $('#idSalaryDetails').multiselect({
+            includeSelectAllOption: true
+        });
+        //$('#btnSelected').click(function () {
+        //    var selected = $("select option:selected");
+        //    var message = "";
+        //    selected.each(function () {
+        //        message += $(this).val() + "\n";
+        //    });
+        //    alert(message);
+        //});
+    });
+    function getDB(name) {
+        $('#spanDBId').show();
+
+        $('#spanDBId').html("");
+        var array = $("#" + name.id).val();
+        $.each(array, function (index) {
+            $('#spanDBId').append("<span><label>" + array[index] + "</label></span><a><i class='remove glyphicon glyphicon-remove-sign glyphicon-white'></i></a>&nbsp;&nbsp; ");
+        })
+    }
+
+    function getDBField(name) {
+        var id = $("#" + getSpanId(name));
+        id.show();
+        id.html("");
+        var array = $("#" + name.id).val();
+        $.each(array, function (index) {
+            $("#" + getSpanId(name)).append("<span><label>" + array[index] + "</label></span><a><i class='remove glyphicon glyphicon-remove-sign glyphicon-white'></i></a> ");
+        })
+
+    }
+    function getSpanId(getname) {
+        var name = $(getname).attr('id');
+        return name.replace('id', 'span');
+    }
+    function ViewReport()
+    {
+       // $("#").load("/OutsourceReport/_MasterReport?tableName="+);
+
+    }
+</script>
+
+

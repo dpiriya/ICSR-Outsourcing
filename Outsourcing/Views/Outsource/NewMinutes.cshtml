@@ -1,0 +1,605 @@
+﻿@model Outsourcing.ViewModel.OutsourcingMeetingView
+@using Outsourcing.CustomHelper
+@{
+    @*ViewBag.Title = "New Minutes";*@
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/HelperStyle1.css" rel="stylesheet" type="text/css" />
+<h3>@ViewBag.Title</h3>
+
+@using (Html.BeginForm("NewMinutes", "Outsource"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <table>
+    <tr id="trMeetID"><td colspan="2">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MeetingID)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.MeetingID, new {@class = "ReadonlyField" })
+                @Html.ValidationMessageFor(model => model.MeetingID)
+            </div>
+        </td></tr>
+    <tr><th colspan="2">Employee Details</th></tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CandidateID)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.CandidateID, new {@class = "ReadonlyField" })
+                @Html.ValidationMessageFor(model => model.CandidateID)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CandidateName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.CandidateName, new { @class = "ReadonlyField" })
+                @Html.ValidationMessageFor(model => model.CandidateName)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DOB)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.DOB, "{0:dd/MM/yyyy}", new { @class = "ReadonlyField" })
+                @Html.ValidationMessageFor(model => model.DOB)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DesignationCode)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.DesignationCode, Model.Designations, "--Select Designation--")
+                @Html.ValidationMessageFor(model => model.DesignationCode)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DesignationName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.DesignationName, new { @class = "ReadonlyField" })
+                @Html.ValidationMessageFor(model => model.DesignationName)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Qualification)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Qualification)
+                @Html.ValidationMessageFor(model => model.Qualification)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Experience)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Experience)
+                @Html.ValidationMessageFor(model => model.Experience)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.IITMExperience)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.IITMExperience, Html.OptionsForBoolean(model=>model.IITMExperience), "--Select Yes/No--")
+                @Html.ValidationMessageFor(model => model.IITMExperience)
+            </div>
+        </td>
+    </tr>
+    <tr><th colspan="2">Project Details</th></tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProjectType)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.ProjectType, Model.ProjectTypes, "--Select Project Type --")
+                @Html.ValidationMessageFor(model => model.ProjectType)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DepartmentCode)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.DepartmentCode, Model.Departments, "--Select Department--")
+                @Html.ValidationMessageFor(model => model.DepartmentCode)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DepartmentName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.DepartmentName, new { @class = "ReadonlyField" })
+                @Html.ValidationMessageFor(model => model.DepartmentName)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProjectNo)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ProjectNo)
+                @Html.ValidationMessageFor(model => model.ProjectNo)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProjectTitle)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.ProjectTitle, new { @class = "ReadonlyField" })
+                @Html.ValidationMessageFor(model => model.ProjectTitle)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SponsoredAgency)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SponsoredAgency, new { @class = "ReadonlyField" })
+                @Html.ValidationMessageFor(model => model.SponsoredAgency)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PICode)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PICode)
+                @Html.ValidationMessageFor(model => model.PICode)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PIName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.PIName, new { @class = "ReadonlyField" })
+                @Html.ValidationMessageFor(model => model.PIName)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProjectCloseDate)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.ProjectCloseDate, "{0:dd/MM/yyyy}", new { @class = "ReadonlyField" })
+                @Html.ValidationMessageFor(model => model.ProjectCloseDate)
+            </div>
+        </td>
+        <td></td>
+    </tr>
+    <tr><th colspan="2">Appointment Details</th></tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RequestFromDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RequestFromDate)
+                @Html.ValidationMessageFor(model => model.RequestFromDate)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RequestToDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RequestToDate)
+                @Html.ValidationMessageFor(model => model.RequestToDate)
+            </div>
+        </td>
+    </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DurationType)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.DurationType, Model.DurationTypes, "--Select Duration Type--")
+                        @Html.ValidationMessageFor(model => model.DurationType)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DurationInMonth)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.DurationInMonth)
+                        @Html.ValidationMessageFor(model => model.DurationInMonth)
+                    </div>
+                </td>
+            </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FromDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FromDate)
+                @Html.ValidationMessageFor(model => model.FromDate)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ToDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ToDate)
+                @Html.ValidationMessageFor(model => model.ToDate)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.GrossSalary)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.GrossSalary)
+                @Html.ValidationMessageFor(model => model.GrossSalary)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CostToProject)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CostToProject)
+                @Html.ValidationMessageFor(model => model.CostToProject)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CommitmentNo)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CommitmentNo)
+                @Html.ValidationMessageFor(model => model.CommitmentNo)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MeetingDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MeetingDate)
+                @Html.ValidationMessageFor(model => model.MeetingDate)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OutSourcingCompany)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.OutSourcingCompany, Model.OutSourcingCompanies, "--Select Outsource Agency--")
+                @Html.ValidationMessageFor(model => model.OutSourcingCompany)
+            </div>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+            <p>
+                @Html.HiddenFor(model=>model.Command)
+                <input type="submit" class="SubmitViolet" value="Save" />
+            </p>
+        </td>
+    </tr>
+    </table>
+    </fieldset>
+}
+
+<div>
+    <table>
+        <tr>
+            <td>
+                @Html.ActionLink("Minutes List", "MinutesList") 
+            </td><td>
+                @Html.ActionLink("Employee List", "EmployeeList")
+            </td>
+        </tr>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('input:text:first').focus();
+            var $inp = $('input:text');
+            $inp.bind('keydown', function (e) {
+                var key = e.which;
+                if (key == 13) {
+                    e.preventDefault();
+                    var nxtIdx = $inp.index(this) + 1;
+                    $(":input:text:eq(" + nxtIdx + ")").focus();
+                }
+            });
+        });
+        $("#MeetingID").attr('readOnly', 'true');
+        $("#CandidateID").attr('readOnly', 'true');
+        $("#CandidateName").attr('readOnly', 'true');
+        $("#DOB").attr('readOnly', 'true');
+        $("#DesignationName").attr('readOnly', 'true');
+        $("#DepartmentName").attr('readOnly', 'true');
+        $("#ProjectTitle").attr('readOnly', 'true');
+        $("#SponsoredAgency").attr('readOnly', 'true');
+        $("#PIName").attr('readOnly', 'true');
+        $("#ProjectCloseDate").attr('readOnly', 'true');
+        $("#FromDate").attr('readOnly', 'true');
+        $("#FromDate").attr("placeholder", "dd/MM/yyyy").datepicker({
+            dateFormat: "dd/mm/yy",
+            onSelect: function (date) {
+                var dt = $("#FromDate").datepicker('getDate');
+                dt.setDate(dt.getDate() + 1);
+                $("#ToDate").val('');
+                $("#ToDate").datepicker('option', 'minDate', dt);
+            }
+        });
+        $("#ToDate").attr('readOnly', 'true');
+        $("#ToDate").attr("placeholder", "dd/MM/yyyy").datepicker({
+            dateFormat: "dd/mm/yy", changeMonth: "true",
+            onClose: function () {
+                var dt = $("#FromDate").datepicker('getDate');
+                var dt2 = $("#ToDate").datepicker('getDate');
+                if (dt2 <= dt) {
+                   // dt3 = $("#ToDate").datepicker('option', 'minDate');
+                    //$("#ToDate").datepicker('setDate', dt);
+                    $("#ToDate").datepicker('option', 'minDate', dt);
+                }
+            }
+        });
+        $("#ToDate").keyup(function (e) {if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this);}});
+        $("#MeetingDate").attr('readOnly', 'true');
+        $("#MeetingDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", minDate: "-1y", maxDate:"3m", beforeShowDay: function (date) { var day = date.getDay(); return [(day != 1 && day != 3 && day != 4 && day != 5 && day != 6 && day != 0), ''] } });
+        $("#RequestFromDate").attr('readOnly', 'true');
+        $("#RequestFromDate").attr("placeholder", "dd/MM/yyyy").datepicker({
+            dateFormat: "dd/mm/yy",
+            onSelect: function (date) {
+                var dt = $("#RequestFromDate").datepicker('getDate');
+                dt.setDate(dt.getDate() + 1);
+                $("#RequestToDate").val('');
+                $("#RequestToDate").datepicker('option', 'minDate', dt);
+            }
+        });
+        $("#RequestToDate").attr('readOnly', 'true');
+        $("#RequestToDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", changeMonth: "true" });
+        $("#RequestToDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
+        $("#DesignationCode").change(function () {
+            //var desig = $("#DesignationCode").children("option").is("selected").text();
+            var desig = $("#DesignationCode option:selected").text();
+            var arr = desig.split('--');
+            $("#DesignationName").val(arr[1].trim());
+        });
+        $("#DepartmentCode").change(function () {
+            var dept = $("#DepartmentCode option:selected").text();
+            var arr = dept.split('--');
+            $("#DepartmentName").val(arr[1].trim());
+        });
+        $("#DurationType").change(function () {
+            var duration = $("select[name='DurationType'] option:selected").index();
+            if (duration == 1)
+            {
+                $("#FromDate").val("");
+                $("#ToDate").val("");
+                $("#DurationInMonth").removeAttr('readonly');
+                $("#FromDate").datepicker("disable");
+                $("#ToDate").datepicker("disable");
+                $("#DurationInMonth").removeClass("ReadonlyField");
+                $("#FromDate").addClass("ReadonlyField");
+                $("#ToDate").addClass("ReadonlyField");
+            }
+            else if (duration == 2)
+            {
+                $("#DurationInMonth").val("");
+                $("#DurationInMonth").attr('readonly', 'true');
+                $("#FromDate").datepicker("enable");
+                $("#ToDate").datepicker("enable");
+                $("#DurationInMonth").addClass("ReadonlyField");
+                $("#FromDate").removeClass("ReadonlyField");
+                $("#ToDate").removeClass("ReadonlyField");
+            }
+            else if (duration == 3) {
+                $("#DurationInMonth").val("");
+                $("#FromDate").val("");
+                $("#DurationInMonth").attr('readonly', 'true');
+                $("#FromDate").datepicker("disable");
+                $("#ToDate").datepicker("enable");
+                $("#DurationInMonth").addClass("ReadonlyField");
+                $("#FromDate").addClass("ReadonlyField");
+                $("#ToDate").removeClass("ReadonlyField");
+            }
+        });
+        $("#PICode").blur(function () {
+            var piCode = this.value;
+            if (piCode != '') {
+                $.ajax({
+                    url: '@Url.Content("~/Outsource/getPI")',
+                    type: 'post',
+                    dataType: "json",
+                    data: { id: piCode },
+                    success: function (data) {
+                        if (data.result == 'success') {
+                            $("#PIName").val(data.PIName);
+                            $("#PICode").val($("#PICode").val().toUpperCase());
+                        }
+                        else {
+                            alert('PI code is wrong');
+                            $("#PIName").val("");
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (xhr.status == 404) {
+                            alert(thrownError)
+                        }
+                    }
+                });
+            }
+            else {
+                alert('Please enter PI Code');
+            }
+        });
+        $("#ProjectType").change(function () {
+            $("#ProjectTitle").val("");
+            $("#SponsoredAgency").val("");
+            $("#ProjectTitle").attr('readOnly', 'true');
+            $("#SponsoredAgency").attr('readOnly', 'true');
+            $("#ProjectNo").val("");
+        });
+        $("#SponsoredAgency").blur(function () {
+            var agen = this.value;
+            if (agen.length > 4) {
+                $("#SponsoredAgency").val('');
+                alert('Length should be less than equal to 4');
+            }
+            else {
+                $("#SponsoredAgency").val(agen.toUpperCase());
+            }
+        });
+        $("#ProjectNo").blur(function () {
+            if ($("#DepartmentCode option:selected").val() == '') {
+                alert('Select Department');
+                return;
+            }
+            if ($("#ProjectType option:selected").val() == '')
+            {
+                alert('Select Project Type');
+                return;
+            }
+            $("#ProjectTitle").attr('readOnly', 'true');
+            $("#SponsoredAgency").attr('readOnly', 'true');
+            var projNo = this.value;
+            $("#ProjectNo").val(projNo.toUpperCase());
+            var pType= $("#ProjectType option:selected").val().trim();
+            var dept = $("#DepartmentCode option:selected").val().trim();
+            if ((projNo != '' && projNo.trim().length == 18 && pType == 'SR') || (projNo != '' && projNo.trim().length == 20 && (pType == 'RB' || pType == 'RC' || pType == 'IC' || pType == 'ET'))) {
+                $.ajax({
+                    url: '@Url.Content("~/Outsource/getProjectDetails")',
+                    type: 'post',
+                    dataType: "json",
+                    data: { projectNo: projNo, projectType: pType, dept: dept },
+                    success: function (data) {
+                        if (data.result == 'success') {
+                            $("#ProjectTitle").val(data.ProjectTitle);
+                            $("#SponsoredAgency").val(data.SponsoredAgency);
+                            $("#ProjectCloseDate").val(data.CloseDate);
+                            $("#ProjectNo").val(projNo.toUpperCase());
+                        }
+                        else {
+                            $("#ProjectTitle").val("");
+                            $("#SponsoredAgency").val("");
+                            $("#ProjectCloseDate").val("");
+                            alert('Project Number is wrong');
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (xhr.status == 404) {
+                            alert(thrownError)
+                        }
+                    }
+                });
+            }
+            else if (projNo != '' && projNo.trim().length <= 30 && (pType == 'DDF' || pType == 'PCF' || pType == 'RMF' || pType == 'ADM')) {
+
+                if (pType == 'DDF') {
+                    $("#ProjectTitle").val('Department Development Fund');
+                    $("#SponsoredAgency").val('DDF');
+                }
+                else if (pType == 'PCF') {
+                    $("#ProjectTitle").val('Personal Contingency Fund');
+                    $("#SponsoredAgency").val('PCF');
+                }
+                else if (pType == 'RMF') {
+                    $("#ProjectTitle").val('Research Management Fund');
+                    $("#SponsoredAgency").val('RMF');
+                }
+                else if (pType == 'ADM') {
+                    $("#ProjectTitle").val('');
+                    $("#SponsoredAgency").val('');
+                    $("#ProjectTitle").removeAttr('readOnly');
+                    $("#SponsoredAgency").removeAttr('readOnly');
+                }
+            }
+            else {
+                alert('Please Verify Project Number');
+            }
+        });
+
+        /*$("#CandidateID").blur(function () {
+            var empid = this.value;
+            if (empid != '') {
+                $.ajax({
+                    url: '@@Url.Content("~/Outsource/getEmployee")',
+                    type: 'post',
+                    dataType: "json",
+                    data: { id: empid },
+                    success: function (data) {
+                        if (data.result == 'success') {
+                            $("#CandidateName").val(data.EmployeeName);
+                            $("#DOB").val(data.DOB);
+                            $("#CandidateID").val($("#CandidateID").val().toUpperCase());
+                        }
+                        else {
+                            alert('Candidate ID is wrong');
+                            $("#CandidateName").val("");
+                            $("#DOB").val("");
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (xhr.status == 404) {
+                            alert(thrownError)
+                        }
+                    }
+                });
+            }
+            else {
+                alert('Enter Candidate id');
+            }
+        });*/
+    });
+</script>
+}
+@{    
+    if (ViewData["result"] != "" && ViewData["result"] != null)
+    {
+        ViewData["result"] = null;
+        var results = ViewData["MeetID"];
+        <script type="text/javascript" language="javascript">
+            alert("The New Minute Added Successfully, The Employee ID is : @results");
+    </script>
+    }    
+}

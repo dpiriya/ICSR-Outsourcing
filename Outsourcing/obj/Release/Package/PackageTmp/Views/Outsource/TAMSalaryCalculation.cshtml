@@ -1,0 +1,75 @@
+﻿@using System.Collections
+@model Outsourcing.ViewModel.SalaryDetailsView
+<link href="~/Content/HelperStyle1.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Salary Calculation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Salary Calculation</h3>
+@using (@Html.BeginForm("TAMSalaryCalculation", "Outsource", FormMethod.Post,new { id = "form1" }))
+{
+    <table>
+        <tr>
+            <td>Recommended Salary</td>
+            <td>@Html.TextBox("RecommendSalary", null, new {@style="width:120px"})</td>
+            <td>Designation</td>
+            <td>@Html.DropDownList("Design", new SelectList((IEnumerable)ViewData["Designation"], "Value", "Text"), "--Select Designation--", new { @class = "small-input", @style = "width:200px" }) </td>
+            <td>@Html.DropDownList("PFEligible", new SelectList((IEnumerable)ViewData["PFEligible"], "Value", "Text"), "--Select PF Eligible--", new { @style = "width:160px" }) </td>
+            <td><input type="submit" id="btnCalculate" @*name="btnCalculate"*@ name="action:TAMSalaryCalculation" class="SubmitViolet1"  onclick="return Verify()" value="Calculation" /></td>
+        </tr>
+        <tr><th colspan="6"></th></tr>
+       
+    </table>
+}
+
+
+@using (@Html.BeginForm("rptsalary", "Outsource", FormMethod.Post, new { id = "form2" }))
+{
+    @Html.Partial("_SalaryDetails", Model)
+<table>
+    <tr>
+        <td>
+            <p>
+                <input type="submit" class="SubmitViolet" value="Print" name="action:rptsalary"  onclick="print()" />
+            </p>
+        </td>
+    </tr>   
+    <tr>
+    <td>
+        @Html.ActionLink("Back", "OutsourcingModule", "OutSource")
+    </td>
+    
+</tr></table>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#RecommendSalary").prop("required", true);
+            $("#Design").prop("required", true);
+            $("#RecommendSalary").blur(function () {
+                var salary = $("#RecommendSalary").val();
+                if (isNaN(salary))
+                    if ($(".red").length == 0) { $("#RecommendSalary").after('<div class="red">* Recommended Salary is Required</div>'); return false; } else { $("#RecommendSalary").next(".red").remove(); return true; }
+            });
+            $("#Design").blur(function () {                
+                var sl = $("#Design option:selected").val();
+                if (sl == '' || sl == null) { if ($(".red1").length == 0) $("#Design").after('<div class="red1">* Select Designation</div>'); return false; }
+                else { $("#Design").next(".red1").remove();return true; }
+            });
+        });
+        
+        function Verify()
+        {
+            var sl = $("#Design option:selected").val();
+            if (sl == '' || sl == null) { if ($(".red1").length == 0) $("#Design").after('<div class="red1">* Select Designation</div>'); return false; }
+            else {
+                $("#Design").next(".red1").remove(); return true;
+            }
+        }
+        function print()
+        {
+            $('#form2').submit();
+        }
+    </script>
+}

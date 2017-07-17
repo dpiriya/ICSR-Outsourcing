@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="left:30px;position:relative;">
+    <h3>Reports</h3>
+    <table>
+        <tr>
+            <td>
+                <p>@Html.ActionLink("Master Report", "MasterReport", "OutSourceReport")</p>
+                <br/>
+                <p>@Html.ActionLink("Various Reports", "VariousReport", "OutSourceReport")</p>
+                <br />
+                <p>@Html.ActionLink("Medical Card", "MedicalCard", "OutSourceReport")</p>
+                <br />
+                <p>@Html.ActionLink("Month Wise (OR) Period Wise Report", "MonthWiseReport", "OutSourceReport")</p>
+
+            </td>
+        </tr>
+    </table>
+</div>

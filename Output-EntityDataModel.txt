@@ -1,0 +1,36 @@
+﻿Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:00.9393563.
+Generating the model took 00:00:01.5346311.
+Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:00.9418660.
+Generating the model took 00:00:00.9119743.
+Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:00.8980634.
+Generating the model took 00:00:00.8688308.
+The model was generated with warnings or errors.Recruitment.edmxPlease see the Error List for more details. These issues must be fixed before running your application.
+Loading metadata from the database took 00:00:01.3063932.
+Generating the model took 00:00:02.1501325.
+Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:01.4120584.
+Generating the model took 00:00:01.1530948.
+Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:01.0456157.
+Generating the model took 00:00:03.7184926.
+Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:01.0299017.
+Generating the model took 00:00:01.4036311.
+Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:00.9986019.
+Generating the model took 00:00:00.9360832.
+Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:01.0671034.
+Generating the model took 00:00:00.9110486.
+Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:01.2046695.
+Generating the model took 00:00:01.1925411.
+Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:01.1789818.
+Generating the model took 00:00:01.0608376.
+Generated model file: Recruitment.edmx.
+Loading metadata from the database took 00:00:00.9705617.
+Generating the model took 00:00:00.9224226.

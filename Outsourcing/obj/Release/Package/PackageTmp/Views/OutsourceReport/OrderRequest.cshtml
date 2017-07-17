@@ -1,0 +1,121 @@
+﻿<link href="~/Content/TableView.css" rel="stylesheet" type="text/css" />
+@model IList<Outsourcing.ViewModel.OrderRequestView>
+@{
+    ViewBag.Title = "Order Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Order Request</h3>
+@using (@Html.BeginForm("OrderRequest", "OutsourceReport", FormMethod.Get))
+{
+<table class="SearchTable" align="center" style="width:400px; vertical-align:top">
+    <tr>
+        <td>Order Type</td>
+        <td>@Html.DropDownList("OrderType", (IEnumerable<SelectListItem>)ViewBag.OrderTypeList, "--Select Order Type--") </td>
+        <td><input type="submit" class="SubmitViolet" id="btnChoose" value="Submit" /></td>
+    </tr>
+</table>
+}
+<div>
+@using (@Html.BeginForm("OrderReport", "OutsourceReport", FormMethod.Get))
+{
+    <input type="submit" class="SubmitViolet" id="btnReport" value="Report" />
+}
+</div>
+@using (@Html.BeginForm("OrderRequest", "OutsourceReport", FormMethod.Post))
+{ 
+@Html.Hidden("OrderType", (string)ViewBag.OrderType)
+<table class="Table1">
+    <tr>
+        <th>
+            @Html.Label("Selection")
+        </th>
+        <th>
+            @Html.Label("Employee ID")
+        </th>
+        <th>
+            @Html.Label("Order Date")
+        </th>
+        <th>
+            @Html.Label("Employee Name")
+        </th>
+        <th>
+            @Html.Label("Designation Name")
+        </th>
+        <th>
+            @Html.Label("Project Number")
+        </th>
+        <th>
+            @Html.Label("PI Name")
+        </th>
+        <th>
+            @Html.Label("Department Code")
+        </th>
+        <th>
+            @Html.Label("From Date")
+        </th>
+        <th>
+            @Html.Label("To Date")
+        </th>
+        <th>
+            @Html.Label("Basic Salary")
+        </th>
+    </tr>
+    @for (var item = 0; item < Model.Count; item++)
+    {
+    <tr>
+        <td>
+            @Html.EditorFor(x => x[item].isOrdered)           
+        </td>
+        <td>
+            @Html.HiddenFor(x => x[item].EmployeeID)
+            @Html.HiddenFor(x => x[item].OrderID)
+            
+            @Html.DisplayFor(x => x[item].EmployeeID)
+        </td>
+        <td>
+            @Html.HiddenFor(x => x[item].CreatedOn)
+            @Html.DisplayFor(x => x[item].CreatedOn)
+        </td>
+        <td>
+            @Html.HiddenFor(x => x[item].EmployeeName)
+            @Html.DisplayFor(x => x[item].EmployeeName)
+        </td>
+        <td>
+            @Html.HiddenFor(x => x[item].DesignationName)
+            @Html.DisplayFor(x => x[item].DesignationName)
+        </td>
+        <td>
+            @Html.HiddenFor(x => x[item].ProjectNo)
+            @Html.DisplayFor(x => x[item].ProjectNo)
+        </td>
+        <td>
+            @Html.HiddenFor(x => x[item].PIName)
+            @Html.DisplayFor(x => x[item].PIName)
+        </td>
+        <td>
+            @Html.HiddenFor(x => x[item].DepartmentCode)
+            @Html.DisplayFor(x => x[item].DepartmentCode)
+        </td>
+        <td>
+            @Html.HiddenFor(x => x[item].FromDate)
+            @Html.DisplayFor(x => x[item].FromDate)
+        </td>
+        <td>
+            @Html.HiddenFor(x => x[item].ToDate)
+            @Html.DisplayFor(x => x[item].ToDate)
+        </td>
+        <td>
+            @Html.HiddenFor(x => x[item].BasicSalary)
+            @Html.DisplayFor(x => x[item].BasicSalary)
+        </td>
+    </tr>
+    }
+    <tr style="border:none">
+        <td colspan="11" align="center">
+            <p>
+                <input type="submit" class="SubmitViolet" value="Save & Generate Report" onclick="target = '_blank';" />
+            </p>
+        </td>
+    </tr>
+</table>
+}

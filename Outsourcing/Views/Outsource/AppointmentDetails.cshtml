@@ -1,0 +1,231 @@
+﻿@model IEnumerable<Outsourcing.ViewModel.AppointmentDetailsView>
+<link href="~/Content/TableView.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "AppointmentDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var appMaster = ViewData["AppointmentMaster"] as Outsourcing.ViewModel.AppointmentMasterView;
+    var appProjets = ViewData["appointmentProjects"] as Outsourcing.Models.AppointmentProject;
+    
+}
+<div style="color:red;font-weight:bold;text-align:center">
+    @Html.ValidationMessage("Error")
+</div>
+<table class="MainTable">
+    <tr>
+        <td class="noBorders">
+            <h4>Employee Details</h4>
+            <table class="MixDetail">
+                <tr>
+                    <th>
+                        @Html.Label("Employee ID")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(a => appMaster.EmployeeID)
+                    </td>
+                    <th>
+                        @Html.Label("Employee Name")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(a => appMaster.EmployeeName)
+                    </td>
+                    <th>
+                        @Html.Label("DesignationName")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(a => appMaster.DesignationName)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.Label("Appointment Date")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(a => appMaster.AppointmentDate)
+                    </td>
+                    <th>
+                        @Html.Label("To Date")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(a => appMaster.ToDate)
+                    </td>
+                    <th>
+                        @Html.Label("Relieve Date")
+                    </th>
+                    <td>
+                        @Html.DisplayFor(a => appMaster.RelieveDate)
+                    </td>
+                </tr>
+                @using (@Html.BeginForm("", "Outsource", new { EmployeeID = appMaster.EmployeeID }))
+                {
+                    <tr>
+                        <td colspan="8" align="right">
+                            @* @if (appMaster.RelieveDate == null)
+                                {
+                                    <input type="submit" class="SubmitBlue" value="Edit" name="action:AppointmentMasterEdit" onclick="target = '_self';" />
+                                }*@
+                            <input type="submit" class="SubmitBlue" value="Details" name="action:AppointmentMasterDetails" onclick="target = '_self';" />
+                        </td>
+                    </tr>
+                }
+            </table>
+
+            <h4>Appointment Details</h4>
+
+            <table class="Table1">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MeetingID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProjectNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FromDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GrossSalary)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CostToProject)
+                    </th>
+                    <th></th>
+                </tr>
+                @{int i = 1;}
+                @foreach (var item in Model)
+                {
+                    using (@Html.BeginForm("", "Outsource", new { EmployeeID = appMaster.EmployeeID, MeetingID = item.MeetingID, OrderID = item.OrderID, cmd = "Update" }))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MeetingID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderType)
+                            </td> 
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProjectNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FromDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ToDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GrossSalary)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CostToProject)
+                            </td>
+                            <td class="actionColumn">
+                                @if (appMaster.RelieveDate == null || Membership.GetUser().UserName.ToString() == "administrator" )
+                                {
+                                    if (i == 1)
+                                    {
+                                        if (item.OrderType == "Appointment")
+                                        {
+                                            <input type="submit" class="SubmitBlue" value="Edit" name="action:NewAppointment" onclick="target = '_self';" />
+                                        }
+                                        else if (item.OrderType == "Enhancement")
+                                        {
+                                            <input type="submit" class="SubmitBlue" value="Edit" name="action:EnhancementOrder" onclick="target = '_self';" />
+                                            <input type="submit" class="SubmitBlue" value="Report" name="action:rptenhance" onclick="target = '_self';" />
+                                        }
+                                        else if (item.OrderType == "Extension")
+                                        {
+                                            <input type="submit" class="SubmitBlue" value="Edit" name="action:ExtensionOrder" onclick="target = '_self';" />
+                                            <input type="submit" class="SubmitBlue" value="Report" name="action:rptext" onclick="target = '_self';" />
+                                        }
+                                        else if (item.OrderType == "Relieve")
+                                        {
+                                            <input type="submit" class="SubmitBlue" value="Edit" name="action:RelieveOrder" onclick="target = '_self';" />
+                                            <input type="submit" class="SubmitBlue" value="Report" name="action:rptrelieve" onclick="target = '_self';" />
+                                        }
+                                        else if (item.OrderType == "StopPayment")
+                                        {
+                                            <input type="submit" class="SubmitBlue" value="Report" name="action:stoppaymentrpt" onclick="target = '_self';" />
+                                        }
+                                        else if (item.OrderType == "Rejoin")
+                                        {
+                                            <input type="submit" class="SubmitBlue" value="Edit" name="action:Rejoin" onclick="target = '_self';" />
+                                            <input type="submit" class="SubmitBlue" value="Report" name="action:rptrejoin" onclick="target = '_self';" />
+                                        }
+
+                                        i = i + 1;
+                                    }
+                                }
+                                <input type="submit" class="SubmitBlue" value="Details" name="action:AppointmentDetailsDetails" onclick="target = '_self';" />
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </td>
+        @if (appMaster.RelieveDate == null)
+        {
+            <td class="noBorders" valign="middle" align="center">
+                @using (@Html.BeginForm("", "Outsource", new { EmployeeID = appMaster.EmployeeID, MeetingID = appProjets.MeetingID, OrderID = 0, cmd = "Update" }))
+                {
+                    if (appProjets.ProjectRelieveDate != null)
+                    {
+                        <input type="submit" class="SubmitBlueSameSize" value="Edit Relieve Project" name="action:ProjectRelieveOrder" onclick="target = '_self';" /> <br /><br />
+                    }
+                }
+                @using (@Html.BeginForm("", "Outsource", new { EmployeeID = appMaster.EmployeeID, MeetingID = appProjets.MeetingID, OrderID = 0, cmd = "New" }))
+                {
+                    if (appProjets.ProjectRelieveDate != null)
+                    {
+                        <input type="submit" class="SubmitBlueSameSize" value="Relieve From Agency" name="action:RelieveOrder" onclick="target = '_self';" /> <br /><br />
+                    }
+                    else if (appProjets.Remarks=="StopPayment")
+                    {
+                        <input type="submit" class="SubmitBlueSameSize" value="Rejoin" name="action:Rejoin" onclick="target = '_self';" /><br /><br />
+                        <input type="submit" class="SubmitBlueSameSize" value="Relieve From Project" name="action:ProjectRelieveOrder" onclick="target = '_self';" /> <br /><br />
+                        <input type="submit" class="SubmitBlueSameSize" value="Relieve From Agency" name="action:RelieveOrder" onclick="target = '_self';" /> <br /><br />
+                    }
+                    else
+                    {
+                        <input type="submit" class="SubmitBlueSameSize" value="Extension" name="action:ExtensionOrder" onclick="target = '_self';" /> <br /><br />
+                        <input type="submit" class="SubmitBlueSameSize" value="Enhancement" name="action:EnhancementOrder" onclick="target = '_self';" /> <br /><br />
+                        <input type="submit" class="SubmitBlueSameSize" value="Stop Payment" name="action:StopPayment" onclick="target = '_self';"/><br/><br/>
+                        <input type="submit" class="SubmitBlueSameSize" value="Relieve From Project" name="action:ProjectRelieveOrder" onclick="target = '_self';" /> <br /><br />
+                        <input type="submit" class="SubmitBlueSameSize" value="Relieve From Agency" name="action:RelieveOrder" onclick="target = '_self';" /> <br /><br />
+                    }
+                }
+                @using (@Html.BeginForm("", "Outsource", new { EmployeeID = appMaster.EmployeeID, MeetingID = "New", OrderID = 0, cmd = "New" }))
+                {
+                    if (appProjets.ProjectRelieveDate != null)
+                    {
+                    <input type="submit" class="SubmitBlue" value="Reappointment" name="action:NewAppointment" onclick="target = '_self';" /> 
+                    }                
+                }
+            </td>
+        }
+        else
+        {
+            if (Membership.GetUser().UserName.ToString() == "administrator")
+            {
+                <td class="noBorders" valign="middle" align="center">
+                @using (@Html.BeginForm("", "Outsource", new { EmployeeID = appMaster.EmployeeID, MeetingID = appProjets.MeetingID, OrderID = 0, cmd = "Update" }))
+                {
+                <input type="submit" class="SubmitBlueSameSize" value="Edit Relieve Order" name="action:RelieveOrder" onclick="target = '_self';" /><br /><br />
+                <input type="submit" class="SubmitBlueSameSize" value="Report Relieve Order" name="action:rptrelieve" onclick="target = '_self';"/><br /><br />
+                }
+                </td>
+            }
+        }
+        </tr>
+</table>
+@*<script>
+        function stoppaymentrpt(empid, oid) {
+            console.log(empid);
+            @*/@Url.Action("rptstoppayment", "Outsource",new {empid= empid, oid=oid });
+        };
+    </script>*@

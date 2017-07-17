@@ -1,0 +1,291 @@
+﻿@model Outsourcing.ViewModel.OutsourcingEmployeeDetailsView
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/HelperStyle1.css" rel="stylesheet" />
+@using (Html.BeginForm("NewEmployee","Outsource"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <h2>@ViewBag.Title</h2>    
+    <fieldset>
+        <table>
+            <tr id="trCandidateID">
+                <td colspan="2">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CandidateID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CandidateID, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.CandidateID)
+                    </div>
+                </td>
+            </tr>
+            <tr><th colspan="2">Personal Details</th></tr>
+            <tr>
+                <td>                    
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CandidateName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CandidateName)
+                        @Html.ValidationMessageFor(model => model.CandidateName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DOB)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.DOB,"{0:dd/MM/yyyy}", new {id="DOB"})
+                        @Html.ValidationMessageFor(model => model.DOB)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Gender)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.Gender, Model.Genders, "--Select Gender--")
+                        @Html.ValidationMessageFor(model => model.Gender)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CasteCategory)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.CasteCategory, Model.CasteCategories,"--Select Caste--")
+                        @Html.ValidationMessageFor(model => model.CasteCategory)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FatherName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.FatherName)
+                        @Html.ValidationMessageFor(model => model.FatherName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MotherName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.MotherName)
+                        @Html.ValidationMessageFor(model => model.MotherName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.HusbandName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.HusbandName)
+                        @Html.ValidationMessageFor(model => model.HusbandName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PermanentAddress)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PermanentAddress)
+                        @Html.ValidationMessageFor(model => model.PermanentAddress)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CommunicationAddress)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CommunicationAddress)
+                        @Html.ValidationMessageFor(model => model.CommunicationAddress)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PAN)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PAN)
+                        @Html.ValidationMessageFor(model => model.PAN)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PhoneNumber)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PhoneNumber)
+                        @Html.ValidationMessageFor(model => model.PhoneNumber)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MobileNumber)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.MobileNumber)
+                        @Html.ValidationMessageFor(model => model.MobileNumber)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.EmailID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.EmailID)
+                        @Html.ValidationMessageFor(model => model.EmailID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.EmergencyContactNo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.EmergencyContactNo)
+                        @Html.ValidationMessageFor(model => model.EmergencyContactNo)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PF_UAN)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PF_UAN)
+                        @Html.ValidationMessageFor(model => model.PF_UAN)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ESIC_NO)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ESIC_NO)
+                        @Html.ValidationMessageFor(model => model.ESIC_NO)
+                    </div>
+                </td>
+            </tr>
+            <tr><th colspan="2">Saving Bank Account Details</th></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BankName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BankName)
+                        @Html.ValidationMessageFor(model => model.BankName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BranchName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BranchName)
+                        @Html.ValidationMessageFor(model => model.BranchName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BankAccountNo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BankAccountNo)
+                        @Html.ValidationMessageFor(model => model.BankAccountNo)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ConfirmBankAccountNo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ConfirmBankAccountNo, new { id = "ConfirmBankAccountNo" })
+                        @Html.ValidationMessageFor(model => model.ConfirmBankAccountNo)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.IFSC_Code)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.IFSC_Code)
+                        @Html.ValidationMessageFor(model => model.IFSC_Code)
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <p>
+                        @Html.HiddenFor(model => model.Command)
+                        <input type="submit" class="SubmitViolet" value="Save" />
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "EmployeeList")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")  
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('input:text:first').focus();
+            var $inp = $('input:text');
+            $inp.bind('keydown', function (e) {
+                var key = e.which;
+                if (key == 13) {
+                    e.preventDefault();
+                    var nxtIdx = $inp.index(this) + 1;
+                    $(":input:text:eq(" + nxtIdx + ")").focus();
+                }
+            });
+        });
+        $("#CandidateID").attr('readOnly', 'true');
+        $("#DOB").attr('readOnly', 'true');
+        $("#DOB").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", changeYear: true, changeMonth: true, minDate: "-110y", maxDate: "-18y" });
+        $("#ConfirmBankAccountNo").bind('copy paste cut', function (e) {
+            e.preventDefault();
+        });
+});
+</script>
+}
+@{
+    if (ViewData["result"] != "" && ViewData["result"] != null)
+    {
+        ViewData["result"] = null;
+        var results = ViewData["CandidateID"];
+        <script type="text/javascript" language="javascript">
+            alert("The New Candidate Added Successfully, The Candidate ID is : @results");
+        </script>
+    }
+}
+
+

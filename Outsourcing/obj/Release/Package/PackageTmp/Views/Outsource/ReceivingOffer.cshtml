@@ -1,0 +1,152 @@
+﻿@model Outsourcing.ViewModel.OfferProcessingView
+
+<link href="@Url.Content("~/Content/HelperStyle1.css")" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Receiving Offer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Receiving Offer</h3>
+
+@using (Html.BeginForm("ReceivingOffer", "Outsource"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MeetingID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.MeetingID, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.MeetingID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CandidateName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CandidateName, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.CandidateName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DesignationName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.DesignationName, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.DesignationName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.GrossSalary)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.GrossSalary, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.GrossSalary)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DurationInMonth)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.DurationInMonth, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.DurationInMonth)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FromDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.FromDate,"{0:dd/MM/yyy}", new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.FromDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ToDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ToDate,"{0:dd/MM/yyy}", new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.ToDate)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.OfferRequestDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.OfferRequestDate,"{0:dd/MM/yyy}", new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.OfferRequestDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.OfferReceivedDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.OfferReceivedDate)
+                        @Html.ValidationMessageFor(model => model.OfferReceivedDate)
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <p>
+                        <input type="submit" class="SubmitViolet" value="Update" />
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Offer Processing", "OfferProcessing")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#MeetingID").attr('readOnly', 'true');
+            $("#CandidateName").attr('readOnly', 'true');
+            $("#DesignationName").attr('readOnly', 'true');
+            $("#GrossSalary").attr('readOnly', 'true');
+            $("#DurationInMonth").attr('readOnly', 'true');
+            $("#FromDate").attr('readOnly', 'true');
+            $("#ToDate").attr('readOnly', 'true');
+            $("#OfferRequestDate").attr('readOnly', 'true');
+            $("#OfferReceivedDate").attr('readOnly', 'true');
+            var dt = $("#OfferRequestDate").val();
+            $("#OfferReceivedDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", minDate: dt });
+            $("#OfferReceivedDate").prop("required", true);
+            $("#OfferReceivedDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
+        });
+    </script>
+}
+@{
+    if (ViewData["Result"] != "" && ViewData["Result"] != null)
+    {
+        ViewData["result"] = null;
+        <script type="text/javascript" language="javascript">
+            alert("The Offer received date updated Successfully");
+        </script>
+    }
+}

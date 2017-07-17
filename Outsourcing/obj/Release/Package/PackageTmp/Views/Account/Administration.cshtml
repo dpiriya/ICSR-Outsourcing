@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Administration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Administration</h2>
+
+@if (Membership.GetUser().UserName.ToString() == "administrator")
+{
+    using (Html.BeginForm("UserResetPassword", "Account", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" class="SubmitViolet" value="Reset Password" />
+    }
+}

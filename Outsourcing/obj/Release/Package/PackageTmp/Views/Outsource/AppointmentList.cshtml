@@ -1,0 +1,112 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using System.Web
+@model IPagedList<Outsourcing.ViewModel.AppointmentList>
+<link href="~/Content/TableView.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Employee List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="titleView"><h3>Employee List</h3></div>
+@using (@Html.BeginForm("AppointmentList", "Outsource", FormMethod.Get))
+{
+    <table class="SearchTable">
+        <tr>
+            <td>Search Name</td>
+            <td>@Html.TextBox("SearchName")</td>
+            <td>Search DOB</td>
+            <td> @Html.TextBox("SearchDOB") @Html.Hidden("dob")</td>
+            <td><input type="submit" id="btnSearch" name="btnSearch" class="SubmitBlue" value="Search" /></td>    
+            <td colspan="3" align="right" width="40%"></td>
+</tr>
+    </table>
+}
+<table class="Table1">    
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().EmployeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DesignationCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().AppointmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ToDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().RelieveDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().BasicSalary)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            using (@Html.BeginForm("AppointmentDetails", "Outsource", new { id = item.EmployeeID }))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DesignationCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RelieveDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasicSalary)
+                </td>
+                <td class="actionColumn">
+                    <input type="submit" class="SubmitBlue" value="Appointment Details" name="AppointmentDetails" id="AppointmentDetails" />
+                </td>
+            </tr>
+        }
+        }
+    </table>
+<table class="SearchTable">
+    <tr>
+        <td>
+            @Html.PagedListPager(Model, Page => Url.Action("AppointmentList", new { SearchName = Request.QueryString["SearchName"], SearchDOB = Request.QueryString["SearchDOB"], Page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayItemSliceAndTotal = true, DisplayPageCountAndCurrentLocation = true })
+        </td>
+    </tr>
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#SearchDOB").attr('readOnly', 'true');
+            $("#SearchDOB").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", changeYear: true, changeMonth: true, });
+            $("#SearchDOB").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
+            $("#btnSearch").click(function () {
+                var dob = $("#SearchDOB").val();
+                $("#dob").val(dob.replace("/", ""));
+                $("#dob").val($("#dob").val().replace("/", ""));
+            });
+        });
+    </script>
+}

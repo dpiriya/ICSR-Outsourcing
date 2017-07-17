@@ -1,0 +1,190 @@
+﻿@model Outsourcing.ViewModel.RelieveView
+<link href="~/Content/HelperStyle1.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Relieve Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Relieve Order</h3>
+
+@using (Html.BeginForm("RelieveOrder", "Outsource", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.EmployeeID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.HiddenFor(model => model.Command)
+                        @Html.HiddenFor(model => model.ExtensionFromDate, new { @id = "ExtFromDate" })
+                        @Html.HiddenFor(model => model.ExtensionToDate, new { @id = "ExtToDate" })
+                        @Html.TextBoxFor(model => model.EmployeeID, new { @id = "EmployeeID", @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.EmployeeID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.EmployeeName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.EmployeeName, new { @id = "EmployeeName", @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.EmployeeName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MeetingID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.MeetingID, new { @id = "MeetingID1", @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.MeetingID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProjectType)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ProjectType, new { @id = "ProjectType", @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.ProjectType)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProjectNo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ProjectNo, new { @id = "ProjectNo", @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.ProjectNo)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.AppointmentFromDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.AppointmentFromDate, "{0:dd/MM/yyyy}", new { @id = "AppointmentFromDate", @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.AppointmentFromDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.AppointmentToDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.AppointmentToDate, "{0:dd/MM/yyyy}", new { @id = "AppointmentToDate", @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.AppointmentToDate)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.RelieveDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.RelieveDate, "{0:dd/MM/yyyy}", new { @id = "RelieveDate" })
+                        @Html.ValidationMessageFor(model => model.RelieveDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Remarks)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Remarks, new { @id = "Remarks" })
+                        @Html.ValidationMessageFor(model => model.Remarks)
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+            @if (ViewData["Result"] == "" || ViewData["Result"] == null)
+            {
+                <tr>
+                    <td colspan="2" align="center">
+                        <p>
+                            <input type="submit" class="SubmitViolet" value="Save" />
+                        </p>
+                    </td>
+                </tr>
+            }
+        </table>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Appointment Details", "AppointmentDetails", new { id = Model.EmployeeID })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                $('input:text:first').focus();
+                var $inp = $('input:text');
+                $inp.bind('keydown', function (e) {
+                    var key = e.which;
+                    if (key == 13) {
+                        e.preventDefault();
+                        var nxtIdx = $inp.index(this) + 1;
+                        $(":input:text:eq(" + nxtIdx + ")").focus();
+                    }
+                });
+            });
+            $("#EmployeeID").attr('readOnly', 'true');
+            $("#EmployeeName").attr('readOnly', 'true');
+            $("#MeetingID").attr('readOnly', 'true');
+            $("#ProjectType").attr('readOnly', 'true');
+            $("#ProjectNo").attr('readOnly', 'true');
+            $("#AppointmentFromDate").attr('readOnly', 'true');
+            $("#AppointmentToDate").attr('readOnly', 'true');
+
+            var dt = $("#ExtFromDate").val(); 
+            var dt1 = dt.split('/');
+            var fDate = new Date(dt1[1] + '/' + dt1[0] + '/' + dt1[2])
+            var dTo = $("#ExtToDate").val();
+            var dt2 = dTo.split('/');
+            var tDate = new Date(dt2[1] + '/' + dt2[0] + '/' + dt2[2])
+            fDate.setDate(fDate.getDate());
+            tDate.setDate(tDate.getDate());
+            $("#RelieveDate").attr('readOnly', 'true');
+            $("#RelieveDate").attr("placeholder", "dd/MM/yyyy").datepicker({
+                dateFormat: "dd/mm/yy", changeMonth: "true", minDate: fDate, maxDate: tDate
+            });
+            $("#RelieveDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
+
+        });
+    </script>
+}
+
+@{
+    if (ViewData["Result"] != "" && ViewData["Result"] != null)
+    {
+        ViewData["Result"] = null;
+        var results = Model.EmployeeID;
+        var status = ViewData["Status"];
+        if (status == "Insert")
+        {
+            <script type="text/javascript" language="javascript">
+                alert("Relieve order added successfully, The Employee ID is : @results");
+            </script>
+        }
+        else if (status == "Update")
+        {
+            <script type="text/javascript" language="javascript">
+                alert("Relieve order Updated Successfully, The Employee ID is : @results");
+            </script>
+        }
+    }
+}

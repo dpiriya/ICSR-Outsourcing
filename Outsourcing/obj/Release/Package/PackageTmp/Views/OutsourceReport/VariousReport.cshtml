@@ -1,0 +1,148 @@
+﻿@model Outsourcing.ViewModel.VariousReportView
+
+@{
+    ViewBag.Title = "VariousReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/VariousReportStyle.css" rel="stylesheet" type="text/css" />
+
+@using (Html.BeginForm("VariousReport", "OutSourceReport"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <table align="center" >
+            <tr><td> <h3>Various Report</h3></td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.AppointmentStatus)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.AppointmentStatus,Model.AppointmentStatuskal)
+                        @Html.ValidationMessageFor(model => model.AppointmentStatus)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.EmployeeNo)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.EmployeeNo)
+                        @Html.ValidationMessageFor(model => model.EmployeeNo)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.EmployeeName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.EmployeeName, new {style="height: 50px"})
+                        @Html.ValidationMessageFor(model => model.EmployeeName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Department)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.Department,Model.Departments, "--Select Department--", new { style= "width:500px"})
+                        @Html.ValidationMessageFor(model => model.Department)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProjectType)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.ProjectType,Model.ProjectTypes,"-- Select Project Type --")
+                        @Html.ValidationMessageFor(model => model.ProjectType)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProjectNumber)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.ProjectNumber,Model.ProjectNumbers,"-- Select Project Number --")
+                        @Html.ValidationMessageFor(model => model.ProjectNumber)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CoorName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.CoorName,Model.CoorNames,"-- Select Coor Code --")
+                        @Html.ValidationMessageFor(model => model.CoorName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Designation)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.Designation, Model.Designations, "-- Select Designation --")
+                        @Html.ValidationMessageFor(model => model.Designation)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DocumentFormat)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.DocumentFormat, Model.DocumentFormats)
+                        @Html.ValidationMessageFor(model => model.DocumentFormat)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <p>
+                        <input class="SubmitViolet" type="submit" value="Report" onclick="target = '_blank';" />
+                        <input class="SubmitViolet" type="reset" value="Clear" />
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

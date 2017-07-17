@@ -1,0 +1,98 @@
+﻿@model IList <Outsourcing.ViewModel.OfferRequestView>
+<link href= "@Url.Content("~/Content/TableView.css")" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Offer Request List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="titleView"><h3>Offer Request List</h3></div>
+@using (Html.BeginForm("OfferRequestList", "Outsource"))
+{
+<table class="Table1">
+    <tr>
+        <th>
+            @Html.Label("Selection")
+        <th>
+            @Html.Label("Meet ID")
+        </th>
+        <th>
+           @Html.Label("Meeting Date")
+        </th>
+        <th>
+            @Html.Label("Employee Name")
+        </th>
+        <th>
+            @Html.Label("Designation Name")
+        </th>
+        <th>
+           @Html.Label("Gross Salary")
+        </th>
+        <th>
+           @Html.Label("Duration In Month")
+        </th>
+        <th>
+            @Html.Label("From Date")
+        </th>
+        <th>
+            @Html.Label("To Date")
+        </th>        
+    </tr>
+    @for (var item=0; item< Model.Count; item++)
+    {
+         <tr>
+            <td>
+                @Html.EditorFor( x => x[item].isOffered)                                
+            </td>
+            <td>   
+                @Html.HiddenFor(x => x[item].MeetingID)
+                @Html.DisplayFor(x => x[item].MeetingID)
+            </td>
+            <td>
+                @Html.HiddenFor(x => x[item].MeetingDate)
+                @Html.DisplayFor(x => x[item].MeetingDate)
+            </td>
+            <td>
+                @Html.HiddenFor(x => x[item].CandidateName)
+                @Html.DisplayFor(x => x[item].CandidateName)
+            </td>
+            <td>
+                @Html.HiddenFor(x => x[item].DesignationName)
+                @Html.DisplayFor(x => x[item].DesignationName)
+            </td>
+            <td>
+                @Html.HiddenFor(x => x[item].GrossSalary)
+                @Html.DisplayFor(x => x[item].GrossSalary)
+               
+            </td>
+            <td>
+                @Html.HiddenFor(x => x[item].DurationInMonth)
+                @Html.DisplayFor(x => x[item].DurationInMonth)
+            </td>
+            <td>
+                @Html.HiddenFor(x => x[item].FromDate)
+                @Html.DisplayFor(x => x[item].FromDate)
+            </td>
+            <td>
+                @Html.HiddenFor(x => x[item].ToDate)
+                @Html.DisplayFor(x => x[item].ToDate)
+            </td>
+        </tr>
+       }
+    <tr style="border:none">
+        <td colspan="9" align="center">
+            <p>
+                <input type="submit" class="SubmitViolet" value="Save & Generate Report" onclick="target = '_blank';" />
+            </p>
+        </td>
+    </tr>   
+</table>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+        });
+   </script> 
+ }
+
+

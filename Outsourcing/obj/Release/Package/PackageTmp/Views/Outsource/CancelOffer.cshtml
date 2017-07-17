@@ -1,0 +1,103 @@
+﻿@model Outsourcing.ViewModel.OfferCancelView
+<link href="@Url.Content("~/Content/HelperStyle1.css")" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "CancelOffer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Cancel Offer</h3>
+
+@using (Html.BeginForm("CancelOffer", "Outsource"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MeetingID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.MeetingID, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.MeetingID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CandidateName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CandidateName, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.CandidateName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DesignationName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.DesignationName, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.DesignationName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.OfferStatus)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.OfferStatus, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.OfferStatus)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Remarks)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Remarks)
+                        @Html.ValidationMessageFor(model => model.Remarks)
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <p>
+                        <input type="submit" class="SubmitViolet" value="Update" />
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Offer Processing", "OfferProcessing")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#MeetingID").attr('readOnly', 'true');
+            $("#CandidateName").attr('readOnly', 'true');
+            $("#DesignationName").attr('readOnly', 'true');
+            $("#OfferStatus").attr('readOnly', 'true');
+        });
+    </script>
+}
+@{
+    if (ViewData["Result"] != "" && ViewData["Result"] != null)
+    {
+        ViewData["result"] = null;
+        <script type="text/javascript" language="javascript">
+            alert("The Offer has Cancelled");
+        </script>
+    }
+}

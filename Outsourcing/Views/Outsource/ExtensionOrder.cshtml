@@ -1,0 +1,531 @@
+﻿@model Outsourcing.ViewModel.ExtensionOrderView
+<link href="~/Content/HelperStyle1.css" rel="stylesheet" />
+@{
+    @*ViewBag.Title = "ExtensionOrder";*@
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>@ViewBag.Title</h3>
+<div>
+    @using (Html.BeginForm("ExtensionOrder", "Outsource", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset id="info">
+            <table>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.appointmentDetailsView.EmployeeID)
+                        </div>
+                        <div class="editor-field">
+                            @Html.HiddenFor(model => model.Command)
+                            @Html.TextBoxFor(model => model.appointmentDetailsView.EmployeeID, new { @id = "EmployeeID", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.appointmentDetailsView.EmployeeID)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.appointmentDetailsView.EmployeeName)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.appointmentDetailsView.EmployeeName, new { @id = "EmployeeName", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.appointmentDetailsView.EmployeeName)
+                        </div>
+                    </td>
+                <tr><th colspan="2">Appointment Details</th></tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.appointmentDetailsView.MeetingID)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.appointmentDetailsView.MeetingID, new { @id = "MeetingID", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.appointmentDetailsView.MeetingID)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.appointmentDetailsView.OrderType)
+                        </div>
+                        <div class="editor-field">
+                            @{
+                                if(Model.Command=="Update")
+                                {
+                                    @Html.HiddenFor(model => model.appointmentDetailsView.OrderID)
+                                }
+                             }
+                            @Html.HiddenFor(model => model.salaryDetailsView.OrderID, new { @id = "OrderID" })
+                            @Html.TextBoxFor(model => model.appointmentDetailsView.OrderType, new { @id = "OrderType", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.appointmentDetailsView.OrderType)
+                        </div>
+                    </td>
+                </tr>
+                <tr>                    
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.appointmentDetailsView.ProjectNo)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.appointmentDetailsView.ProjectNo, new { @id = "ProjectNo", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.appointmentDetailsView.ProjectNo)
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.appointmentDetailsView.FromDate)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.appointmentDetailsView.FromDate, "{0:dd/MM/yyyy}", new { @id = "FromDate", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.appointmentDetailsView.FromDate)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.appointmentDetailsView.ToDate)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.appointmentDetailsView.ToDate, "{0:dd/MM/yyyy}", new { @id = "ToDate" })
+                            @Html.ValidationMessageFor(model => model.appointmentDetailsView.ToDate)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.appointmentDetailsView.CommitmentNo)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.appointmentDetailsView.CommitmentNo, new { @id = "CommitmentNo" })
+                            @Html.ValidationMessageFor(model => model.appointmentDetailsView.CommitmentNo)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.appointmentDetailsView.Remarks)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.appointmentDetailsView.Remarks, new { @id = "Remarks" })
+                            @Html.ValidationMessageFor(model => model.appointmentDetailsView.Remarks)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.appointmentDetailsView.BasicSalary)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.appointmentDetailsView.BasicSalary, new { @id = "AppointmentBasic", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.appointmentDetailsView.BasicSalary)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.Label("Increment Amount")
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBox("IncrementAmt", "", new { style = "width :320px" })
+                            <input type="button" id="btnSearch" name="btnSearch" style="width:75px; background-color:#b29af8; border:1px solid #8a66f4;color:#FFFFFF;font-weight:bold;font-family:'Times New Roman', Times, serif; border-radius:5px;" onclick="CalculateSalary()" value="Calculate" />
+                        </div>
+                    </td>
+                    </tr>               
+                <tr><th colspan="2">Salary Details</th></tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.BasicSalary)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.BasicSalary, new { @id = "BasicSalary" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.BasicSalary)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.HRA)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.HRA, new { @id = "HRA" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.HRA)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.Bonus)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.Bonus, new { @id = "Bonus" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.Bonus)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.SpecialAllowance)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.SpecialAllowance, new { @id = "SpecialAllowance" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.SpecialAllowance)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.GrossSalary)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.GrossSalary, new { @id = "GrossSalary", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.GrossSalary)
+                        </div>
+                    </td>
+                </tr>
+                <tr><th colspan="2">Deduction</th></tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.EmployeePF)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.EmployeePF, new { @id = "EmployeePF" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.EmployeePF)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.EmployeeESIC)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.EmployeeESIC, new { @id = "EmployeeESIC" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.EmployeeESIC)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.ProfessionalTax)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.ProfessionalTax, new { @id = "ProfessionalTax" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.ProfessionalTax)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.TotalDeduction)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.TotalDeduction, new { @id = "TotalDeduction", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.TotalDeduction)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.NetSalary)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.NetSalary, new { @id = "NetSalary", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.NetSalary)
+                        </div>
+                    </td>
+                </tr>
+                <tr><th colspan="2">Contribution</th></tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.EmployerPF)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.EmployerPF, new { @id = "EmployerPF" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.EmployerPF)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.EmployerESIC)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.EmployerESIC, new { @id = "EmployerESIC" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.EmployerESIC)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.Insurance)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.Insurance, new { @id = "Insurance" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.Insurance)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.TotalContribution)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.TotalContribution, new { @id = "TotalContribution", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.TotalContribution)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.GrossTotal)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.GrossTotal, new { @id = "GrossTotal", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.GrossTotal)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.AgencyFee)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.AgencyFee, new { @id = "AgencyFee" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.AgencyFee)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.GrossTotalwithAgencyFee)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.GrossTotalwithAgencyFee, new { @id = "GrossTotalwithAgencyFee", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.GrossTotalwithAgencyFee)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.ServiceTax)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.ServiceTax, new { @id = "ServiceTax" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.ServiceTax)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.salaryDetailsView.TotalSalary)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.salaryDetailsView.TotalSalary, new { @id = "TotalSalary", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.salaryDetailsView.TotalSalary)
+                        </div>
+                    </td>
+                </tr>
+                @if (ViewData["Result"] == "" || ViewData["Result"] == null)
+                {
+                <tr>
+                    <td colspan="2" align="center">
+                        <p>
+                            <input type="submit" class="SubmitViolet" value="Save" />
+                            
+                        </p>
+                    </td>
+                </tr>
+                }
+               
+            </table>
+        </fieldset>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Appointment Details", "AppointmentDetails", new { id = ViewData["EmployeeID"]})
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                $('input:text:first').focus();
+                var $inp = $('input:text');
+                $inp.bind('keydown', function (e) {
+                    var key = e.which;
+                    if (key == 13) {
+                        e.preventDefault();
+                        var nxtIdx = $inp.index(this) + 1;
+                        $(":input:text:eq(" + nxtIdx + ")").focus();
+                    }
+                });
+            });
+            $("#EmployeeID").attr('readOnly', 'true');
+            $("#EmployeeName").attr('readOnly', 'true');
+            $("#MeetingID").attr('readOnly', 'true');
+            $("#OrderType").attr('readOnly', 'true');
+            $("#ProjectType").attr('readOnly', 'true');
+            $("#ProjectNo").attr('readOnly', 'true');
+            $("#FromDate").attr('readOnly', 'true');
+            var dt = $("#FromDate").val();
+            var dt1 = dt.split('/');
+            var dt2 = new Date(dt1[1] + '/' + dt1[0] + '/' + dt1[2])
+            var dt3 = new Date(dt1[1] + '/' + dt1[0] + '/' + dt1[2])
+            dt2.setDate(dt2.getDate() + 1);
+            dt3.setMonth(dt3.getMonth() + 12);
+            dt3.setDate(dt3.getDate() - 1);
+            $("#ToDate").prop("required", true);
+            $("#ToDate").attr('readOnly', 'true');
+            $("#ToDate").attr("placeholder", "dd/MM/yyyy").datepicker({
+                dateFormat: "dd/mm/yy", changeMonth: "true", minDate:dt2, maxDate:dt3 });
+            $("#ToDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
+            $("#AppointmentBasic").attr('readOnly', 'true');
+            $("#GrossSalary").attr('readOnly', 'true');
+            $("#TotalDeduction").attr('readOnly', 'true');
+            $("#NetSalary").attr('readOnly', 'true');
+            $("#TotalContribution").attr('readOnly', 'true');
+            $("#GrossTotal").attr('readOnly', 'true');
+            $("#GrossTotalwithAgencyFee").attr('readOnly', 'true');
+            $("#TotalSalary").attr('readOnly', 'true');
+            $("#BasicSalary").blur(function () { CalculateGross(); });
+            $("#HRA").blur(function () { CalculateGross(); });
+            $("#Bonus").blur(function () { CalculateGross(); });
+            $("#SpecialAllowance").blur(function () { CalculateGross(); });
+            $("#EmployeePF").blur(function () { CalculateDeduction(); });
+            $("#EmployeeESIC").blur(function () { CalculateDeduction(); });
+            $("#ProfessionalTax").blur(function () { CalculateDeduction(); });
+            $("#EmployerPF").blur(function () { CalculateContribution() });
+            $("#EmployerESIC").blur(function () { CalculateContribution() });
+            $("#Insurance").blur(function () { CalculateContribution() });
+            $("#AgencyFee").blur(function () { CalculateAgency() });
+            $("#ServiceTax").blur(function () { CalculateTotalSalary() });
+        });
+        function CalculateGross() {
+            var Basic = $("#BasicSalary").val();
+            var HRA = $("#HRA").val();
+            var Bonus = $("#Bonus").val();
+            var SpecialAllowance = $("#SpecialAllowance").val();
+            $("#GrossSalary").val(parseFloat(Basic) + parseFloat(HRA) + parseFloat(Bonus) + parseFloat(SpecialAllowance));
+            CalculateNet();
+            CalculateCTC();
+        }
+        function CalculateDeduction() {
+            var EmployeePF = $("#EmployeePF").val();
+            var EmployeeESIC = $("#EmployeeESIC").val();
+            var ProfessionalTax = $("#ProfessionalTax").val();
+            $("#TotalDeduction").val(parseFloat(EmployeePF) + parseFloat(EmployeeESIC) + parseFloat(ProfessionalTax));
+            CalculateNet();
+        }
+        function CalculateNet() {
+            var Gross = $("#GrossSalary").val();
+            var TotalDeduction = $("#TotalDeduction").val();
+            $("#NetSalary").val(parseFloat(Gross) - parseFloat(TotalDeduction));
+        }
+        function CalculateContribution() {
+            var EmployerPF = $("#EmployerPF").val();
+            var EmployerESIC = $("#EmployerESIC").val();
+            var Insurance = $("#Insurance").val();
+            $("#TotalContribution").val(parseFloat(EmployerPF) + parseFloat(EmployerESIC) + parseFloat(Insurance));
+            CalculateCTC();
+        }
+        function CalculateCTC() {
+            var Gross = $("#GrossSalary").val();
+            var TotalContribution = $("#TotalContribution").val();
+            $("#GrossTotal").val(parseFloat(Gross) + parseFloat(TotalContribution));
+            CalculateAgency();
+        }
+        function CalculateAgency() {
+            var AgencyFee = $("#AgencyFee").val();
+            var GrossTotal = $("#GrossTotal").val();
+            $("#GrossTotalwithAgencyFee").val(parseFloat(GrossTotal) + parseFloat(AgencyFee));
+            CalculateTotalSalary();
+        }
+        function CalculateTotalSalary() {
+            var ServiceTax = $("#ServiceTax").val();
+            var GrossTotalwithAgencyFee = $("#GrossTotalwithAgencyFee").val();
+            $("#TotalSalary").val(parseFloat(GrossTotalwithAgencyFee) + parseFloat(ServiceTax));
+        }
+        
+        function CalculateSalary()
+        {
+            var empid = $("#EmployeeID").val();
+            var basics = $("#AppointmentBasic").val(); 
+            var increment = $("#IncrementAmt").val();
+            var orderid = $("#OrderID").val();
+            if (!isNaN(parseFloat(increment)) && isFinite(increment)) {
+                $.ajax({
+                    url: '@Url.Content("~/Outsource/SalaryCalculationUpdate")',
+                    type: 'post',
+                    dataType: "json",
+                    data: { id: empid, basicSalary: basics, increment: increment,orderID:orderid},
+                    success: function (data) {
+                        if (data.result == 'success') {
+                            $("#BasicSalary").val(data.BasicSalary);
+                            $("#HRA").val(data.HRA);
+                            $("#Bonus").val(data.Bonus);
+                            $("#SpecialAllowance").val(data.SpecialAllowance);
+                            $("#GrossSalary").val(data.GrossSalary);
+                            $("#EmployeePF").val(data.EmployeePF);
+                            $("#EmployeeESIC").val(data.EmployeeESIC);
+                            $("#ProfessionalTax").val(data.ProfessionalTax);
+                            $("#TotalDeduction").val(data.TotalDeduction);
+                            $("#NetSalary").val(data.NetSalary);
+                            $("#EmployerPF").val(data.EmployerPF);
+                            $("#EmployerESIC").val(data.EmployerESIC);
+                            $("#Insurance").val(data.Insurance);
+                            $("#TotalContribution").val(data.TotalContribution);
+                            $("#GrossTotal").val(data.GrossTotal);
+                            $("#AgencyFee").val(data.AgencyFee);
+                            $("#GrossTotalwithAgencyFee").val(data.GrossTotalwithAgencyFee);
+                            $("#ServiceTax").val(data.ServiceTax);
+                            $("#TotalSalary").val(data.TotalSalary);
+                        }
+                        else {
+                            alert('Please verify salary details');
+                            //$("#CandidateName").val("");
+                            //$("#DOB").val("");
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (xhr.status == 404) {
+                            alert(thrownError)
+                        }
+                    }
+                });
+            }
+            else {
+                alert('Enter Increment Amount');
+            }
+        }
+
+    </script>
+}
+@{
+    if (ViewData["Result"] != "" && ViewData["Result"] != null)
+    {
+        ViewData["Result"] = null;
+        var results = ViewData["EmployeeID"];
+        var status = ViewData["Status"];
+        if (status == "Insert")
+        { 
+        <script type="text/javascript" language="javascript">
+            alert("Extension Order Added Successfully, The Employee ID is : @results");
+        </script>
+        }
+        else if (status == "Update")
+        {
+            <script type="text/javascript" language="javascript">
+                alert("Extension Order Updated Successfully, The Employee ID is : @results");
+            </script>
+        }
+    }
+}

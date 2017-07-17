@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "MedicalCard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <table align="center" width="400" height="200">
+            <tr>
+                <th>
+                    <h3>Medical Card</h3>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-field">
+                        @Html.RadioButton("rdoBtnEmpID","EmpID",true)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("ddlEmpID", new SelectList((System.Collections.IEnumerable)ViewData["EmployeeList"]), "Select Employee ID")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Approved By")
+                    </div>
+                </td>
+                <td>                    
+                    <div class="editor-field">
+                        @Html.DropDownList("ddlAuthority",new SelectList((System.Collections.IEnumerable)ViewData["Authorities"], "AuthorityID", "AuthorityDesignation"), "Select Authority")                        
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        <input type="submit" class="SubmitViolet1" value="Report" onclick="target = '_blank';" />
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#MeetingDate").attr('readOnly', 'true');
+        $("#MeetingDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", minDate: "-1y", maxDate: "3m", beforeShowDay: function (date) { var day = date.getDay(); return [(day != 1 && day != 3 && day != 4 && day != 5 && day != 6 && day != 0), ''] } });
+    });
+    </script>
+}

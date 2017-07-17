@@ -1,0 +1,129 @@
+﻿@model Outsourcing.ViewModel.JoiningReportView
+<link href="@Url.Content("~/Content/HelperStyle1.css")" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "JoiningReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Joining Report</h3>
+
+@using (Html.BeginForm("JoiningReport", "Outsource"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MeetingID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.MeetingID, new { @class = "ReadonlyField" } )
+                        @Html.ValidationMessageFor(model => model.MeetingID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CandidateName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CandidateName, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.CandidateName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DesignationName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.DesignationName, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.DesignationName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.JoiningDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.JoiningDate)
+                        @Html.ValidationMessageFor(model => model.JoiningDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.JoiningReportApprovedBy)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.JoiningReportApprovedBy)
+                        @Html.ValidationMessageFor(model => model.JoiningReportApprovedBy)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.JoiningReportDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.JoiningReportDate)
+                        @Html.ValidationMessageFor(model => model.JoiningReportDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ApprovalChannel)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.ApprovalChannel, Model.ApprovalChannels,"-- Select Channel--")
+                        @Html.ValidationMessageFor(model => model.ApprovalChannel)
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <p>
+                        <input type="submit" class="SubmitViolet" value="Update" />
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Offer Processing", "OfferProcessing")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#MeetingID").attr('readOnly', 'true');
+            $("#CandidateName").attr('readOnly', 'true');
+            $("#DesignationName").attr('readOnly', 'true');
+            $("#JoiningDate").attr('readOnly', 'true');
+            $("#JoiningReportDate").attr('readOnly', 'true');
+            $("#JoiningDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd-mm-yy" });
+            $("#JoiningDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
+            $("#JoiningReportDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd-mm-yy" });
+            $("#JoiningReportDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
+        });
+    </script>
+}
+@{
+    if (ViewData["Result"] != "" && ViewData["Result"] != null)
+    {
+        ViewData["result"] = null;
+        <script type="text/javascript" language="javascript">
+            alert("Joining date updated Successfully");
+        </script>
+    }
+}
+
