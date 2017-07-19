@@ -286,3 +286,4 @@ F:\ApplicationBackup\Recruitment\ICSR Outsourcing\Outsourcing\bin\zh-Hant\System
 F:\ApplicationBackup\Recruitment\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.csprojResolveAssemblyReference.cache
 F:\ApplicationBackup\Recruitment\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.dll
 F:\ApplicationBackup\Recruitment\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.pdb
+E:\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.csprojResolveAssemblyReference.cache

@@ -110,9 +110,9 @@
             $("#DesignationName").attr('readOnly', 'true');
             $("#JoiningDate").attr('readOnly', 'true');
             $("#JoiningReportDate").attr('readOnly', 'true');
-            $("#JoiningDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "yy-mm-dd" });
+            $("#JoiningDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd-mm-yy" });
             $("#JoiningDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
-            $("#JoiningReportDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "yy-mm-dd" });
+            $("#JoiningReportDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd-mm-yy" });
             $("#JoiningReportDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
         });
     </script>
