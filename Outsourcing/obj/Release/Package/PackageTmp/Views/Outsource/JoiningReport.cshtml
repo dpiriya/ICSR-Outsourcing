@@ -49,7 +49,7 @@
                         @Html.LabelFor(model => model.JoiningDate)
                     </div>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.JoiningDate)
+                        @Html.TextBoxFor(model => model.JoiningDate)
                         @Html.ValidationMessageFor(model => model.JoiningDate)
                     </div>
                 </td>
@@ -60,7 +60,7 @@
                         @Html.LabelFor(model => model.JoiningReportApprovedBy)
                     </div>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.JoiningReportApprovedBy)
+                        @Html.TextBoxFor(model => model.JoiningReportApprovedBy)
                         @Html.ValidationMessageFor(model => model.JoiningReportApprovedBy)
                     </div>
                 </td>
@@ -69,7 +69,7 @@
                         @Html.LabelFor(model => model.JoiningReportDate)
                     </div>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.JoiningReportDate)
+                        @Html.TextBoxFor(model => model.JoiningReportDate)
                         @Html.ValidationMessageFor(model => model.JoiningReportDate)
                     </div>
                 </td>
@@ -110,9 +110,9 @@
             $("#DesignationName").attr('readOnly', 'true');
             $("#JoiningDate").attr('readOnly', 'true');
             $("#JoiningReportDate").attr('readOnly', 'true');
-            $("#JoiningDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd-mm-yy" });
+            $("#JoiningDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy" });
             $("#JoiningDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
-            $("#JoiningReportDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd-mm-yy" });
+            $("#JoiningReportDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy" });
             $("#JoiningReportDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
         });
     </script>

@@ -130,7 +130,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             $("#MeetingID").attr('readOnly', 'true');
             $("#OrderType").attr('readOnly', 'true');
             $("#stoppaymentdate").attr('readOnly', 'true');
-            $("#stoppaymentdate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "yy-mm-dd" });
+            $("#stoppaymentdate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy" });
             $("#stoppaymentdate").prop("required", true);
             $("#stoppaymentdate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
             

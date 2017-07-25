@@ -44,7 +44,7 @@
             </tr>
         </table>
     </div>
-        <div id="divAppointmentProject" >
+        <div id="divAppointmentProject" class="hidden">
             <table>
                 <tr>
                     <td>
@@ -165,11 +165,24 @@
     });
     function getDB(name) {
         $('#spanDBId').show();
-
+       
         $('#spanDBId').html("");
         var array = $("#" + name.id).val();
         $.each(array, function (index) {
             $('#spanDBId').append("<span><label>" + array[index] + "</label></span><a><i class='remove glyphicon glyphicon-remove-sign glyphicon-white'></i></a>&nbsp;&nbsp; ");
+        })
+        
+
+        //$("select option:selected").each(function () {
+        //    var msg = "";
+        //    msg = "#div" + $(this).val();
+        //    $(msg).removeClass('hidden');
+        //});     
+       
+        var array = $("#" + name.id).val();
+        $.each(array, function (index) {
+            var i=($("#" + getdivid(name)).val());
+            $("#div" + i).removeClass('hidden');
         })
     }
 
@@ -186,6 +199,11 @@
     function getSpanId(getname) {
         var name = $(getname).attr('id');
         return name.replace('id', 'span');
+    }
+    function getdivid(getname)
+    {
+        var name = $(getname).attr('id');
+        return name.replace('id', 'div');
     }
     function ViewReport()
     {
