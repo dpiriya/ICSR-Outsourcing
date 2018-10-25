@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Outsourcing.ViewModel.DesignationView>
+<link href="~/Content/TableView.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "DesignationList";
+    Layout = "~/Views/Shared/_Layout.cshtml";   
+}
+
+<h2>Designation List</h2>
+
+<p>
+    @Html.ActionLink("Create New","DesignationInsert")
+</p>
+<table class="Table1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DesignationCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DesignationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LowerAgeLimit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpperAgeLimit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qualifications)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Experience)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    
+    using (@Html.BeginForm("", "Outsource", new {id=item.DesignationCode}))
+    { 
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DesignationCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DesignationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LowerAgeLimit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpperAgeLimit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qualifications)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Experience)
+        </td>
+        <td>
+            <input type="submit" class="SubmitBlue" value="Edit" name="action:DesignationEdit" />
+            <input type="submit" class="SubmitBlue" value="Details" name="action:DesignationDetails" />
+            <input type="submit" class="SubmitBlue" value="Delete" name="action:DesignationDelete" onclick="return confirm ('Are you sure!!! Do you want to delete this designation')" />            
+        </td>
+    </tr>
+    }
+}
+
+</table>

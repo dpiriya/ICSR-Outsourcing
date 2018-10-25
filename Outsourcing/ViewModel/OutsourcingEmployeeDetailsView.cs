@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using Outsourcing.Models;
+using Outsourcing.CustomDataAnnotations;
 
 namespace Outsourcing.ViewModel
 {
@@ -19,8 +20,20 @@ namespace Outsourcing.ViewModel
 
         [Required]
         [Display(Name = "Date of Birth")]
-        [DataType(DataType.Date),DisplayFormat(DataFormatString="{0:dd/MM/yyyy}",ApplyFormatInEditMode=true)]
+        //[DataType(DataType.Date),DisplayFormat(DataFormatString="{0:dd/MM/yyyy}",ApplyFormatInEditMode=true)]
         public Nullable<System.DateTime> DOB { get; set; }
+
+        [Display(Name = "Age")]
+        public int Age { get; set; }
+
+        
+        [Display(Name ="Physically Challenged")]
+     
+        public bool PH { get; set; }
+        
+        [Display(Name ="Marital Status")]
+        public string MaritalStatus { get; set; }
+        public IEnumerable<SelectListItem> MStatus { get; set; }
 
         [Required]
         [Display(Name = "Gender")]
@@ -54,6 +67,10 @@ namespace Outsourcing.ViewModel
         [Display(Name = "Permanent Account Number (PAN)")]
         public string PAN { get; set; }
 
+        [RegularExpression("[0-9]{12}",ErrorMessage ="Should contains 12 digits")]
+        [Display(Name = "Aadhar Number")]
+        public string Aadhar { get; set; }
+
         [RegularExpression("[0-9]{3,6}-[0-9]{6,8}$", ErrorMessage = "eg. 044-12345678, 04287-223458  ")]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
@@ -79,16 +96,17 @@ namespace Outsourcing.ViewModel
 
         [Display(Name = "Bank Name")]
         public string BankName { get; set; }
+        public IEnumerable<SelectListItem> BankNameList { get; set; }
         
         [Display(Name = "Branch Name")]
         public string BranchName { get; set; }
 
-        [RegularExpression("^[0-9]{13}$", ErrorMessage = "Length should be 13")]
+        [RegularExpression("^[0-9]{10,20}$", ErrorMessage = "Length should not exceed 20")]
         [Display(Name = "Bank Account No")]
         public string BankAccountNo { get; set; }
 
         [System.ComponentModel.DataAnnotations.Compare("BankAccountNo",ErrorMessage="The confirm Bank Account Number does not match with Bank Account Number")]
-        [RegularExpression("^[0-9]{13}$",ErrorMessage="Length should be 13")]
+        [RegularExpression("^[0-9]{10,20}$",ErrorMessage= "Length should not exceed 20")]
         [Display(Name = "Re-Enter Bank Account No")]
         public string ConfirmBankAccountNo { get; set; }
 
@@ -114,12 +132,15 @@ namespace Outsourcing.ViewModel
                 DOB= Convert.ToDateTime(ev.DOB),
                 Gender =ev.Gender,
                 CasteCategory =ev.CasteCategory, 
+                PH=Convert.ToBoolean(ev.PH),
+                MaritalStatus=ev.MaritalStatus,
                 FatherName =ev.FatherName, 
                 MotherName =ev.MotherName, 
                 HusbandName =ev.HusbandName, 
                 PermanentAddress =ev.PermanentAddress,
                 CommunicationAddress =ev.CommunicationAddress,
                 PAN =ev.PAN, 
+                Aadhar=ev.Aadhar,
                 PhoneNumber =ev.PhoneNumber, 
                 MobileNumber =ev.MobileNumber, 
                 EmailID =ev.EmailID, 
@@ -142,12 +163,15 @@ namespace Outsourcing.ViewModel
                 DOB = om.DOB,
                 Gender = om.Gender,
                 CasteCategory = om.CasteCategory,
+                PH=om.PH,
+                MaritalStatus=om.MaritalStatus,
                 FatherName = om.FatherName,
                 MotherName = om.MotherName,
                 HusbandName = om.HusbandName,
                 PermanentAddress = om.PermanentAddress,
                 CommunicationAddress = om.CommunicationAddress,
                 PAN = om.PAN,
+                Aadhar=om.Aadhar,
                 PhoneNumber = om.PhoneNumber,
                 MobileNumber = om.MobileNumber,
                 EmailID = om.EmailID,
@@ -170,6 +194,20 @@ namespace Outsourcing.ViewModel
             }.ToList();
             return gList;
         }
+       
+        public List<SelectListItem> M_Status()
+        {
+            List<SelectListItem> mList = new List<SelectListItem>();
+            mList = new[]
+            {
+                new SelectListItem {Value="Married",Text="Married" },
+                new SelectListItem {Value="Unmarried",Text="Unmarried" },
+                new SelectListItem {Value="Divorced",Text="Divorced" },
+                new SelectListItem {Value="Widowed",Text="Widowed" }
+            }.ToList();
+            return mList;
+        }
+
         public List<SelectListItem> CasteList()
         {
             List<SelectListItem> cList = new List<SelectListItem>();
@@ -181,6 +219,15 @@ namespace Outsourcing.ViewModel
                 new SelectListItem {Value="OC", Text="Other Caste"}
             }.ToList();
             return cList;
+        }
+
+        public List<SelectListItem> bankList()
+        {
+            using (RecruitEntities recruit = new RecruitEntities())
+            {
+                List<SelectListItem> blist = recruit.tbl_mst_BankName.Select(m => new SelectListItem { Text = m.BankName, Value = m.BankName }).ToList();
+                return blist;
+            }
         }
     }         
 }

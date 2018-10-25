@@ -50,10 +50,10 @@ namespace Outsourcing.Models
     
         public virtual ICollection<AppointmentDetail> AppointmentDetails { get; set; }
         public virtual OutSourcingDesignation OutSourcingDesignation { get; set; }
-        public virtual OutsourcingEmployeeDetail OutsourcingEmployeeDetail { get; set; }
-        public virtual OutsourcingMeeting OutsourcingMeeting { get; set; }
         public virtual ICollection<OrderRequestDetail> OrderRequestDetails { get; set; }
         public virtual ICollection<SalaryDetail> SalaryDetails { get; set; }
         public virtual ICollection<AppointmentProject> AppointmentProjects { get; set; }
+        public virtual OutsourcingMeeting OutsourcingMeeting { get; set; }
+        public virtual OutsourcingEmployeeDetail OutsourcingEmployeeDetail { get; set; }
     }
 }

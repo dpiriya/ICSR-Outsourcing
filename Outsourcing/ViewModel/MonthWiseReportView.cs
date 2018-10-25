@@ -12,13 +12,13 @@ namespace Outsourcing.ViewModel
         [Required]
         [Display(Name = "From Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FromDate { get; set; }
 
         [Required]
         [Display(Name = "To Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ToDate { get; set; }
 
         [Required]

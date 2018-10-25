@@ -200,3 +200,20 @@
         </td>
     </tr>
 </table>
+
+
+    <script type="text/javascript">
+        $("#BasicSalary,#HRA,#Bonus,#SpecialAllowance").change(function () {
+            var add = parseInt($("#BasicSalary").val()) + parseInt($("#HRA").val()) + parseInt($("#Bonus").val()) + parseInt($("#SpecialAllowance").val());
+            $("#GrossSalary").val(add);
+        });
+        $("#EmployeePF,#EmployeeESIC,#ProfessionalTax,#TotalDeduction").change(function () {
+            var add = parseInt($("#EmployeePF").val()) + parseInt($("#EmployeeESIC").val()) + parseInt($("#ProfessionalTax").val()) + parseInt($("#TotalDeduction").val());
+            $("#NetSalary").val(add);
+        });
+        $("#EmployerPF,#EmployerESIC,#Insurance,#TotalDeduction").change(function () {
+            var add = parseInt($("#EmployerPF").val()) + parseInt($("#EmployerESIC").val()) + parseInt($("#Insurance").val()) + parseInt($("#TotalContribution").val());
+            $("#GrossTotal").val(add);
+        });
+        </script>
+

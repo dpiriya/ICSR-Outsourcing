@@ -87,23 +87,45 @@
     <tr>
         <td>
             <div class="editor-label">
-                @Html.LabelFor(model => model.Experience)
+                @Html.LabelFor(model => model.IITMExperience)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.Experience)
-                @Html.ValidationMessageFor(model => model.Experience)
+                @Html.DropDownListFor(model => model.IITMExperience, Html.OptionsForBoolean(model => model.IITMExperience), "--Select Yes/No--")
+                @Html.ValidationMessageFor(model => model.IITMExperience)
             </div>
         </td>
         <td>
             <div class="editor-label">
-                @Html.LabelFor(model => model.IITMExperience)
+                @Html.LabelFor(model => model.IIT_Experience)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.IITMExperience, Html.OptionsForBoolean(model=>model.IITMExperience), "--Select Yes/No--")
-                @Html.ValidationMessageFor(model => model.IITMExperience)
+                @Html.EditorFor(model => model.IIT_Experience)
+                @Html.ValidationMessageFor(model => model.IIT_Experience)
             </div>
-        </td>
+        </td>   
+        
     </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.NONIIT_Experience)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.NONIIT_Experience)
+                        @Html.ValidationMessageFor(model => model.NONIIT_Experience)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Total_Experience)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Total_Experience,new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.Total_Experience)
+                    </div>
+                </td>
+
+            </tr>
     <tr><th colspan="2">Project Details</th></tr>
     <tr>
         <td>
@@ -195,7 +217,15 @@
                 @Html.ValidationMessageFor(model => model.ProjectCloseDate)
             </div>
         </td>
-        <td></td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Section)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.Section, Model.Sections, "--Select Section--")
+                @Html.ValidationMessageFor(model => model.Section)
+            </div>
+        </td>
     </tr>
     <tr><th colspan="2">Appointment Details</th></tr>
     <tr>
@@ -253,7 +283,7 @@
                 @Html.LabelFor(model => model.ToDate)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.ToDate)
+                @Html.TextBoxFor(model => model.ToDate)
                 @Html.ValidationMessageFor(model => model.ToDate)
             </div>
         </td>
@@ -350,6 +380,15 @@
                 }
             });
         });
+        $("#IITMExperience").change(function () {
+            var val = $("#IITMExperience option:selected").text();
+            if (val=="Yes") {
+                $("#IIT_Experience").removeClass("ReadonlyField");
+            }
+            else
+                $("#IIT_Experience").addClass("ReadonlyField");
+        });
+        $("#Total_Experience").attr('readOnly', 'true');
         $("#MeetingID").attr('readOnly', 'true');
         $("#CandidateID").attr('readOnly', 'true');
         $("#CandidateName").attr('readOnly', 'true');
@@ -360,6 +399,7 @@
         $("#SponsoredAgency").attr('readOnly', 'true');
         $("#PIName").attr('readOnly', 'true');
         $("#ProjectCloseDate").attr('readOnly', 'true');
+      
         $("#FromDate").attr('readOnly', 'true');
         $("#FromDate").attr("placeholder", "dd/MM/yyyy").datepicker({
             dateFormat: "dd/mm/yy",
@@ -409,6 +449,12 @@
             var dept = $("#DepartmentCode option:selected").text();
             var arr = dept.split('--');
             $("#DepartmentName").val(arr[1].trim());
+            if($("#DepartmentCode option:selected").text()=="ICS--Centre for Industrial Consultancy and Sponsored Research")
+            {
+                $("#Section").prop("disabled", false);
+            }
+            else
+                $("#Section").prop("disabled", true);
         });
         $("#DurationType").change(function () {
             var duration = $("select[name='DurationType'] option:selected").index();
@@ -473,6 +519,10 @@
                 alert('Please enter PI Code');
             }
         });
+        //to add total experience automatically 
+        $("#NONIIT_Experience").blur(function add() {
+              $("#Total_Experience").val(parseFloat($("#IIT_Experience").val()) +parseFloat($("#NONIIT_Experience").val()));
+        });
         $("#ProjectType").change(function () {
             $("#ProjectTitle").val("");
             $("#SponsoredAgency").val("");
@@ -506,7 +556,7 @@
             $("#ProjectNo").val(projNo.toUpperCase());
             var pType= $("#ProjectType option:selected").val().trim();
             var dept = $("#DepartmentCode option:selected").val().trim();
-            if ((projNo != '' && projNo.trim().length == 18 && pType == 'SR') || (projNo != '' && projNo.trim().length == 20 && (pType == 'RB' || pType == 'RC' || pType == 'IC' || pType == 'ET'))) {
+            if ((projNo != '' && projNo.trim().length == 18 && pType == 'SR') || (projNo != '' && projNo.trim().length == 20 && (pType == 'RB' || pType == 'RC' || pType == 'IC' || pType == 'ET' ||pType=='CR' ||pType=='IT'))) {
                 $.ajax({
                     url: '@Url.Content("~/Outsource/getProjectDetails")',
                     type: 'post',

@@ -1,0 +1,169 @@
+﻿@model Outsourcing.ViewModel.stoppaymentview
+@{
+    ViewBag.Title = "rejoin";
+}
+
+<h2>rejoin</h2>
+
+<link href="~/Content/HelperStyle1.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Rejoin";
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<div>
+    @using (Html.BeginForm("rejoin", "Outsource", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <table>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.EmployeeID)
+                        </div>
+                        <div class="editor-field">
+                            @Html.HiddenFor(model => model.Command)
+                            @Html.TextBoxFor(model => model.EmployeeID, new { @id = "EmployeeID", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.EmployeeID)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.EmployeeName)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.EmployeeName, new { @id = "EmployeeName", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.EmployeeName)
+                        </div>
+                    </td>
+                <tr><th colspan="2">Appointment Details</th></tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.MeetingID)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.MeetingID, new { @id = "MeetingID", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.MeetingID)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.OrderType)
+                        </div>
+                        <div class="editor-field">
+                            @{
+                                if (Model.Command == "Update")
+                                {
+                                    @Html.HiddenFor(model => model.OrderID)
+                                }
+                            }
+
+                            @Html.TextBoxFor(model => model.OrderType, new { @id = "OrderType", @class = "ReadonlyField" })
+                            @Html.ValidationMessageFor(model => model.OrderType)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.FromDate)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.FromDate, "{0:dd/MM/yyyy}", new { @id = "stoppaymentdate" })
+                            @Html.ValidationMessageFor(model => model.FromDate)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Remarks)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Remarks, new { @id = "Remarks" })
+                            @Html.ValidationMessageFor(model => model.Remarks)
+                        </div>
+                    </td>
+                </tr>
+
+                @if (Convert.ToString(ViewData["Result"]) == "" || ViewData["Result"] == null)
+                {
+                    <tr>
+                        <td colspan="2" align="center">
+                            <p>
+                                <input type="submit" class="SubmitViolet" value="Save" />
+                            </p>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </fieldset>
+                                }
+</div>
+
+<div>
+    @if (Convert.ToString(Model.EmployeeID) != null && Convert.ToString(Model.EmployeeID) != "")
+    {
+        @Html.ActionLink("Appointment Details", "AppointmentDetails", new { id = Model.EmployeeID })
+    }
+    else
+    {
+        @Html.ActionLink("Appointment Details", "AppointmentList")
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                $('input:text:first').focus();
+                var $inp = $('input:text');
+                $inp.bind('keydown', function (e) {
+                    var key = e.which;
+                    if (key == 13) {
+                        e.preventDefault();
+                        var nxtIdx = $inp.index(this) + 1;
+                        $(":input:text:eq(" + nxtIdx + ")").focus();
+                    }
+                });
+            });
+            $("#EmployeeID").attr('readOnly', 'true');
+            $("#EmployeeName").attr('readOnly', 'true');
+            $("#MeetingID").attr('readOnly', 'true');
+            $("#OrderType").attr('readOnly', 'true');
+            $("#stoppaymentdate").attr('readOnly', 'true');
+            $("#stoppaymentdate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy" });
+            $("#stoppaymentdate").prop("required", true);
+            $("#stoppaymentdate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
+
+        });
+
+    </script>
+}
+@{
+    if (ViewData["Result"] != "" && ViewData["Result"] != null)
+    {
+        ViewData["Result"] = null;
+        var results = ViewData["EmployeeID"];
+        var status = ViewData["Status"];
+        if (status == "Insert")
+        {
+            <script type="text/javascript" language="javascript">
+            alert("Rejoin Order Added Successfully, The Employee ID is : @results");
+            </script>
+        }
+        else if (status == "Update")
+        {
+            <script type="text/javascript" language="javascript">
+                alert("Rejoin Order Updated Successfully, The Employee ID is : @results");
+            </script>
+        }
+    }
+}
+
+
+

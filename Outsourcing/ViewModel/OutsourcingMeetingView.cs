@@ -50,14 +50,24 @@ namespace Outsourcing.ViewModel
         public string Qualification { get; set; }
 
         [Required]
-        [Display(Name = "Experience in Years")]       
-        public Nullable<decimal> Experience { get; set; }
-
-        [Required]
-        [Display(Name = "IITM Experience")]    
+        [Display(Name = "IITM Experience")]
         [BooleanDisplayValuesAsYesNo]
         public Nullable<bool> IITMExperience { get; set; }
         public IEnumerable<SelectListItem> IITMExperiences { get; set; }
+
+        [Required]
+        [Display(Name = "IIT Experience in Years")]
+        public Nullable<decimal> IIT_Experience { get; set; }
+
+        [Required]
+        [Display(Name = "Non IIT Experience in Years")]
+        public Nullable<decimal> NONIIT_Experience { get; set; }
+
+        [Required]
+        [Display(Name = "Total Experience")]       
+        public Nullable<decimal> Total_Experience { get; set; }
+
+       
 
         [Required]
         [Display(Name = "Project Type")]                       
@@ -88,6 +98,10 @@ namespace Outsourcing.ViewModel
         [Display(Name = "Project Closure Date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ProjectCloseDate { get; set; }
+
+        [Display(Name ="Section")]
+        public string Section { get; set; }
+        public IEnumerable<SelectListItem> Sections { get; set; }
 
         [Required]
         [Display(Name = "Coordinator Code")]              
@@ -212,6 +226,15 @@ namespace Outsourcing.ViewModel
             }.ToList();
             return dList;
         }
+        public List<SelectListItem> SectionList()
+        {
+            using (RecruitEntities recruit = new RecruitEntities())
+            {
+                List<SelectListItem> dList = recruit.tbl_mst_Section.Select(em => new SelectListItem { Value = em.SectionName, Text = em.SectionName }).ToList();
+                return dList;
+            }            
+        }
+
         public static implicit operator OutsourcingMeeting(OutsourcingMeetingView mv)
         {
             return new OutsourcingMeeting
@@ -224,9 +247,12 @@ namespace Outsourcing.ViewModel
                 DesignationCode=mv.DesignationCode,
                 DesignationName=mv.DesignationName,
                 Qualification=mv.Qualification,
-                Experience=Convert.ToDecimal(mv.Experience),
                 IITMExperience=Convert.ToBoolean(mv.IITMExperience),
-                ProjectType=mv.ProjectType,
+                IIT_Experience = Convert.ToDecimal(mv.IIT_Experience),
+                NONIIT_Experience=Convert.ToDecimal(mv.NONIIT_Experience),
+                Total_Experience=Convert.ToDecimal(mv.Total_Experience),
+                ProjectType =mv.ProjectType,
+                Section=mv.Section,
                 ProjectNo =mv.ProjectNo,
                 ProjectTitle=mv.ProjectTitle,
                 DepartmentCode=mv.DepartmentCode,  
@@ -259,9 +285,12 @@ namespace Outsourcing.ViewModel
                 DesignationCode = mv.DesignationCode,
                 DesignationName = mv.DesignationName,
                 Qualification = mv.Qualification,
-                Experience = mv.Experience,
+                IIT_Experience = mv.IIT_Experience,
                 IITMExperience = mv.IITMExperience,
+                NONIIT_Experience = mv.NONIIT_Experience,
+                Total_Experience = mv.Total_Experience,
                 ProjectType = mv.ProjectType,
+                Section=mv.Section,
                 ProjectNo = mv.ProjectNo,
                 ProjectTitle = mv.ProjectTitle,
                 DepartmentCode = mv.DepartmentCode,

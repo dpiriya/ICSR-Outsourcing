@@ -29,8 +29,10 @@ namespace Outsourcing.Models
         public string DesignationCode { get; set; }
         public string DesignationName { get; set; }
         public string Qualification { get; set; }
-        public decimal Experience { get; set; }
         public bool IITMExperience { get; set; }
+        public Nullable<decimal> IIT_Experience { get; set; }
+        public Nullable<decimal> NONIIT_Experience { get; set; }
+        public Nullable<decimal> Total_Experience { get; set; }
         public string ProjectType { get; set; }
         public string ProjectNo { get; set; }
         public string ProjectTitle { get; set; }
@@ -40,6 +42,7 @@ namespace Outsourcing.Models
         public string PICode { get; set; }
         public string PIName { get; set; }
         public Nullable<System.DateTime> ProjectCloseDate { get; set; }
+        public string Section { get; set; }
         public string OutSourcingCompany { get; set; }
         public System.DateTime RequestFromDate { get; set; }
         public System.DateTime RequestToDate { get; set; }
@@ -56,11 +59,11 @@ namespace Outsourcing.Models
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public string UpdatedBy { get; set; }
     
-        public virtual OutSourcingDesignation OutSourcingDesignation { get; set; }
-        public virtual OutsourcingEmployeeDetail OutsourcingEmployeeDetail { get; set; }
-        public virtual OutsourcingOffer OutsourcingOffer { get; set; }
         public virtual ICollection<AppointmentDetail> AppointmentDetails { get; set; }
         public virtual ICollection<AppointmentMaster> AppointmentMasters { get; set; }
         public virtual ICollection<AppointmentProject> AppointmentProjects { get; set; }
+        public virtual OutsourcingOffer OutsourcingOffer { get; set; }
+        public virtual OutSourcingDesignation OutSourcingDesignation { get; set; }
+        public virtual OutsourcingEmployeeDetail OutsourcingEmployeeDetails { get; set; }
     }
 }

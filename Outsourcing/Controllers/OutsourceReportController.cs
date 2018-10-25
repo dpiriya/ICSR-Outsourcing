@@ -16,6 +16,7 @@ using System.IO;
 using System.Text;
 using System.Transactions;
 using Outsourcing.Datasets;
+using System.Globalization;
 
 namespace Outsourcing.Controllers
 {
@@ -90,7 +91,7 @@ namespace Outsourcing.Controllers
                     using (SqlConnection con = new SqlConnection())
                     {
                         con.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
-                        string sql = "select M.EmployeeID,M.EmployeeName,P.ProjectNo,P.DepartmentCode,P.DesignationCode,(SELECT TOP 1 BasicSalary FROM AppointmentDetails where OrderType in ('Appointment','Enhancement','Extension') and EmployeeID=M.EmployeeID and MeetingID=P.MeetingID ORDER BY FromDate DESC) as BasicSalary, (SELECT TOP 1 GrossSalary FROM AppointmentDetails where OrderType in ('Appointment','Enhancement','Extension') and EmployeeID=M.EmployeeID and MeetingID=P.MeetingID ORDER BY FromDate DESC) as GrossSalary,P.AppointmentDate,P.ToDate,P.ProjectRelieveDate as RelieveDate from AppointmentMaster M  inner join AppointmentProject P on M.EmployeeID=P.EmployeeID and " + tmpQ;
+                        string sql = "select M.EmployeeID,M.EmployeeName,P.ProjectNo,P.DepartmentCode,P.DesignationCode,(SELECT TOP 1 BasicSalary FROM AppointmentDetails where OrderType in ('Appointment','Enhancement','Extension') and EmployeeID=M.EmployeeID and MeetingID=P.MeetingID ORDER BY OrderID DESC) as BasicSalary, (SELECT TOP 1 GrossSalary FROM AppointmentDetails where OrderType in ('Appointment','Enhancement','Extension') and EmployeeID=M.EmployeeID and MeetingID=P.MeetingID ORDER BY OrderID DESC) as GrossSalary,P.AppointmentDate,P.ToDate,P.ProjectRelieveDate as RelieveDate from AppointmentMaster M  inner join AppointmentProject P on M.EmployeeID=P.EmployeeID and " + tmpQ;
                         SqlDataAdapter sda = new SqlDataAdapter(sql, con);
                         ReportsDS ds = new ReportsDS();
                         sda.Fill(ds.Tables["DtVarious"]);
@@ -676,13 +677,79 @@ namespace Outsourcing.Controllers
             return PartialView();
         }
         [HttpGet]
+        public ActionResult Reminder()
+        {
+            ReminderView mrv = new ReminderView();
+            ////mrv.OrderTypes = mrv.OrderTypeList();
+            mrv.DocumentFormats = mrv.DocumentFormatList();
+
+            ////mrv.ReportBased = mrv.ReportBasedList();
+            return View(mrv);
+        }
+        [HttpPost]
+        public ActionResult Reminder(ReminderView mrv)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    using (RecruitEntities recruit = new RecruitEntities())
+                    {
+                        using (SqlConnection con = new SqlConnection())
+                        {
+                            con.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
+                            SqlDataAdapter sda = new SqlDataAdapter("select P.EmployeeID,P.EmployeeName,P.ProjectNo,P.DepartmentCode,P.DesignationCode,m.BasicSalary, m.AppointmentDate,m.ToDate from AppointmentProject P inner join AppointmentMaster m on m.EmployeeID=p.EmployeeID and m.MeetingID=p.MeetingID and m.RelieveDate is null and m.ToDate between convert(date, '" + mrv.FromDate + "', 103) and convert(date, '" + mrv.ToDate + "', 103) ", con);
+                            ReportsDS ds = new ReportsDS();
+                            sda.Fill(ds.Tables["Reminder"]);
+                            Outsourcing.Reports.ToDateReminder rpt = new Outsourcing.Reports.ToDateReminder();
+                            //ReportClass rpt = new ReportClass();
+                            //rpt.FileName = Server.MapPath("~/Reports/ToDateReminder.rpt");
+                            rpt.Load();
+                            rpt.SetDataSource(ds.Tables["Reminder"]);
+                            if (mrv.DocumentFormat == "PDF")
+                            {
+                                Stream fileStream = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                                return File(fileStream, "application/pdf");
+                            }
+                            else if (mrv.DocumentFormat == "XLS" || mrv.DocumentFormat == "XLSX")
+                            {
+                                //Stream fileStream = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.ExcelRecord);
+                                //return File(fileStream, "application/xls");
+                                GenerateExcel ge = new GenerateExcel();
+                                ge.ExportToExcel(ds.Tables["Reminder"], "Reminder");
+                                return null;
+                            }
+                            else
+                            {
+                                Stream fileStream = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                                return File(fileStream, "application/doc");
+                            }
+
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    mrv.DocumentFormats = mrv.DocumentFormatList();
+                    ModelState.AddModelError("", ex.Message);
+                    return View(mrv);
+                }
+            }
+            else
+                return null;
+        }
+
+
+
+        [HttpGet]
         public ActionResult MasterReport()
         {
             using (RecruitEntities recruit = new RecruitEntities())
             {
                 ViewModel.MasterReport mp = new ViewModel.MasterReport();
                 mp.am = (from t in typeof(AppointmentMasterView).GetProperties() select new SelectListItem { Text = t.Name, Value = t.Name }).ToList();
-                //mp.ap = (from t in typeof(AppointmentProjectView).GetProperties() select t.Name).ToList();
+                mp.ad = (from t in typeof(AppointmentDetailsView).GetProperties() select new SelectListItem { Text = t.Name, Value = t.Name }).ToList();
                 mp.ap = (from t in typeof(AppointmentProjectView).GetProperties() select new SelectListItem { Text = t.Name, Value = t.Name }).ToList();
                 mp.oe = (from t in typeof(OutsourcingEmployeeDetailsView).GetProperties() select new SelectListItem { Text = t.Name, Value = t.Name }).ToList();
                 mp.om = (from t in typeof(OutsourcingMeetingView).GetProperties() select new SelectListItem { Text = t.Name, Value = t.Name }).ToList();
@@ -695,7 +762,7 @@ namespace Outsourcing.Controllers
                 new SelectListItem {Text= "OutsourcingMeeting",Value="OutsourcingMeeting" },
                 new SelectListItem { Text = "OutsourcingEmployeeDetails", Value = "OutsourcingEmployeeDetails"}
             };
-                    
+
                 return View(mp);
             }
         }
@@ -704,25 +771,115 @@ namespace Outsourcing.Controllers
         {
             using (RecruitEntities recruit = new RecruitEntities())
             {
-                var str = mas.ap1;
-                return View();
-            }                
-        }
-        public PartialViewResult _MasterReport(MasterReport mas)
-        {
-            using (RecruitEntities recruit = new RecruitEntities())
-            {
+
+                var SelectedDblist = mas.DBList1[0];
                 using (SqlConnection con = new SqlConnection())
                 {
-
                     con.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
-                    //string sql = "select '"+mas.ap1+"' from '"+mas.+"'";
-                    //SqlDataAdapter sda = new SqlDataAdapter(sql, con);
+                    string sql = "select * from " + SelectedDblist + "";
+                    SqlDataAdapter sda = new SqlDataAdapter(sql, con);
+                    DataTable dt = new DataTable("Master");
+                    sda.Fill(dt);
 
-                    return PartialView();
+                    //    for (int i = 1; i < mas.DBList1.Count; i++)
+                    //    {
+                    //        SelectedDblist += " inner join " + mas.DBList1[i] + " on " + mas.DBList1[i] + ".EmployeeID= " + mas.DBList1[i-1] + ".EmployeeID or " + mas.DBList1[i] + ".MeetingID= " + mas.DBList1[i-1] + ".MeetingID";
+                    //      }
+
+                    //    if (mas.DBList1.Count>0)
+                    //    {
+                    //        var SelectedAppProject = (mas.ap1 != null) ? String.Join(",", mas.ap1.Select(r => string.Concat("AppointmentProject.", r)).ToList()) : null;
+                    //        var SelectedAppMaster = (mas.am1 != null) ? String.Join(",", mas.am1.Select(r => string.Concat("AppointmentMaster.", r)).ToList()) : null;
+                    //        var SelectedAppDetails = (mas.ad1 != null) ? String.Join(",", mas.ad1.Select(r => string.Concat("AppointmentDetails.", r)).ToList()) : null;
+                    //        var SelectedOutMeeting = (mas.om1 != null) ? String.Join(",", mas.om1.Select(r => string.Concat("OutsourcingMeeting", r)).ToList()) : null;
+                    //        var SelectedOutEmployee = (mas.oe1 != null) ? String.Join(",", mas.oe1.Select(r => string.Concat("OutsourcingEmployeeDetails", r)).ToList()) : null;
+                    //        var SelectedSalaryDetails = (mas.sal1 != null) ? String.Join(",", mas.sal1.Select(r => string.Concat("SalaryDetails", r)).ToList()) : null;
+                    //        var SelectedValues = "";
+                    //        if (SelectedAppProject != null)
+                    //            SelectedValues = String.Join(",",SelectedAppProject, SelectedValues);
+                    //        if (SelectedAppMaster != null)
+                    //            SelectedValues = String.Join(",",SelectedAppMaster, SelectedValues);
+                    //        if (SelectedAppDetails != null)
+                    //            SelectedValues = String.Join(",", SelectedAppDetails, SelectedValues);
+                    //        if (SelectedOutMeeting != null)
+                    //            SelectedValues = String.Join(",", SelectedOutMeeting, SelectedValues);
+                    //        if (SelectedOutEmployee != null)
+                    //            SelectedValues = String.Join(",", SelectedOutEmployee, SelectedValues);
+                    //        if (SelectedSalaryDetails != null)
+                    //            SelectedValues = String.Join(",", SelectedSalaryDetails, SelectedValues);
+                    //        //, SelectedOutEmployee, SelectedOutMeeting,SelectedSalaryDetails);
+                    //        SelectedValues = SelectedValues.TrimEnd(',');
+                    //        //For columns
+                    //        var ListValue = SelectedValues.Split(',').ToList();
+                    //        using (SqlConnection con = new SqlConnection())
+                    //        {
+                    //            con.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
+                    //            string sql = "select " + SelectedValues + " from " + SelectedDblist + "";
+                    //            SqlDataAdapter sda = new SqlDataAdapter(sql, con);
+                    //            DataTable dt = new DataTable("Master");
+                    //            sda.Fill(dt);
+                    //            ReportClass rpt = new ReportClass();
+
+                    //            //for (int i = 0; i < ListValue.Count(); i++)
+                    //            //{
+                    //            //    DataColumn dc = new DataColumn(ListValue[i]);
+                    //            //    dt.Columns.Add(dc);
+                    //            //}
+
+                    //            //for (int j = 0; j < dt.Columns.Count; j++)
+                    //            //{
+                    //            //for (int i = 0; i < dt.Columns.Count; i++)
+                    //            //{
+                    //            //    DataRow dr = dt.NewRow();
+                    //            //    dr[i] = dt.Rows[i].ToString();
+                    //            //    dt.Rows.Add(dr);
+                    //            //}
+                    //            //return Json(dt);
+
+                    //            //}
+                    //            //ReportsDS ds = new ReportsDS();
+                    //            // sda.Fill(dt);
+                    //            // ViewBag.ds = dt;
+                    //            // ReportClass rptOrderReq = new ReportClass();
+                    //            // rptOrderReq.FileName = Server.MapPath("~/Reports/AppointmentRequest.rpt");
+                    //            // rptOrderReq.Load();
+                    //            // rptOrderReq.SetDataSource(dt);
+                    //            //// rptOrderReq.SetParameterValue("type", OrderType);
+                    //            // Stream fileStream = rptOrderReq.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    //            // return File(fileStream, "application/pdf");
+                    //        }
+
+                    //    }
+                    //   else
+                    //    {
+                    //        return View();
+                    //    }
+
                 }
+                return View();
             }
+
         }
-    }
+        //public PartialViewResult _MasterReport(MasterReport mas)
+        //{
+        //    using (RecruitEntities recruit = new RecruitEntities())
+        //    {
+        //        using (SqlConnection con = new SqlConnection())
+        //        {
+
+        //            con.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
+        //            //string sql = "select '"+mas.ap1+"' from '"+mas.+"'";
+        //            //SqlDataAdapter sda = new SqlDataAdapter(sql, con);
+
+        //            return PartialView();
+        //        }
+        //    }
+        //}
+
+        public ActionResult MasterTables()
+        {
+            return View();
+        }     
+    }  
 }
 

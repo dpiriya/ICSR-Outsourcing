@@ -159,7 +159,7 @@
             tDate.setDate(tDate.getDate());
             $("#RelieveDate").attr('readOnly', 'true');
             $("#RelieveDate").attr("placeholder", "dd/MM/yyyy").datepicker({
-                dateFormat: "dd/mm/yy", changeMonth: "true", minDate: fDate, maxDate: tDate
+                dateFormat: "dd/mm/yy", changeMonth: "true"//, minDate: fDate, maxDate: tDate -- modified by priya due to no proper process in recruitment
             });
             $("#RelieveDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
 

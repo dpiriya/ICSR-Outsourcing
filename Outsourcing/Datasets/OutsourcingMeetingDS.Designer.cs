@@ -24,13 +24,13 @@ namespace Outsourcing.Datasets {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class OutsourcingMeetingDS : global::System.Data.DataSet {
         
+        private OutsourcingMeetingDataTable tableOutsourcingMeeting;
+        
         private MinutesSummaryDataTable tableMinutesSummary;
         
         private OfferRequestDataTable tableOfferRequest;
         
         private CommitteeApprovalDataTable tableCommitteeApproval;
-        
-        private OutsourcingMeetingDataTable tableOutsourcingMeeting;
         
         private officeorderDataTable tableofficeorder;
         
@@ -68,6 +68,9 @@ namespace Outsourcing.Datasets {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+                if ((ds.Tables["OutsourcingMeeting"] != null)) {
+                    base.Tables.Add(new OutsourcingMeetingDataTable(ds.Tables["OutsourcingMeeting"]));
+                }
                 if ((ds.Tables["MinutesSummary"] != null)) {
                     base.Tables.Add(new MinutesSummaryDataTable(ds.Tables["MinutesSummary"]));
                 }
@@ -76,9 +79,6 @@ namespace Outsourcing.Datasets {
                 }
                 if ((ds.Tables["CommitteeApproval"] != null)) {
                     base.Tables.Add(new CommitteeApprovalDataTable(ds.Tables["CommitteeApproval"]));
-                }
-                if ((ds.Tables["OutsourcingMeeting"] != null)) {
-                    base.Tables.Add(new OutsourcingMeetingDataTable(ds.Tables["OutsourcingMeeting"]));
                 }
                 if ((ds.Tables["officeorder"] != null)) {
                     base.Tables.Add(new officeorderDataTable(ds.Tables["officeorder"]));
@@ -114,6 +114,16 @@ namespace Outsourcing.Datasets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public OutsourcingMeetingDataTable OutsourcingMeeting {
+            get {
+                return this.tableOutsourcingMeeting;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public MinutesSummaryDataTable MinutesSummary {
             get {
                 return this.tableMinutesSummary;
@@ -137,16 +147,6 @@ namespace Outsourcing.Datasets {
         public CommitteeApprovalDataTable CommitteeApproval {
             get {
                 return this.tableCommitteeApproval;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public OutsourcingMeetingDataTable OutsourcingMeeting {
-            get {
-                return this.tableOutsourcingMeeting;
             }
         }
         
@@ -257,6 +257,9 @@ namespace Outsourcing.Datasets {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
+                if ((ds.Tables["OutsourcingMeeting"] != null)) {
+                    base.Tables.Add(new OutsourcingMeetingDataTable(ds.Tables["OutsourcingMeeting"]));
+                }
                 if ((ds.Tables["MinutesSummary"] != null)) {
                     base.Tables.Add(new MinutesSummaryDataTable(ds.Tables["MinutesSummary"]));
                 }
@@ -265,9 +268,6 @@ namespace Outsourcing.Datasets {
                 }
                 if ((ds.Tables["CommitteeApproval"] != null)) {
                     base.Tables.Add(new CommitteeApprovalDataTable(ds.Tables["CommitteeApproval"]));
-                }
-                if ((ds.Tables["OutsourcingMeeting"] != null)) {
-                    base.Tables.Add(new OutsourcingMeetingDataTable(ds.Tables["OutsourcingMeeting"]));
                 }
                 if ((ds.Tables["officeorder"] != null)) {
                     base.Tables.Add(new officeorderDataTable(ds.Tables["officeorder"]));
@@ -314,6 +314,12 @@ namespace Outsourcing.Datasets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
+            this.tableOutsourcingMeeting = ((OutsourcingMeetingDataTable)(base.Tables["OutsourcingMeeting"]));
+            if ((initTable == true)) {
+                if ((this.tableOutsourcingMeeting != null)) {
+                    this.tableOutsourcingMeeting.InitVars();
+                }
+            }
             this.tableMinutesSummary = ((MinutesSummaryDataTable)(base.Tables["MinutesSummary"]));
             if ((initTable == true)) {
                 if ((this.tableMinutesSummary != null)) {
@@ -330,12 +336,6 @@ namespace Outsourcing.Datasets {
             if ((initTable == true)) {
                 if ((this.tableCommitteeApproval != null)) {
                     this.tableCommitteeApproval.InitVars();
-                }
-            }
-            this.tableOutsourcingMeeting = ((OutsourcingMeetingDataTable)(base.Tables["OutsourcingMeeting"]));
-            if ((initTable == true)) {
-                if ((this.tableOutsourcingMeeting != null)) {
-                    this.tableOutsourcingMeeting.InitVars();
                 }
             }
             this.tableofficeorder = ((officeorderDataTable)(base.Tables["officeorder"]));
@@ -372,14 +372,14 @@ namespace Outsourcing.Datasets {
             this.Namespace = "http://tempuri.org/OutsourcingMeetingDS.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
+            this.tableOutsourcingMeeting = new OutsourcingMeetingDataTable();
+            base.Tables.Add(this.tableOutsourcingMeeting);
             this.tableMinutesSummary = new MinutesSummaryDataTable();
             base.Tables.Add(this.tableMinutesSummary);
             this.tableOfferRequest = new OfferRequestDataTable();
             base.Tables.Add(this.tableOfferRequest);
             this.tableCommitteeApproval = new CommitteeApprovalDataTable();
             base.Tables.Add(this.tableCommitteeApproval);
-            this.tableOutsourcingMeeting = new OutsourcingMeetingDataTable();
-            base.Tables.Add(this.tableOutsourcingMeeting);
             this.tableofficeorder = new officeorderDataTable();
             base.Tables.Add(this.tableofficeorder);
             this.tableAppointmentDetails = new AppointmentDetailsDataTable();
@@ -388,6 +388,12 @@ namespace Outsourcing.Datasets {
             base.Tables.Add(this.tableSalaryDetails);
             this.tablerelieve = new relieveDataTable();
             base.Tables.Add(this.tablerelieve);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeOutsourcingMeeting() {
+            return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -405,12 +411,6 @@ namespace Outsourcing.Datasets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeCommitteeApproval() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeOutsourcingMeeting() {
             return false;
         }
         
@@ -494,6 +494,9 @@ namespace Outsourcing.Datasets {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void OutsourcingMeetingRowChangeEventHandler(object sender, OutsourcingMeetingRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void MinutesSummaryRowChangeEventHandler(object sender, MinutesSummaryRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -501,9 +504,6 @@ namespace Outsourcing.Datasets {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void CommitteeApprovalRowChangeEventHandler(object sender, CommitteeApprovalRowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void OutsourcingMeetingRowChangeEventHandler(object sender, OutsourcingMeetingRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void officeorderRowChangeEventHandler(object sender, officeorderRowChangeEvent e);
@@ -516,6 +516,847 @@ namespace Outsourcing.Datasets {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void relieveRowChangeEventHandler(object sender, relieveRowChangeEvent e);
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class OutsourcingMeetingDataTable : global::System.Data.TypedTableBase<OutsourcingMeetingRow> {
+            
+            private global::System.Data.DataColumn columnMeetingID;
+            
+            private global::System.Data.DataColumn columnMeetingDate;
+            
+            private global::System.Data.DataColumn columnCandidateID;
+            
+            private global::System.Data.DataColumn columnCandidateName;
+            
+            private global::System.Data.DataColumn columnDOB;
+            
+            private global::System.Data.DataColumn columnDesignationCode;
+            
+            private global::System.Data.DataColumn columnDesignationName;
+            
+            private global::System.Data.DataColumn columnQualification;
+            
+            private global::System.Data.DataColumn columnIITMExperience;
+            
+            private global::System.Data.DataColumn columnIIT_Experience;
+            
+            private global::System.Data.DataColumn columnNONIIT_Experience;
+            
+            private global::System.Data.DataColumn columnTotal_Experience;
+            
+            private global::System.Data.DataColumn columnProjectType;
+            
+            private global::System.Data.DataColumn columnProjectNo;
+            
+            private global::System.Data.DataColumn columnProjectTitle;
+            
+            private global::System.Data.DataColumn columnDepartmentCode;
+            
+            private global::System.Data.DataColumn columnDepartmentName;
+            
+            private global::System.Data.DataColumn columnSponsoredAgency;
+            
+            private global::System.Data.DataColumn columnPICode;
+            
+            private global::System.Data.DataColumn columnPIName;
+            
+            private global::System.Data.DataColumn columnProjectCloseDate;
+            
+            private global::System.Data.DataColumn columnSection;
+            
+            private global::System.Data.DataColumn columnOutSourcingCompany;
+            
+            private global::System.Data.DataColumn columnRequestFromDate;
+            
+            private global::System.Data.DataColumn columnRequestToDate;
+            
+            private global::System.Data.DataColumn columnDurationInMonth;
+            
+            private global::System.Data.DataColumn columnFromDate;
+            
+            private global::System.Data.DataColumn columnToDate;
+            
+            private global::System.Data.DataColumn columnGrossSalary;
+            
+            private global::System.Data.DataColumn columnCostToProject;
+            
+            private global::System.Data.DataColumn columnCommitmentNo;
+            
+            private global::System.Data.DataColumn columnStatusOfRequest;
+            
+            private global::System.Data.DataColumn columnRemarks;
+            
+            private global::System.Data.DataColumn columnCreatedOn;
+            
+            private global::System.Data.DataColumn columnCreatedBy;
+            
+            private global::System.Data.DataColumn columnUpdatedOn;
+            
+            private global::System.Data.DataColumn columnUpdatedBy;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OutsourcingMeetingDataTable() {
+                this.TableName = "OutsourcingMeeting";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal OutsourcingMeetingDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected OutsourcingMeetingDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MeetingIDColumn {
+                get {
+                    return this.columnMeetingID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MeetingDateColumn {
+                get {
+                    return this.columnMeetingDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CandidateIDColumn {
+                get {
+                    return this.columnCandidateID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CandidateNameColumn {
+                get {
+                    return this.columnCandidateName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DOBColumn {
+                get {
+                    return this.columnDOB;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DesignationCodeColumn {
+                get {
+                    return this.columnDesignationCode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DesignationNameColumn {
+                get {
+                    return this.columnDesignationName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn QualificationColumn {
+                get {
+                    return this.columnQualification;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IITMExperienceColumn {
+                get {
+                    return this.columnIITMExperience;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IIT_ExperienceColumn {
+                get {
+                    return this.columnIIT_Experience;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn NONIIT_ExperienceColumn {
+                get {
+                    return this.columnNONIIT_Experience;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Total_ExperienceColumn {
+                get {
+                    return this.columnTotal_Experience;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProjectTypeColumn {
+                get {
+                    return this.columnProjectType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProjectNoColumn {
+                get {
+                    return this.columnProjectNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProjectTitleColumn {
+                get {
+                    return this.columnProjectTitle;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DepartmentCodeColumn {
+                get {
+                    return this.columnDepartmentCode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DepartmentNameColumn {
+                get {
+                    return this.columnDepartmentName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SponsoredAgencyColumn {
+                get {
+                    return this.columnSponsoredAgency;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PICodeColumn {
+                get {
+                    return this.columnPICode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PINameColumn {
+                get {
+                    return this.columnPIName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProjectCloseDateColumn {
+                get {
+                    return this.columnProjectCloseDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SectionColumn {
+                get {
+                    return this.columnSection;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OutSourcingCompanyColumn {
+                get {
+                    return this.columnOutSourcingCompany;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RequestFromDateColumn {
+                get {
+                    return this.columnRequestFromDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RequestToDateColumn {
+                get {
+                    return this.columnRequestToDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DurationInMonthColumn {
+                get {
+                    return this.columnDurationInMonth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FromDateColumn {
+                get {
+                    return this.columnFromDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ToDateColumn {
+                get {
+                    return this.columnToDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn GrossSalaryColumn {
+                get {
+                    return this.columnGrossSalary;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CostToProjectColumn {
+                get {
+                    return this.columnCostToProject;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CommitmentNoColumn {
+                get {
+                    return this.columnCommitmentNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn StatusOfRequestColumn {
+                get {
+                    return this.columnStatusOfRequest;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RemarksColumn {
+                get {
+                    return this.columnRemarks;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CreatedOnColumn {
+                get {
+                    return this.columnCreatedOn;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CreatedByColumn {
+                get {
+                    return this.columnCreatedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UpdatedOnColumn {
+                get {
+                    return this.columnUpdatedOn;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UpdatedByColumn {
+                get {
+                    return this.columnUpdatedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OutsourcingMeetingRow this[int index] {
+                get {
+                    return ((OutsourcingMeetingRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event OutsourcingMeetingRowChangeEventHandler OutsourcingMeetingRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event OutsourcingMeetingRowChangeEventHandler OutsourcingMeetingRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event OutsourcingMeetingRowChangeEventHandler OutsourcingMeetingRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event OutsourcingMeetingRowChangeEventHandler OutsourcingMeetingRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddOutsourcingMeetingRow(OutsourcingMeetingRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OutsourcingMeetingRow AddOutsourcingMeetingRow(
+                        string MeetingID, 
+                        System.DateTime MeetingDate, 
+                        string CandidateID, 
+                        string CandidateName, 
+                        System.DateTime DOB, 
+                        string DesignationCode, 
+                        string DesignationName, 
+                        string Qualification, 
+                        bool IITMExperience, 
+                        decimal IIT_Experience, 
+                        decimal NONIIT_Experience, 
+                        decimal Total_Experience, 
+                        string ProjectType, 
+                        string ProjectNo, 
+                        string ProjectTitle, 
+                        string DepartmentCode, 
+                        string DepartmentName, 
+                        string SponsoredAgency, 
+                        string PICode, 
+                        string PIName, 
+                        System.DateTime ProjectCloseDate, 
+                        string Section, 
+                        string OutSourcingCompany, 
+                        System.DateTime RequestFromDate, 
+                        System.DateTime RequestToDate, 
+                        int DurationInMonth, 
+                        System.DateTime FromDate, 
+                        System.DateTime ToDate, 
+                        decimal GrossSalary, 
+                        decimal CostToProject, 
+                        string CommitmentNo, 
+                        string StatusOfRequest, 
+                        string Remarks, 
+                        System.DateTime CreatedOn, 
+                        string CreatedBy, 
+                        System.DateTime UpdatedOn, 
+                        string UpdatedBy) {
+                OutsourcingMeetingRow rowOutsourcingMeetingRow = ((OutsourcingMeetingRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MeetingID,
+                        MeetingDate,
+                        CandidateID,
+                        CandidateName,
+                        DOB,
+                        DesignationCode,
+                        DesignationName,
+                        Qualification,
+                        IITMExperience,
+                        IIT_Experience,
+                        NONIIT_Experience,
+                        Total_Experience,
+                        ProjectType,
+                        ProjectNo,
+                        ProjectTitle,
+                        DepartmentCode,
+                        DepartmentName,
+                        SponsoredAgency,
+                        PICode,
+                        PIName,
+                        ProjectCloseDate,
+                        Section,
+                        OutSourcingCompany,
+                        RequestFromDate,
+                        RequestToDate,
+                        DurationInMonth,
+                        FromDate,
+                        ToDate,
+                        GrossSalary,
+                        CostToProject,
+                        CommitmentNo,
+                        StatusOfRequest,
+                        Remarks,
+                        CreatedOn,
+                        CreatedBy,
+                        UpdatedOn,
+                        UpdatedBy};
+                rowOutsourcingMeetingRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowOutsourcingMeetingRow);
+                return rowOutsourcingMeetingRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OutsourcingMeetingRow FindByMeetingID(string MeetingID) {
+                return ((OutsourcingMeetingRow)(this.Rows.Find(new object[] {
+                            MeetingID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                OutsourcingMeetingDataTable cln = ((OutsourcingMeetingDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new OutsourcingMeetingDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnMeetingID = base.Columns["MeetingID"];
+                this.columnMeetingDate = base.Columns["MeetingDate"];
+                this.columnCandidateID = base.Columns["CandidateID"];
+                this.columnCandidateName = base.Columns["CandidateName"];
+                this.columnDOB = base.Columns["DOB"];
+                this.columnDesignationCode = base.Columns["DesignationCode"];
+                this.columnDesignationName = base.Columns["DesignationName"];
+                this.columnQualification = base.Columns["Qualification"];
+                this.columnIITMExperience = base.Columns["IITMExperience"];
+                this.columnIIT_Experience = base.Columns["IIT_Experience"];
+                this.columnNONIIT_Experience = base.Columns["NONIIT_Experience"];
+                this.columnTotal_Experience = base.Columns["Total_Experience"];
+                this.columnProjectType = base.Columns["ProjectType"];
+                this.columnProjectNo = base.Columns["ProjectNo"];
+                this.columnProjectTitle = base.Columns["ProjectTitle"];
+                this.columnDepartmentCode = base.Columns["DepartmentCode"];
+                this.columnDepartmentName = base.Columns["DepartmentName"];
+                this.columnSponsoredAgency = base.Columns["SponsoredAgency"];
+                this.columnPICode = base.Columns["PICode"];
+                this.columnPIName = base.Columns["PIName"];
+                this.columnProjectCloseDate = base.Columns["ProjectCloseDate"];
+                this.columnSection = base.Columns["Section"];
+                this.columnOutSourcingCompany = base.Columns["OutSourcingCompany"];
+                this.columnRequestFromDate = base.Columns["RequestFromDate"];
+                this.columnRequestToDate = base.Columns["RequestToDate"];
+                this.columnDurationInMonth = base.Columns["DurationInMonth"];
+                this.columnFromDate = base.Columns["FromDate"];
+                this.columnToDate = base.Columns["ToDate"];
+                this.columnGrossSalary = base.Columns["GrossSalary"];
+                this.columnCostToProject = base.Columns["CostToProject"];
+                this.columnCommitmentNo = base.Columns["CommitmentNo"];
+                this.columnStatusOfRequest = base.Columns["StatusOfRequest"];
+                this.columnRemarks = base.Columns["Remarks"];
+                this.columnCreatedOn = base.Columns["CreatedOn"];
+                this.columnCreatedBy = base.Columns["CreatedBy"];
+                this.columnUpdatedOn = base.Columns["UpdatedOn"];
+                this.columnUpdatedBy = base.Columns["UpdatedBy"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnMeetingID = new global::System.Data.DataColumn("MeetingID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMeetingID);
+                this.columnMeetingDate = new global::System.Data.DataColumn("MeetingDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMeetingDate);
+                this.columnCandidateID = new global::System.Data.DataColumn("CandidateID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCandidateID);
+                this.columnCandidateName = new global::System.Data.DataColumn("CandidateName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCandidateName);
+                this.columnDOB = new global::System.Data.DataColumn("DOB", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDOB);
+                this.columnDesignationCode = new global::System.Data.DataColumn("DesignationCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDesignationCode);
+                this.columnDesignationName = new global::System.Data.DataColumn("DesignationName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDesignationName);
+                this.columnQualification = new global::System.Data.DataColumn("Qualification", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQualification);
+                this.columnIITMExperience = new global::System.Data.DataColumn("IITMExperience", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIITMExperience);
+                this.columnIIT_Experience = new global::System.Data.DataColumn("IIT_Experience", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIIT_Experience);
+                this.columnNONIIT_Experience = new global::System.Data.DataColumn("NONIIT_Experience", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNONIIT_Experience);
+                this.columnTotal_Experience = new global::System.Data.DataColumn("Total_Experience", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotal_Experience);
+                this.columnProjectType = new global::System.Data.DataColumn("ProjectType", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProjectType);
+                this.columnProjectNo = new global::System.Data.DataColumn("ProjectNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProjectNo);
+                this.columnProjectTitle = new global::System.Data.DataColumn("ProjectTitle", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProjectTitle);
+                this.columnDepartmentCode = new global::System.Data.DataColumn("DepartmentCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDepartmentCode);
+                this.columnDepartmentName = new global::System.Data.DataColumn("DepartmentName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDepartmentName);
+                this.columnSponsoredAgency = new global::System.Data.DataColumn("SponsoredAgency", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSponsoredAgency);
+                this.columnPICode = new global::System.Data.DataColumn("PICode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPICode);
+                this.columnPIName = new global::System.Data.DataColumn("PIName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPIName);
+                this.columnProjectCloseDate = new global::System.Data.DataColumn("ProjectCloseDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProjectCloseDate);
+                this.columnSection = new global::System.Data.DataColumn("Section", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSection);
+                this.columnOutSourcingCompany = new global::System.Data.DataColumn("OutSourcingCompany", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOutSourcingCompany);
+                this.columnRequestFromDate = new global::System.Data.DataColumn("RequestFromDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRequestFromDate);
+                this.columnRequestToDate = new global::System.Data.DataColumn("RequestToDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRequestToDate);
+                this.columnDurationInMonth = new global::System.Data.DataColumn("DurationInMonth", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDurationInMonth);
+                this.columnFromDate = new global::System.Data.DataColumn("FromDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFromDate);
+                this.columnToDate = new global::System.Data.DataColumn("ToDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnToDate);
+                this.columnGrossSalary = new global::System.Data.DataColumn("GrossSalary", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGrossSalary);
+                this.columnCostToProject = new global::System.Data.DataColumn("CostToProject", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCostToProject);
+                this.columnCommitmentNo = new global::System.Data.DataColumn("CommitmentNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCommitmentNo);
+                this.columnStatusOfRequest = new global::System.Data.DataColumn("StatusOfRequest", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStatusOfRequest);
+                this.columnRemarks = new global::System.Data.DataColumn("Remarks", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRemarks);
+                this.columnCreatedOn = new global::System.Data.DataColumn("CreatedOn", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatedOn);
+                this.columnCreatedBy = new global::System.Data.DataColumn("CreatedBy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatedBy);
+                this.columnUpdatedOn = new global::System.Data.DataColumn("UpdatedOn", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUpdatedOn);
+                this.columnUpdatedBy = new global::System.Data.DataColumn("UpdatedBy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUpdatedBy);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnMeetingID}, true));
+                this.columnMeetingID.AllowDBNull = false;
+                this.columnMeetingID.Unique = true;
+                this.columnMeetingID.MaxLength = 15;
+                this.columnMeetingDate.AllowDBNull = false;
+                this.columnCandidateID.AllowDBNull = false;
+                this.columnCandidateID.MaxLength = 10;
+                this.columnCandidateName.AllowDBNull = false;
+                this.columnCandidateName.MaxLength = 75;
+                this.columnDOB.AllowDBNull = false;
+                this.columnDesignationCode.AllowDBNull = false;
+                this.columnDesignationCode.MaxLength = 3;
+                this.columnDesignationName.AllowDBNull = false;
+                this.columnDesignationName.MaxLength = 50;
+                this.columnQualification.AllowDBNull = false;
+                this.columnQualification.MaxLength = 50;
+                this.columnIITMExperience.AllowDBNull = false;
+                this.columnProjectType.AllowDBNull = false;
+                this.columnProjectType.MaxLength = 4;
+                this.columnProjectNo.AllowDBNull = false;
+                this.columnProjectNo.MaxLength = 30;
+                this.columnProjectTitle.AllowDBNull = false;
+                this.columnProjectTitle.MaxLength = 300;
+                this.columnDepartmentCode.AllowDBNull = false;
+                this.columnDepartmentCode.MaxLength = 3;
+                this.columnDepartmentName.AllowDBNull = false;
+                this.columnDepartmentName.MaxLength = 75;
+                this.columnSponsoredAgency.AllowDBNull = false;
+                this.columnSponsoredAgency.MaxLength = 4;
+                this.columnPICode.AllowDBNull = false;
+                this.columnPICode.MaxLength = 5;
+                this.columnPIName.AllowDBNull = false;
+                this.columnPIName.MaxLength = 75;
+                this.columnSection.MaxLength = 15;
+                this.columnOutSourcingCompany.AllowDBNull = false;
+                this.columnOutSourcingCompany.MaxLength = 5;
+                this.columnRequestFromDate.AllowDBNull = false;
+                this.columnRequestToDate.AllowDBNull = false;
+                this.columnGrossSalary.AllowDBNull = false;
+                this.columnCostToProject.AllowDBNull = false;
+                this.columnCommitmentNo.MaxLength = 20;
+                this.columnStatusOfRequest.MaxLength = 20;
+                this.columnRemarks.MaxLength = 100;
+                this.columnCreatedBy.MaxLength = 30;
+                this.columnUpdatedBy.MaxLength = 30;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OutsourcingMeetingRow NewOutsourcingMeetingRow() {
+                return ((OutsourcingMeetingRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new OutsourcingMeetingRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(OutsourcingMeetingRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.OutsourcingMeetingRowChanged != null)) {
+                    this.OutsourcingMeetingRowChanged(this, new OutsourcingMeetingRowChangeEvent(((OutsourcingMeetingRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.OutsourcingMeetingRowChanging != null)) {
+                    this.OutsourcingMeetingRowChanging(this, new OutsourcingMeetingRowChangeEvent(((OutsourcingMeetingRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.OutsourcingMeetingRowDeleted != null)) {
+                    this.OutsourcingMeetingRowDeleted(this, new OutsourcingMeetingRowChangeEvent(((OutsourcingMeetingRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.OutsourcingMeetingRowDeleting != null)) {
+                    this.OutsourcingMeetingRowDeleting(this, new OutsourcingMeetingRowChangeEvent(((OutsourcingMeetingRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveOutsourcingMeetingRow(OutsourcingMeetingRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                OutsourcingMeetingDS ds = new OutsourcingMeetingDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "OutsourcingMeetingDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -550,7 +1391,7 @@ namespace Outsourcing.Datasets {
             
             private global::System.Data.DataColumn columnQualification;
             
-            private global::System.Data.DataColumn columnExperience;
+            private global::System.Data.DataColumn columnTotal_Experience;
             
             private global::System.Data.DataColumn columnDOB;
             
@@ -705,9 +1546,9 @@ namespace Outsourcing.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ExperienceColumn {
+            public global::System.Data.DataColumn Total_ExperienceColumn {
                 get {
-                    return this.columnExperience;
+                    return this.columnTotal_Experience;
                 }
             }
             
@@ -818,7 +1659,7 @@ namespace Outsourcing.Datasets {
                         string CandidateName, 
                         string DesignationName, 
                         string Qualification, 
-                        string Experience, 
+                        decimal Total_Experience, 
                         System.DateTime DOB, 
                         System.DateTime MeetingDate, 
                         string NoOfMonths, 
@@ -841,7 +1682,7 @@ namespace Outsourcing.Datasets {
                         CandidateName,
                         DesignationName,
                         Qualification,
-                        Experience,
+                        Total_Experience,
                         DOB,
                         MeetingDate,
                         NoOfMonths,
@@ -884,7 +1725,7 @@ namespace Outsourcing.Datasets {
                 this.columnCandidateName = base.Columns["CandidateName"];
                 this.columnDesignationName = base.Columns["DesignationName"];
                 this.columnQualification = base.Columns["Qualification"];
-                this.columnExperience = base.Columns["Experience"];
+                this.columnTotal_Experience = base.Columns["Total_Experience"];
                 this.columnDOB = base.Columns["DOB"];
                 this.columnMeetingDate = base.Columns["MeetingDate"];
                 this.columnNoOfMonths = base.Columns["NoOfMonths"];
@@ -923,8 +1764,8 @@ namespace Outsourcing.Datasets {
                 base.Columns.Add(this.columnDesignationName);
                 this.columnQualification = new global::System.Data.DataColumn("Qualification", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQualification);
-                this.columnExperience = new global::System.Data.DataColumn("Experience", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExperience);
+                this.columnTotal_Experience = new global::System.Data.DataColumn("Total_Experience", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotal_Experience);
                 this.columnDOB = new global::System.Data.DataColumn("DOB", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDOB);
                 this.columnMeetingDate = new global::System.Data.DataColumn("MeetingDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
@@ -1715,802 +2556,6 @@ namespace Outsourcing.Datasets {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "CommitteeApprovalDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class OutsourcingMeetingDataTable : global::System.Data.TypedTableBase<OutsourcingMeetingRow> {
-            
-            private global::System.Data.DataColumn columnMeetingID;
-            
-            private global::System.Data.DataColumn columnMeetingDate;
-            
-            private global::System.Data.DataColumn columnCandidateID;
-            
-            private global::System.Data.DataColumn columnCandidateName;
-            
-            private global::System.Data.DataColumn columnDOB;
-            
-            private global::System.Data.DataColumn columnDesignationCode;
-            
-            private global::System.Data.DataColumn columnDesignationName;
-            
-            private global::System.Data.DataColumn columnQualification;
-            
-            private global::System.Data.DataColumn columnExperience;
-            
-            private global::System.Data.DataColumn columnIITMExperience;
-            
-            private global::System.Data.DataColumn columnProjectType;
-            
-            private global::System.Data.DataColumn columnProjectNo;
-            
-            private global::System.Data.DataColumn columnProjectTitle;
-            
-            private global::System.Data.DataColumn columnDepartmentCode;
-            
-            private global::System.Data.DataColumn columnDepartmentName;
-            
-            private global::System.Data.DataColumn columnSponsoredAgency;
-            
-            private global::System.Data.DataColumn columnPICode;
-            
-            private global::System.Data.DataColumn columnPIName;
-            
-            private global::System.Data.DataColumn columnProjectCloseDate;
-            
-            private global::System.Data.DataColumn columnOutSourcingCompany;
-            
-            private global::System.Data.DataColumn columnRequestFromDate;
-            
-            private global::System.Data.DataColumn columnRequestToDate;
-            
-            private global::System.Data.DataColumn columnDurationInMonth;
-            
-            private global::System.Data.DataColumn columnFromDate;
-            
-            private global::System.Data.DataColumn columnToDate;
-            
-            private global::System.Data.DataColumn columnGrossSalary;
-            
-            private global::System.Data.DataColumn columnCostToProject;
-            
-            private global::System.Data.DataColumn columnCommitmentNo;
-            
-            private global::System.Data.DataColumn columnStatusOfRequest;
-            
-            private global::System.Data.DataColumn columnRemarks;
-            
-            private global::System.Data.DataColumn columnCreatedOn;
-            
-            private global::System.Data.DataColumn columnCreatedBy;
-            
-            private global::System.Data.DataColumn columnUpdatedOn;
-            
-            private global::System.Data.DataColumn columnUpdatedBy;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OutsourcingMeetingDataTable() {
-                this.TableName = "OutsourcingMeeting";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal OutsourcingMeetingDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected OutsourcingMeetingDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn MeetingIDColumn {
-                get {
-                    return this.columnMeetingID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn MeetingDateColumn {
-                get {
-                    return this.columnMeetingDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CandidateIDColumn {
-                get {
-                    return this.columnCandidateID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CandidateNameColumn {
-                get {
-                    return this.columnCandidateName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DOBColumn {
-                get {
-                    return this.columnDOB;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DesignationCodeColumn {
-                get {
-                    return this.columnDesignationCode;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DesignationNameColumn {
-                get {
-                    return this.columnDesignationName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn QualificationColumn {
-                get {
-                    return this.columnQualification;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ExperienceColumn {
-                get {
-                    return this.columnExperience;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IITMExperienceColumn {
-                get {
-                    return this.columnIITMExperience;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ProjectTypeColumn {
-                get {
-                    return this.columnProjectType;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ProjectNoColumn {
-                get {
-                    return this.columnProjectNo;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ProjectTitleColumn {
-                get {
-                    return this.columnProjectTitle;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DepartmentCodeColumn {
-                get {
-                    return this.columnDepartmentCode;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DepartmentNameColumn {
-                get {
-                    return this.columnDepartmentName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SponsoredAgencyColumn {
-                get {
-                    return this.columnSponsoredAgency;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PICodeColumn {
-                get {
-                    return this.columnPICode;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PINameColumn {
-                get {
-                    return this.columnPIName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ProjectCloseDateColumn {
-                get {
-                    return this.columnProjectCloseDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn OutSourcingCompanyColumn {
-                get {
-                    return this.columnOutSourcingCompany;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RequestFromDateColumn {
-                get {
-                    return this.columnRequestFromDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RequestToDateColumn {
-                get {
-                    return this.columnRequestToDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DurationInMonthColumn {
-                get {
-                    return this.columnDurationInMonth;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FromDateColumn {
-                get {
-                    return this.columnFromDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ToDateColumn {
-                get {
-                    return this.columnToDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn GrossSalaryColumn {
-                get {
-                    return this.columnGrossSalary;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CostToProjectColumn {
-                get {
-                    return this.columnCostToProject;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CommitmentNoColumn {
-                get {
-                    return this.columnCommitmentNo;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn StatusOfRequestColumn {
-                get {
-                    return this.columnStatusOfRequest;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RemarksColumn {
-                get {
-                    return this.columnRemarks;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CreatedOnColumn {
-                get {
-                    return this.columnCreatedOn;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CreatedByColumn {
-                get {
-                    return this.columnCreatedBy;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn UpdatedOnColumn {
-                get {
-                    return this.columnUpdatedOn;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn UpdatedByColumn {
-                get {
-                    return this.columnUpdatedBy;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OutsourcingMeetingRow this[int index] {
-                get {
-                    return ((OutsourcingMeetingRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event OutsourcingMeetingRowChangeEventHandler OutsourcingMeetingRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event OutsourcingMeetingRowChangeEventHandler OutsourcingMeetingRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event OutsourcingMeetingRowChangeEventHandler OutsourcingMeetingRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event OutsourcingMeetingRowChangeEventHandler OutsourcingMeetingRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddOutsourcingMeetingRow(OutsourcingMeetingRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OutsourcingMeetingRow AddOutsourcingMeetingRow(
-                        string MeetingID, 
-                        System.DateTime MeetingDate, 
-                        string CandidateID, 
-                        string CandidateName, 
-                        System.DateTime DOB, 
-                        string DesignationCode, 
-                        string DesignationName, 
-                        string Qualification, 
-                        decimal Experience, 
-                        bool IITMExperience, 
-                        string ProjectType, 
-                        string ProjectNo, 
-                        string ProjectTitle, 
-                        string DepartmentCode, 
-                        string DepartmentName, 
-                        string SponsoredAgency, 
-                        string PICode, 
-                        string PIName, 
-                        System.DateTime ProjectCloseDate, 
-                        string OutSourcingCompany, 
-                        System.DateTime RequestFromDate, 
-                        System.DateTime RequestToDate, 
-                        int DurationInMonth, 
-                        System.DateTime FromDate, 
-                        System.DateTime ToDate, 
-                        decimal GrossSalary, 
-                        decimal CostToProject, 
-                        string CommitmentNo, 
-                        string StatusOfRequest, 
-                        string Remarks, 
-                        System.DateTime CreatedOn, 
-                        string CreatedBy, 
-                        System.DateTime UpdatedOn, 
-                        string UpdatedBy) {
-                OutsourcingMeetingRow rowOutsourcingMeetingRow = ((OutsourcingMeetingRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        MeetingID,
-                        MeetingDate,
-                        CandidateID,
-                        CandidateName,
-                        DOB,
-                        DesignationCode,
-                        DesignationName,
-                        Qualification,
-                        Experience,
-                        IITMExperience,
-                        ProjectType,
-                        ProjectNo,
-                        ProjectTitle,
-                        DepartmentCode,
-                        DepartmentName,
-                        SponsoredAgency,
-                        PICode,
-                        PIName,
-                        ProjectCloseDate,
-                        OutSourcingCompany,
-                        RequestFromDate,
-                        RequestToDate,
-                        DurationInMonth,
-                        FromDate,
-                        ToDate,
-                        GrossSalary,
-                        CostToProject,
-                        CommitmentNo,
-                        StatusOfRequest,
-                        Remarks,
-                        CreatedOn,
-                        CreatedBy,
-                        UpdatedOn,
-                        UpdatedBy};
-                rowOutsourcingMeetingRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowOutsourcingMeetingRow);
-                return rowOutsourcingMeetingRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OutsourcingMeetingRow FindByMeetingID(string MeetingID) {
-                return ((OutsourcingMeetingRow)(this.Rows.Find(new object[] {
-                            MeetingID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                OutsourcingMeetingDataTable cln = ((OutsourcingMeetingDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new OutsourcingMeetingDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnMeetingID = base.Columns["MeetingID"];
-                this.columnMeetingDate = base.Columns["MeetingDate"];
-                this.columnCandidateID = base.Columns["CandidateID"];
-                this.columnCandidateName = base.Columns["CandidateName"];
-                this.columnDOB = base.Columns["DOB"];
-                this.columnDesignationCode = base.Columns["DesignationCode"];
-                this.columnDesignationName = base.Columns["DesignationName"];
-                this.columnQualification = base.Columns["Qualification"];
-                this.columnExperience = base.Columns["Experience"];
-                this.columnIITMExperience = base.Columns["IITMExperience"];
-                this.columnProjectType = base.Columns["ProjectType"];
-                this.columnProjectNo = base.Columns["ProjectNo"];
-                this.columnProjectTitle = base.Columns["ProjectTitle"];
-                this.columnDepartmentCode = base.Columns["DepartmentCode"];
-                this.columnDepartmentName = base.Columns["DepartmentName"];
-                this.columnSponsoredAgency = base.Columns["SponsoredAgency"];
-                this.columnPICode = base.Columns["PICode"];
-                this.columnPIName = base.Columns["PIName"];
-                this.columnProjectCloseDate = base.Columns["ProjectCloseDate"];
-                this.columnOutSourcingCompany = base.Columns["OutSourcingCompany"];
-                this.columnRequestFromDate = base.Columns["RequestFromDate"];
-                this.columnRequestToDate = base.Columns["RequestToDate"];
-                this.columnDurationInMonth = base.Columns["DurationInMonth"];
-                this.columnFromDate = base.Columns["FromDate"];
-                this.columnToDate = base.Columns["ToDate"];
-                this.columnGrossSalary = base.Columns["GrossSalary"];
-                this.columnCostToProject = base.Columns["CostToProject"];
-                this.columnCommitmentNo = base.Columns["CommitmentNo"];
-                this.columnStatusOfRequest = base.Columns["StatusOfRequest"];
-                this.columnRemarks = base.Columns["Remarks"];
-                this.columnCreatedOn = base.Columns["CreatedOn"];
-                this.columnCreatedBy = base.Columns["CreatedBy"];
-                this.columnUpdatedOn = base.Columns["UpdatedOn"];
-                this.columnUpdatedBy = base.Columns["UpdatedBy"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnMeetingID = new global::System.Data.DataColumn("MeetingID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMeetingID);
-                this.columnMeetingDate = new global::System.Data.DataColumn("MeetingDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMeetingDate);
-                this.columnCandidateID = new global::System.Data.DataColumn("CandidateID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCandidateID);
-                this.columnCandidateName = new global::System.Data.DataColumn("CandidateName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCandidateName);
-                this.columnDOB = new global::System.Data.DataColumn("DOB", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDOB);
-                this.columnDesignationCode = new global::System.Data.DataColumn("DesignationCode", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDesignationCode);
-                this.columnDesignationName = new global::System.Data.DataColumn("DesignationName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDesignationName);
-                this.columnQualification = new global::System.Data.DataColumn("Qualification", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQualification);
-                this.columnExperience = new global::System.Data.DataColumn("Experience", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExperience);
-                this.columnIITMExperience = new global::System.Data.DataColumn("IITMExperience", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIITMExperience);
-                this.columnProjectType = new global::System.Data.DataColumn("ProjectType", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnProjectType);
-                this.columnProjectNo = new global::System.Data.DataColumn("ProjectNo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnProjectNo);
-                this.columnProjectTitle = new global::System.Data.DataColumn("ProjectTitle", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnProjectTitle);
-                this.columnDepartmentCode = new global::System.Data.DataColumn("DepartmentCode", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDepartmentCode);
-                this.columnDepartmentName = new global::System.Data.DataColumn("DepartmentName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDepartmentName);
-                this.columnSponsoredAgency = new global::System.Data.DataColumn("SponsoredAgency", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSponsoredAgency);
-                this.columnPICode = new global::System.Data.DataColumn("PICode", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPICode);
-                this.columnPIName = new global::System.Data.DataColumn("PIName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPIName);
-                this.columnProjectCloseDate = new global::System.Data.DataColumn("ProjectCloseDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnProjectCloseDate);
-                this.columnOutSourcingCompany = new global::System.Data.DataColumn("OutSourcingCompany", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnOutSourcingCompany);
-                this.columnRequestFromDate = new global::System.Data.DataColumn("RequestFromDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRequestFromDate);
-                this.columnRequestToDate = new global::System.Data.DataColumn("RequestToDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRequestToDate);
-                this.columnDurationInMonth = new global::System.Data.DataColumn("DurationInMonth", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDurationInMonth);
-                this.columnFromDate = new global::System.Data.DataColumn("FromDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFromDate);
-                this.columnToDate = new global::System.Data.DataColumn("ToDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnToDate);
-                this.columnGrossSalary = new global::System.Data.DataColumn("GrossSalary", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnGrossSalary);
-                this.columnCostToProject = new global::System.Data.DataColumn("CostToProject", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCostToProject);
-                this.columnCommitmentNo = new global::System.Data.DataColumn("CommitmentNo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCommitmentNo);
-                this.columnStatusOfRequest = new global::System.Data.DataColumn("StatusOfRequest", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnStatusOfRequest);
-                this.columnRemarks = new global::System.Data.DataColumn("Remarks", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRemarks);
-                this.columnCreatedOn = new global::System.Data.DataColumn("CreatedOn", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCreatedOn);
-                this.columnCreatedBy = new global::System.Data.DataColumn("CreatedBy", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCreatedBy);
-                this.columnUpdatedOn = new global::System.Data.DataColumn("UpdatedOn", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUpdatedOn);
-                this.columnUpdatedBy = new global::System.Data.DataColumn("UpdatedBy", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUpdatedBy);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnMeetingID}, true));
-                this.columnMeetingID.AllowDBNull = false;
-                this.columnMeetingID.Unique = true;
-                this.columnMeetingID.MaxLength = 15;
-                this.columnMeetingDate.AllowDBNull = false;
-                this.columnCandidateID.AllowDBNull = false;
-                this.columnCandidateID.MaxLength = 10;
-                this.columnCandidateName.AllowDBNull = false;
-                this.columnCandidateName.MaxLength = 75;
-                this.columnDOB.AllowDBNull = false;
-                this.columnDesignationCode.AllowDBNull = false;
-                this.columnDesignationCode.MaxLength = 3;
-                this.columnDesignationName.AllowDBNull = false;
-                this.columnDesignationName.MaxLength = 50;
-                this.columnQualification.AllowDBNull = false;
-                this.columnQualification.MaxLength = 50;
-                this.columnExperience.AllowDBNull = false;
-                this.columnIITMExperience.AllowDBNull = false;
-                this.columnProjectType.AllowDBNull = false;
-                this.columnProjectType.MaxLength = 4;
-                this.columnProjectNo.AllowDBNull = false;
-                this.columnProjectNo.MaxLength = 30;
-                this.columnProjectTitle.AllowDBNull = false;
-                this.columnProjectTitle.MaxLength = 300;
-                this.columnDepartmentCode.AllowDBNull = false;
-                this.columnDepartmentCode.MaxLength = 3;
-                this.columnDepartmentName.AllowDBNull = false;
-                this.columnDepartmentName.MaxLength = 75;
-                this.columnSponsoredAgency.AllowDBNull = false;
-                this.columnSponsoredAgency.MaxLength = 4;
-                this.columnPICode.AllowDBNull = false;
-                this.columnPICode.MaxLength = 5;
-                this.columnPIName.AllowDBNull = false;
-                this.columnPIName.MaxLength = 75;
-                this.columnOutSourcingCompany.AllowDBNull = false;
-                this.columnOutSourcingCompany.MaxLength = 5;
-                this.columnRequestFromDate.AllowDBNull = false;
-                this.columnRequestToDate.AllowDBNull = false;
-                this.columnGrossSalary.AllowDBNull = false;
-                this.columnCostToProject.AllowDBNull = false;
-                this.columnCommitmentNo.MaxLength = 20;
-                this.columnStatusOfRequest.MaxLength = 20;
-                this.columnRemarks.MaxLength = 100;
-                this.columnCreatedBy.MaxLength = 30;
-                this.columnUpdatedBy.MaxLength = 30;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OutsourcingMeetingRow NewOutsourcingMeetingRow() {
-                return ((OutsourcingMeetingRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new OutsourcingMeetingRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(OutsourcingMeetingRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.OutsourcingMeetingRowChanged != null)) {
-                    this.OutsourcingMeetingRowChanged(this, new OutsourcingMeetingRowChangeEvent(((OutsourcingMeetingRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.OutsourcingMeetingRowChanging != null)) {
-                    this.OutsourcingMeetingRowChanging(this, new OutsourcingMeetingRowChangeEvent(((OutsourcingMeetingRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.OutsourcingMeetingRowDeleted != null)) {
-                    this.OutsourcingMeetingRowDeleted(this, new OutsourcingMeetingRowChangeEvent(((OutsourcingMeetingRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.OutsourcingMeetingRowDeleting != null)) {
-                    this.OutsourcingMeetingRowDeleting(this, new OutsourcingMeetingRowChangeEvent(((OutsourcingMeetingRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveOutsourcingMeetingRow(OutsourcingMeetingRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                OutsourcingMeetingDS ds = new OutsourcingMeetingDS();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "OutsourcingMeetingDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4038,7 +4083,7 @@ namespace Outsourcing.Datasets {
             
             private global::System.Data.DataColumn columnGender;
             
-            private global::System.Data.DataColumn columnRelievedOn;
+            private global::System.Data.DataColumn columnRelieveDate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -4147,9 +4192,9 @@ namespace Outsourcing.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RelievedOnColumn {
+            public global::System.Data.DataColumn RelieveDateColumn {
                 get {
-                    return this.columnRelievedOn;
+                    return this.columnRelieveDate;
                 }
             }
             
@@ -4190,7 +4235,7 @@ namespace Outsourcing.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public relieveRow AddrelieveRow(string ProjectNo, string EmployeeID, string EmployeeName, string DesignationName, string ProjectType, string ProjectTitle, string DepartmentName, string CommitmentNo, string Gender, System.DateTime RelievedOn) {
+            public relieveRow AddrelieveRow(string ProjectNo, string EmployeeID, string EmployeeName, string DesignationName, string ProjectType, string ProjectTitle, string DepartmentName, string CommitmentNo, string Gender, System.DateTime RelieveDate) {
                 relieveRow rowrelieveRow = ((relieveRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ProjectNo,
@@ -4202,7 +4247,7 @@ namespace Outsourcing.Datasets {
                         DepartmentName,
                         CommitmentNo,
                         Gender,
-                        RelievedOn};
+                        RelieveDate};
                 rowrelieveRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowrelieveRow);
                 return rowrelieveRow;
@@ -4234,7 +4279,7 @@ namespace Outsourcing.Datasets {
                 this.columnDepartmentName = base.Columns["DepartmentName"];
                 this.columnCommitmentNo = base.Columns["CommitmentNo"];
                 this.columnGender = base.Columns["Gender"];
-                this.columnRelievedOn = base.Columns["RelievedOn"];
+                this.columnRelieveDate = base.Columns["RelieveDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4258,8 +4303,8 @@ namespace Outsourcing.Datasets {
                 base.Columns.Add(this.columnCommitmentNo);
                 this.columnGender = new global::System.Data.DataColumn("Gender", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGender);
-                this.columnRelievedOn = new global::System.Data.DataColumn("RelievedOn", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRelievedOn);
+                this.columnRelieveDate = new global::System.Data.DataColumn("RelieveDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRelieveDate);
                 this.columnProjectNo.AllowDBNull = false;
                 this.columnProjectNo.MaxLength = 30;
                 this.columnEmployeeID.AllowDBNull = false;
@@ -4402,6 +4447,684 @@ namespace Outsourcing.Datasets {
                 }
                 xs.Add(dsSchema);
                 return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class OutsourcingMeetingRow : global::System.Data.DataRow {
+            
+            private OutsourcingMeetingDataTable tableOutsourcingMeeting;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal OutsourcingMeetingRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableOutsourcingMeeting = ((OutsourcingMeetingDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MeetingID {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.MeetingIDColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.MeetingIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime MeetingDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.MeetingDateColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.MeetingDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CandidateID {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.CandidateIDColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.CandidateIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CandidateName {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.CandidateNameColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.CandidateNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DOB {
+                get {
+                    return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.DOBColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.DOBColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DesignationCode {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.DesignationCodeColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.DesignationCodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DesignationName {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.DesignationNameColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.DesignationNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Qualification {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.QualificationColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.QualificationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IITMExperience {
+                get {
+                    return ((bool)(this[this.tableOutsourcingMeeting.IITMExperienceColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.IITMExperienceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IIT_Experience {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableOutsourcingMeeting.IIT_ExperienceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IIT_Experience\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.IIT_ExperienceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal NONIIT_Experience {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableOutsourcingMeeting.NONIIT_ExperienceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NONIIT_Experience\' in table \'OutsourcingMeeting\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.NONIIT_ExperienceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal Total_Experience {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableOutsourcingMeeting.Total_ExperienceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Total_Experience\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.Total_ExperienceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ProjectType {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.ProjectTypeColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.ProjectTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ProjectNo {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.ProjectNoColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.ProjectNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ProjectTitle {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.ProjectTitleColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.ProjectTitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DepartmentCode {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.DepartmentCodeColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.DepartmentCodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DepartmentName {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.DepartmentNameColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.DepartmentNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SponsoredAgency {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.SponsoredAgencyColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.SponsoredAgencyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PICode {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.PICodeColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.PICodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PIName {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.PINameColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.PINameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime ProjectCloseDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.ProjectCloseDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ProjectCloseDate\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.ProjectCloseDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Section {
+                get {
+                    try {
+                        return ((string)(this[this.tableOutsourcingMeeting.SectionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Section\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.SectionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string OutSourcingCompany {
+                get {
+                    return ((string)(this[this.tableOutsourcingMeeting.OutSourcingCompanyColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.OutSourcingCompanyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime RequestFromDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.RequestFromDateColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.RequestFromDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime RequestToDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.RequestToDateColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.RequestToDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int DurationInMonth {
+                get {
+                    try {
+                        return ((int)(this[this.tableOutsourcingMeeting.DurationInMonthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DurationInMonth\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.DurationInMonthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime FromDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.FromDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FromDate\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.FromDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime ToDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.ToDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ToDate\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.ToDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal GrossSalary {
+                get {
+                    return ((decimal)(this[this.tableOutsourcingMeeting.GrossSalaryColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.GrossSalaryColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal CostToProject {
+                get {
+                    return ((decimal)(this[this.tableOutsourcingMeeting.CostToProjectColumn]));
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.CostToProjectColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CommitmentNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableOutsourcingMeeting.CommitmentNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CommitmentNo\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.CommitmentNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string StatusOfRequest {
+                get {
+                    try {
+                        return ((string)(this[this.tableOutsourcingMeeting.StatusOfRequestColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'StatusOfRequest\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.StatusOfRequestColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Remarks {
+                get {
+                    try {
+                        return ((string)(this[this.tableOutsourcingMeeting.RemarksColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Remarks\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.RemarksColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime CreatedOn {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.CreatedOnColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CreatedOn\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.CreatedOnColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CreatedBy {
+                get {
+                    try {
+                        return ((string)(this[this.tableOutsourcingMeeting.CreatedByColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CreatedBy\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.CreatedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime UpdatedOn {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.UpdatedOnColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UpdatedOn\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.UpdatedOnColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UpdatedBy {
+                get {
+                    try {
+                        return ((string)(this[this.tableOutsourcingMeeting.UpdatedByColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UpdatedBy\' in table \'OutsourcingMeeting\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableOutsourcingMeeting.UpdatedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIIT_ExperienceNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.IIT_ExperienceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIIT_ExperienceNull() {
+                this[this.tableOutsourcingMeeting.IIT_ExperienceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsNONIIT_ExperienceNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.NONIIT_ExperienceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetNONIIT_ExperienceNull() {
+                this[this.tableOutsourcingMeeting.NONIIT_ExperienceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTotal_ExperienceNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.Total_ExperienceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTotal_ExperienceNull() {
+                this[this.tableOutsourcingMeeting.Total_ExperienceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsProjectCloseDateNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.ProjectCloseDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetProjectCloseDateNull() {
+                this[this.tableOutsourcingMeeting.ProjectCloseDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSectionNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.SectionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSectionNull() {
+                this[this.tableOutsourcingMeeting.SectionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDurationInMonthNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.DurationInMonthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDurationInMonthNull() {
+                this[this.tableOutsourcingMeeting.DurationInMonthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFromDateNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.FromDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFromDateNull() {
+                this[this.tableOutsourcingMeeting.FromDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsToDateNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.ToDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetToDateNull() {
+                this[this.tableOutsourcingMeeting.ToDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCommitmentNoNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.CommitmentNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCommitmentNoNull() {
+                this[this.tableOutsourcingMeeting.CommitmentNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsStatusOfRequestNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.StatusOfRequestColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetStatusOfRequestNull() {
+                this[this.tableOutsourcingMeeting.StatusOfRequestColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRemarksNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.RemarksColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRemarksNull() {
+                this[this.tableOutsourcingMeeting.RemarksColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCreatedOnNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.CreatedOnColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCreatedOnNull() {
+                this[this.tableOutsourcingMeeting.CreatedOnColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCreatedByNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.CreatedByColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCreatedByNull() {
+                this[this.tableOutsourcingMeeting.CreatedByColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUpdatedOnNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.UpdatedOnColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUpdatedOnNull() {
+                this[this.tableOutsourcingMeeting.UpdatedOnColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUpdatedByNull() {
+                return this.IsNull(this.tableOutsourcingMeeting.UpdatedByColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUpdatedByNull() {
+                this[this.tableOutsourcingMeeting.UpdatedByColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4629,17 +5352,17 @@ namespace Outsourcing.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Experience {
+            public decimal Total_Experience {
                 get {
                     try {
-                        return ((string)(this[this.tableMinutesSummary.ExperienceColumn]));
+                        return ((decimal)(this[this.tableMinutesSummary.Total_ExperienceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Experience\' in table \'MinutesSummary\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Total_Experience\' in table \'MinutesSummary\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMinutesSummary.ExperienceColumn] = value;
+                    this[this.tableMinutesSummary.Total_ExperienceColumn] = value;
                 }
             }
             
@@ -4913,14 +5636,14 @@ namespace Outsourcing.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsExperienceNull() {
-                return this.IsNull(this.tableMinutesSummary.ExperienceColumn);
+            public bool IsTotal_ExperienceNull() {
+                return this.IsNull(this.tableMinutesSummary.Total_ExperienceColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetExperienceNull() {
-                this[this.tableMinutesSummary.ExperienceColumn] = global::System.Convert.DBNull;
+            public void SetTotal_ExperienceNull() {
+                this[this.tableMinutesSummary.Total_ExperienceColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5483,582 +6206,6 @@ namespace Outsourcing.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDurationNull() {
                 this[this.tableCommitteeApproval.DurationColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class OutsourcingMeetingRow : global::System.Data.DataRow {
-            
-            private OutsourcingMeetingDataTable tableOutsourcingMeeting;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal OutsourcingMeetingRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableOutsourcingMeeting = ((OutsourcingMeetingDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string MeetingID {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.MeetingIDColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.MeetingIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime MeetingDate {
-                get {
-                    return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.MeetingDateColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.MeetingDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CandidateID {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.CandidateIDColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.CandidateIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CandidateName {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.CandidateNameColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.CandidateNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime DOB {
-                get {
-                    return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.DOBColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.DOBColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DesignationCode {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.DesignationCodeColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.DesignationCodeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DesignationName {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.DesignationNameColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.DesignationNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Qualification {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.QualificationColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.QualificationColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal Experience {
-                get {
-                    return ((decimal)(this[this.tableOutsourcingMeeting.ExperienceColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.ExperienceColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IITMExperience {
-                get {
-                    return ((bool)(this[this.tableOutsourcingMeeting.IITMExperienceColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.IITMExperienceColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ProjectType {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.ProjectTypeColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.ProjectTypeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ProjectNo {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.ProjectNoColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.ProjectNoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ProjectTitle {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.ProjectTitleColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.ProjectTitleColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DepartmentCode {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.DepartmentCodeColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.DepartmentCodeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DepartmentName {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.DepartmentNameColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.DepartmentNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SponsoredAgency {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.SponsoredAgencyColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.SponsoredAgencyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string PICode {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.PICodeColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.PICodeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string PIName {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.PINameColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.PINameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime ProjectCloseDate {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.ProjectCloseDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ProjectCloseDate\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.ProjectCloseDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string OutSourcingCompany {
-                get {
-                    return ((string)(this[this.tableOutsourcingMeeting.OutSourcingCompanyColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.OutSourcingCompanyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime RequestFromDate {
-                get {
-                    return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.RequestFromDateColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.RequestFromDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime RequestToDate {
-                get {
-                    return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.RequestToDateColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.RequestToDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int DurationInMonth {
-                get {
-                    try {
-                        return ((int)(this[this.tableOutsourcingMeeting.DurationInMonthColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DurationInMonth\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.DurationInMonthColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime FromDate {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.FromDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FromDate\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.FromDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime ToDate {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.ToDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ToDate\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.ToDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal GrossSalary {
-                get {
-                    return ((decimal)(this[this.tableOutsourcingMeeting.GrossSalaryColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.GrossSalaryColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal CostToProject {
-                get {
-                    return ((decimal)(this[this.tableOutsourcingMeeting.CostToProjectColumn]));
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.CostToProjectColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CommitmentNo {
-                get {
-                    try {
-                        return ((string)(this[this.tableOutsourcingMeeting.CommitmentNoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CommitmentNo\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.CommitmentNoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string StatusOfRequest {
-                get {
-                    try {
-                        return ((string)(this[this.tableOutsourcingMeeting.StatusOfRequestColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'StatusOfRequest\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.StatusOfRequestColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Remarks {
-                get {
-                    try {
-                        return ((string)(this[this.tableOutsourcingMeeting.RemarksColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Remarks\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.RemarksColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime CreatedOn {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.CreatedOnColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CreatedOn\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.CreatedOnColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CreatedBy {
-                get {
-                    try {
-                        return ((string)(this[this.tableOutsourcingMeeting.CreatedByColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CreatedBy\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.CreatedByColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime UpdatedOn {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableOutsourcingMeeting.UpdatedOnColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'UpdatedOn\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.UpdatedOnColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string UpdatedBy {
-                get {
-                    try {
-                        return ((string)(this[this.tableOutsourcingMeeting.UpdatedByColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'UpdatedBy\' in table \'OutsourcingMeeting\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableOutsourcingMeeting.UpdatedByColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsProjectCloseDateNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.ProjectCloseDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetProjectCloseDateNull() {
-                this[this.tableOutsourcingMeeting.ProjectCloseDateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDurationInMonthNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.DurationInMonthColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDurationInMonthNull() {
-                this[this.tableOutsourcingMeeting.DurationInMonthColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsFromDateNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.FromDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetFromDateNull() {
-                this[this.tableOutsourcingMeeting.FromDateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsToDateNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.ToDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetToDateNull() {
-                this[this.tableOutsourcingMeeting.ToDateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCommitmentNoNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.CommitmentNoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCommitmentNoNull() {
-                this[this.tableOutsourcingMeeting.CommitmentNoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsStatusOfRequestNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.StatusOfRequestColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetStatusOfRequestNull() {
-                this[this.tableOutsourcingMeeting.StatusOfRequestColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRemarksNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.RemarksColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRemarksNull() {
-                this[this.tableOutsourcingMeeting.RemarksColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCreatedOnNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.CreatedOnColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCreatedOnNull() {
-                this[this.tableOutsourcingMeeting.CreatedOnColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCreatedByNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.CreatedByColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCreatedByNull() {
-                this[this.tableOutsourcingMeeting.CreatedByColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsUpdatedOnNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.UpdatedOnColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetUpdatedOnNull() {
-                this[this.tableOutsourcingMeeting.UpdatedOnColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsUpdatedByNull() {
-                return this.IsNull(this.tableOutsourcingMeeting.UpdatedByColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetUpdatedByNull() {
-                this[this.tableOutsourcingMeeting.UpdatedByColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6897,17 +7044,17 @@ namespace Outsourcing.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime RelievedOn {
+            public System.DateTime RelieveDate {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tablerelieve.RelievedOnColumn]));
+                        return ((global::System.DateTime)(this[this.tablerelieve.RelieveDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RelievedOn\' in table \'relieve\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'RelieveDate\' in table \'relieve\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablerelieve.RelievedOnColumn] = value;
+                    this[this.tablerelieve.RelieveDateColumn] = value;
                 }
             }
             
@@ -6925,14 +7072,48 @@ namespace Outsourcing.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRelievedOnNull() {
-                return this.IsNull(this.tablerelieve.RelievedOnColumn);
+            public bool IsRelieveDateNull() {
+                return this.IsNull(this.tablerelieve.RelieveDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRelievedOnNull() {
-                this[this.tablerelieve.RelievedOnColumn] = global::System.Convert.DBNull;
+            public void SetRelieveDateNull() {
+                this[this.tablerelieve.RelieveDateColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class OutsourcingMeetingRowChangeEvent : global::System.EventArgs {
+            
+            private OutsourcingMeetingRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OutsourcingMeetingRowChangeEvent(OutsourcingMeetingRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OutsourcingMeetingRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
             }
         }
         
@@ -7024,40 +7205,6 @@ namespace Outsourcing.Datasets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public CommitteeApprovalRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class OutsourcingMeetingRowChangeEvent : global::System.EventArgs {
-            
-            private OutsourcingMeetingRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OutsourcingMeetingRowChangeEvent(OutsourcingMeetingRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public OutsourcingMeetingRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -7204,6 +7351,1326 @@ namespace Outsourcing.Datasets {
             public global::System.Data.DataRowAction Action {
                 get {
                     return this.eventAction;
+                }
+            }
+        }
+    }
+}
+namespace Outsourcing.Datasets.OutsourcingMeetingDSTableAdapters {
+    
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class OutsourcingMeetingTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public OutsourcingMeetingTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "OutsourcingMeeting";
+            tableMapping.ColumnMappings.Add("MeetingID", "MeetingID");
+            tableMapping.ColumnMappings.Add("MeetingDate", "MeetingDate");
+            tableMapping.ColumnMappings.Add("CandidateID", "CandidateID");
+            tableMapping.ColumnMappings.Add("CandidateName", "CandidateName");
+            tableMapping.ColumnMappings.Add("DOB", "DOB");
+            tableMapping.ColumnMappings.Add("DesignationCode", "DesignationCode");
+            tableMapping.ColumnMappings.Add("DesignationName", "DesignationName");
+            tableMapping.ColumnMappings.Add("Qualification", "Qualification");
+            tableMapping.ColumnMappings.Add("IITMExperience", "IITMExperience");
+            tableMapping.ColumnMappings.Add("IIT_Experience", "IIT_Experience");
+            tableMapping.ColumnMappings.Add("NONIIT_Experience", "NONIIT_Experience");
+            tableMapping.ColumnMappings.Add("Total_Experience", "Total_Experience");
+            tableMapping.ColumnMappings.Add("ProjectType", "ProjectType");
+            tableMapping.ColumnMappings.Add("ProjectNo", "ProjectNo");
+            tableMapping.ColumnMappings.Add("ProjectTitle", "ProjectTitle");
+            tableMapping.ColumnMappings.Add("DepartmentCode", "DepartmentCode");
+            tableMapping.ColumnMappings.Add("DepartmentName", "DepartmentName");
+            tableMapping.ColumnMappings.Add("SponsoredAgency", "SponsoredAgency");
+            tableMapping.ColumnMappings.Add("PICode", "PICode");
+            tableMapping.ColumnMappings.Add("PIName", "PIName");
+            tableMapping.ColumnMappings.Add("ProjectCloseDate", "ProjectCloseDate");
+            tableMapping.ColumnMappings.Add("Section", "Section");
+            tableMapping.ColumnMappings.Add("OutSourcingCompany", "OutSourcingCompany");
+            tableMapping.ColumnMappings.Add("RequestFromDate", "RequestFromDate");
+            tableMapping.ColumnMappings.Add("RequestToDate", "RequestToDate");
+            tableMapping.ColumnMappings.Add("DurationInMonth", "DurationInMonth");
+            tableMapping.ColumnMappings.Add("FromDate", "FromDate");
+            tableMapping.ColumnMappings.Add("ToDate", "ToDate");
+            tableMapping.ColumnMappings.Add("GrossSalary", "GrossSalary");
+            tableMapping.ColumnMappings.Add("CostToProject", "CostToProject");
+            tableMapping.ColumnMappings.Add("CommitmentNo", "CommitmentNo");
+            tableMapping.ColumnMappings.Add("StatusOfRequest", "StatusOfRequest");
+            tableMapping.ColumnMappings.Add("Remarks", "Remarks");
+            tableMapping.ColumnMappings.Add("CreatedOn", "CreatedOn");
+            tableMapping.ColumnMappings.Add("CreatedBy", "CreatedBy");
+            tableMapping.ColumnMappings.Add("UpdatedOn", "UpdatedOn");
+            tableMapping.ColumnMappings.Add("UpdatedBy", "UpdatedBy");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[OutsourcingMeeting] WHERE (([MeetingID] = @Original_MeetingID)" +
+                ")";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MeetingID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeetingID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[OutsourcingMeeting] ([MeetingID], [MeetingDate], [CandidateID], [CandidateName], [DOB], [DesignationCode], [DesignationName], [Qualification], [IITMExperience], [IIT_Experience], [NONIIT_Experience], [Total_Experience], [ProjectType], [ProjectNo], [ProjectTitle], [DepartmentCode], [DepartmentName], [SponsoredAgency], [PICode], [PIName], [ProjectCloseDate], [Section], [OutSourcingCompany], [RequestFromDate], [RequestToDate], [DurationInMonth], [FromDate], [ToDate], [GrossSalary], [CostToProject], [CommitmentNo], [StatusOfRequest], [Remarks], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy]) VALUES (@MeetingID, @MeetingDate, @CandidateID, @CandidateName, @DOB, @DesignationCode, @DesignationName, @Qualification, @IITMExperience, @IIT_Experience, @NONIIT_Experience, @Total_Experience, @ProjectType, @ProjectNo, @ProjectTitle, @DepartmentCode, @DepartmentName, @SponsoredAgency, @PICode, @PIName, @ProjectCloseDate, @Section, @OutSourcingCompany, @RequestFromDate, @RequestToDate, @DurationInMonth, @FromDate, @ToDate, @GrossSalary, @CostToProject, @CommitmentNo, @StatusOfRequest, @Remarks, @CreatedOn, @CreatedBy, @UpdatedOn, @UpdatedBy)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MeetingID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeetingID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MeetingDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeetingDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CandidateID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CandidateID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CandidateName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CandidateName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOB", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOB", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DesignationCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DesignationCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DesignationName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DesignationName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Qualification", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Qualification", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IITMExperience", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IITMExperience", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IIT_Experience", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "IIT_Experience", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NONIIT_Experience", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "NONIIT_Experience", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Total_Experience", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "Total_Experience", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProjectType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProjectNo", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProjectTitle", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectTitle", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DepartmentCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DepartmentCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DepartmentName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DepartmentName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SponsoredAgency", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SponsoredAgency", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PICode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PICode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PIName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PIName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProjectCloseDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectCloseDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Section", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Section", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OutSourcingCompany", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OutSourcingCompany", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RequestFromDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RequestFromDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RequestToDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RequestToDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DurationInMonth", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DurationInMonth", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FromDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FromDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ToDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ToDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GrossSalary", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "GrossSalary", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CostToProject", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 12, 2, "CostToProject", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CommitmentNo", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CommitmentNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StatusOfRequest", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StatusOfRequest", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Remarks", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Remarks", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedOn", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedOn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedBy", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedBy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedOn", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedOn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedBy", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedBy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[OutsourcingMeeting] SET [MeetingID] = @MeetingID, [MeetingDate] = @MeetingDate, [CandidateID] = @CandidateID, [CandidateName] = @CandidateName, [DOB] = @DOB, [DesignationCode] = @DesignationCode, [DesignationName] = @DesignationName, [Qualification] = @Qualification, [IITMExperience] = @IITMExperience, [IIT_Experience] = @IIT_Experience, [NONIIT_Experience] = @NONIIT_Experience, [Total_Experience] = @Total_Experience, [ProjectType] = @ProjectType, [ProjectNo] = @ProjectNo, [ProjectTitle] = @ProjectTitle, [DepartmentCode] = @DepartmentCode, [DepartmentName] = @DepartmentName, [SponsoredAgency] = @SponsoredAgency, [PICode] = @PICode, [PIName] = @PIName, [ProjectCloseDate] = @ProjectCloseDate, [Section] = @Section, [OutSourcingCompany] = @OutSourcingCompany, [RequestFromDate] = @RequestFromDate, [RequestToDate] = @RequestToDate, [DurationInMonth] = @DurationInMonth, [FromDate] = @FromDate, [ToDate] = @ToDate, [GrossSalary] = @GrossSalary, [CostToProject] = @CostToProject, [CommitmentNo] = @CommitmentNo, [StatusOfRequest] = @StatusOfRequest, [Remarks] = @Remarks, [CreatedOn] = @CreatedOn, [CreatedBy] = @CreatedBy, [UpdatedOn] = @UpdatedOn, [UpdatedBy] = @UpdatedBy WHERE (([MeetingID] = @Original_MeetingID))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MeetingID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeetingID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MeetingDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeetingDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CandidateID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CandidateID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CandidateName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CandidateName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOB", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOB", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DesignationCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DesignationCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DesignationName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DesignationName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Qualification", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Qualification", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IITMExperience", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IITMExperience", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IIT_Experience", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "IIT_Experience", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NONIIT_Experience", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "NONIIT_Experience", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Total_Experience", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 0, "Total_Experience", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProjectType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProjectNo", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProjectTitle", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectTitle", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DepartmentCode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DepartmentCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DepartmentName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DepartmentName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SponsoredAgency", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SponsoredAgency", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PICode", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PICode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PIName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PIName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProjectCloseDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProjectCloseDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Section", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Section", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OutSourcingCompany", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OutSourcingCompany", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RequestFromDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RequestFromDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RequestToDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RequestToDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DurationInMonth", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DurationInMonth", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FromDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FromDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ToDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ToDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GrossSalary", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "GrossSalary", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CostToProject", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 12, 2, "CostToProject", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CommitmentNo", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CommitmentNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StatusOfRequest", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StatusOfRequest", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Remarks", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Remarks", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedOn", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedOn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedBy", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedBy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedOn", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedOn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedBy", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedBy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MeetingID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeetingID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT MeetingID, MeetingDate, CandidateID, CandidateName, DOB, DesignationCode, DesignationName, Qualification, IITMExperience, IIT_Experience, NONIIT_Experience, Total_Experience, ProjectType, ProjectNo, ProjectTitle, DepartmentCode, DepartmentName, SponsoredAgency, PICode, PIName, ProjectCloseDate, Section, OutSourcingCompany, RequestFromDate, RequestToDate, DurationInMonth, FromDate, ToDate, GrossSalary, CostToProject, CommitmentNo, StatusOfRequest, Remarks, CreatedOn, CreatedBy, UpdatedOn, UpdatedBy FROM dbo.OutsourcingMeeting";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(OutsourcingMeetingDS.OutsourcingMeetingDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual OutsourcingMeetingDS.OutsourcingMeetingDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            OutsourcingMeetingDS.OutsourcingMeetingDataTable dataTable = new OutsourcingMeetingDS.OutsourcingMeetingDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(OutsourcingMeetingDS.OutsourcingMeetingDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(OutsourcingMeetingDS dataSet) {
+            return this.Adapter.Update(dataSet, "OutsourcingMeeting");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(string Original_MeetingID) {
+            if ((Original_MeetingID == null)) {
+                throw new global::System.ArgumentNullException("Original_MeetingID");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[0].Value = ((string)(Original_MeetingID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(
+                    string MeetingID, 
+                    System.DateTime MeetingDate, 
+                    string CandidateID, 
+                    string CandidateName, 
+                    System.DateTime DOB, 
+                    string DesignationCode, 
+                    string DesignationName, 
+                    string Qualification, 
+                    bool IITMExperience, 
+                    global::System.Nullable<decimal> IIT_Experience, 
+                    global::System.Nullable<decimal> NONIIT_Experience, 
+                    global::System.Nullable<decimal> Total_Experience, 
+                    string ProjectType, 
+                    string ProjectNo, 
+                    string ProjectTitle, 
+                    string DepartmentCode, 
+                    string DepartmentName, 
+                    string SponsoredAgency, 
+                    string PICode, 
+                    string PIName, 
+                    global::System.Nullable<global::System.DateTime> ProjectCloseDate, 
+                    string Section, 
+                    string OutSourcingCompany, 
+                    System.DateTime RequestFromDate, 
+                    System.DateTime RequestToDate, 
+                    global::System.Nullable<int> DurationInMonth, 
+                    global::System.Nullable<global::System.DateTime> FromDate, 
+                    global::System.Nullable<global::System.DateTime> ToDate, 
+                    decimal GrossSalary, 
+                    decimal CostToProject, 
+                    string CommitmentNo, 
+                    string StatusOfRequest, 
+                    string Remarks, 
+                    global::System.Nullable<global::System.DateTime> CreatedOn, 
+                    string CreatedBy, 
+                    global::System.Nullable<global::System.DateTime> UpdatedOn, 
+                    string UpdatedBy) {
+            if ((MeetingID == null)) {
+                throw new global::System.ArgumentNullException("MeetingID");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(MeetingID));
+            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(MeetingDate));
+            if ((CandidateID == null)) {
+                throw new global::System.ArgumentNullException("CandidateID");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(CandidateID));
+            }
+            if ((CandidateName == null)) {
+                throw new global::System.ArgumentNullException("CandidateName");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(CandidateName));
+            }
+            this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(DOB));
+            if ((DesignationCode == null)) {
+                throw new global::System.ArgumentNullException("DesignationCode");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(DesignationCode));
+            }
+            if ((DesignationName == null)) {
+                throw new global::System.ArgumentNullException("DesignationName");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(DesignationName));
+            }
+            if ((Qualification == null)) {
+                throw new global::System.ArgumentNullException("Qualification");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(Qualification));
+            }
+            this.Adapter.InsertCommand.Parameters[8].Value = ((bool)(IITMExperience));
+            if ((IIT_Experience.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(IIT_Experience.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((NONIIT_Experience.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((decimal)(NONIIT_Experience.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Total_Experience.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((decimal)(Total_Experience.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((ProjectType == null)) {
+                throw new global::System.ArgumentNullException("ProjectType");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((string)(ProjectType));
+            }
+            if ((ProjectNo == null)) {
+                throw new global::System.ArgumentNullException("ProjectNo");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((string)(ProjectNo));
+            }
+            if ((ProjectTitle == null)) {
+                throw new global::System.ArgumentNullException("ProjectTitle");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[14].Value = ((string)(ProjectTitle));
+            }
+            if ((DepartmentCode == null)) {
+                throw new global::System.ArgumentNullException("DepartmentCode");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[15].Value = ((string)(DepartmentCode));
+            }
+            if ((DepartmentName == null)) {
+                throw new global::System.ArgumentNullException("DepartmentName");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[16].Value = ((string)(DepartmentName));
+            }
+            if ((SponsoredAgency == null)) {
+                throw new global::System.ArgumentNullException("SponsoredAgency");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[17].Value = ((string)(SponsoredAgency));
+            }
+            if ((PICode == null)) {
+                throw new global::System.ArgumentNullException("PICode");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[18].Value = ((string)(PICode));
+            }
+            if ((PIName == null)) {
+                throw new global::System.ArgumentNullException("PIName");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[19].Value = ((string)(PIName));
+            }
+            if ((ProjectCloseDate.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[20].Value = ((System.DateTime)(ProjectCloseDate.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((Section == null)) {
+                this.Adapter.InsertCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[21].Value = ((string)(Section));
+            }
+            if ((OutSourcingCompany == null)) {
+                throw new global::System.ArgumentNullException("OutSourcingCompany");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[22].Value = ((string)(OutSourcingCompany));
+            }
+            this.Adapter.InsertCommand.Parameters[23].Value = ((System.DateTime)(RequestFromDate));
+            this.Adapter.InsertCommand.Parameters[24].Value = ((System.DateTime)(RequestToDate));
+            if ((DurationInMonth.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[25].Value = ((int)(DurationInMonth.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[25].Value = global::System.DBNull.Value;
+            }
+            if ((FromDate.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[26].Value = ((System.DateTime)(FromDate.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((ToDate.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[27].Value = ((System.DateTime)(ToDate.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[27].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.InsertCommand.Parameters[28].Value = ((decimal)(GrossSalary));
+            this.Adapter.InsertCommand.Parameters[29].Value = ((decimal)(CostToProject));
+            if ((CommitmentNo == null)) {
+                this.Adapter.InsertCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[30].Value = ((string)(CommitmentNo));
+            }
+            if ((StatusOfRequest == null)) {
+                this.Adapter.InsertCommand.Parameters[31].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[31].Value = ((string)(StatusOfRequest));
+            }
+            if ((Remarks == null)) {
+                this.Adapter.InsertCommand.Parameters[32].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[32].Value = ((string)(Remarks));
+            }
+            if ((CreatedOn.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[33].Value = ((System.DateTime)(CreatedOn.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[33].Value = global::System.DBNull.Value;
+            }
+            if ((CreatedBy == null)) {
+                this.Adapter.InsertCommand.Parameters[34].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[34].Value = ((string)(CreatedBy));
+            }
+            if ((UpdatedOn.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[35].Value = ((System.DateTime)(UpdatedOn.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[35].Value = global::System.DBNull.Value;
+            }
+            if ((UpdatedBy == null)) {
+                this.Adapter.InsertCommand.Parameters[36].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[36].Value = ((string)(UpdatedBy));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string MeetingID, 
+                    System.DateTime MeetingDate, 
+                    string CandidateID, 
+                    string CandidateName, 
+                    System.DateTime DOB, 
+                    string DesignationCode, 
+                    string DesignationName, 
+                    string Qualification, 
+                    bool IITMExperience, 
+                    global::System.Nullable<decimal> IIT_Experience, 
+                    global::System.Nullable<decimal> NONIIT_Experience, 
+                    global::System.Nullable<decimal> Total_Experience, 
+                    string ProjectType, 
+                    string ProjectNo, 
+                    string ProjectTitle, 
+                    string DepartmentCode, 
+                    string DepartmentName, 
+                    string SponsoredAgency, 
+                    string PICode, 
+                    string PIName, 
+                    global::System.Nullable<global::System.DateTime> ProjectCloseDate, 
+                    string Section, 
+                    string OutSourcingCompany, 
+                    System.DateTime RequestFromDate, 
+                    System.DateTime RequestToDate, 
+                    global::System.Nullable<int> DurationInMonth, 
+                    global::System.Nullable<global::System.DateTime> FromDate, 
+                    global::System.Nullable<global::System.DateTime> ToDate, 
+                    decimal GrossSalary, 
+                    decimal CostToProject, 
+                    string CommitmentNo, 
+                    string StatusOfRequest, 
+                    string Remarks, 
+                    global::System.Nullable<global::System.DateTime> CreatedOn, 
+                    string CreatedBy, 
+                    global::System.Nullable<global::System.DateTime> UpdatedOn, 
+                    string UpdatedBy, 
+                    string Original_MeetingID) {
+            if ((MeetingID == null)) {
+                throw new global::System.ArgumentNullException("MeetingID");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(MeetingID));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(MeetingDate));
+            if ((CandidateID == null)) {
+                throw new global::System.ArgumentNullException("CandidateID");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(CandidateID));
+            }
+            if ((CandidateName == null)) {
+                throw new global::System.ArgumentNullException("CandidateName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(CandidateName));
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(DOB));
+            if ((DesignationCode == null)) {
+                throw new global::System.ArgumentNullException("DesignationCode");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(DesignationCode));
+            }
+            if ((DesignationName == null)) {
+                throw new global::System.ArgumentNullException("DesignationName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(DesignationName));
+            }
+            if ((Qualification == null)) {
+                throw new global::System.ArgumentNullException("Qualification");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Qualification));
+            }
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((bool)(IITMExperience));
+            if ((IIT_Experience.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(IIT_Experience.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((NONIIT_Experience.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(NONIIT_Experience.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Total_Experience.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Total_Experience.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((ProjectType == null)) {
+                throw new global::System.ArgumentNullException("ProjectType");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(ProjectType));
+            }
+            if ((ProjectNo == null)) {
+                throw new global::System.ArgumentNullException("ProjectNo");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(ProjectNo));
+            }
+            if ((ProjectTitle == null)) {
+                throw new global::System.ArgumentNullException("ProjectTitle");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(ProjectTitle));
+            }
+            if ((DepartmentCode == null)) {
+                throw new global::System.ArgumentNullException("DepartmentCode");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(DepartmentCode));
+            }
+            if ((DepartmentName == null)) {
+                throw new global::System.ArgumentNullException("DepartmentName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(DepartmentName));
+            }
+            if ((SponsoredAgency == null)) {
+                throw new global::System.ArgumentNullException("SponsoredAgency");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(SponsoredAgency));
+            }
+            if ((PICode == null)) {
+                throw new global::System.ArgumentNullException("PICode");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(PICode));
+            }
+            if ((PIName == null)) {
+                throw new global::System.ArgumentNullException("PIName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(PIName));
+            }
+            if ((ProjectCloseDate.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((System.DateTime)(ProjectCloseDate.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((Section == null)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((string)(Section));
+            }
+            if ((OutSourcingCompany == null)) {
+                throw new global::System.ArgumentNullException("OutSourcingCompany");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(OutSourcingCompany));
+            }
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((System.DateTime)(RequestFromDate));
+            this.Adapter.UpdateCommand.Parameters[24].Value = ((System.DateTime)(RequestToDate));
+            if ((DurationInMonth.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((int)(DurationInMonth.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
+            }
+            if ((FromDate.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((System.DateTime)(FromDate.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((ToDate.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((System.DateTime)(ToDate.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[28].Value = ((decimal)(GrossSalary));
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((decimal)(CostToProject));
+            if ((CommitmentNo == null)) {
+                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(CommitmentNo));
+            }
+            if ((StatusOfRequest == null)) {
+                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((string)(StatusOfRequest));
+            }
+            if ((Remarks == null)) {
+                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((string)(Remarks));
+            }
+            if ((CreatedOn.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((System.DateTime)(CreatedOn.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
+            }
+            if ((CreatedBy == null)) {
+                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((string)(CreatedBy));
+            }
+            if ((UpdatedOn.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((System.DateTime)(UpdatedOn.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
+            }
+            if ((UpdatedBy == null)) {
+                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((string)(UpdatedBy));
+            }
+            if ((Original_MeetingID == null)) {
+                throw new global::System.ArgumentNullException("Original_MeetingID");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((string)(Original_MeetingID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    System.DateTime MeetingDate, 
+                    string CandidateID, 
+                    string CandidateName, 
+                    System.DateTime DOB, 
+                    string DesignationCode, 
+                    string DesignationName, 
+                    string Qualification, 
+                    bool IITMExperience, 
+                    global::System.Nullable<decimal> IIT_Experience, 
+                    global::System.Nullable<decimal> NONIIT_Experience, 
+                    global::System.Nullable<decimal> Total_Experience, 
+                    string ProjectType, 
+                    string ProjectNo, 
+                    string ProjectTitle, 
+                    string DepartmentCode, 
+                    string DepartmentName, 
+                    string SponsoredAgency, 
+                    string PICode, 
+                    string PIName, 
+                    global::System.Nullable<global::System.DateTime> ProjectCloseDate, 
+                    string Section, 
+                    string OutSourcingCompany, 
+                    System.DateTime RequestFromDate, 
+                    System.DateTime RequestToDate, 
+                    global::System.Nullable<int> DurationInMonth, 
+                    global::System.Nullable<global::System.DateTime> FromDate, 
+                    global::System.Nullable<global::System.DateTime> ToDate, 
+                    decimal GrossSalary, 
+                    decimal CostToProject, 
+                    string CommitmentNo, 
+                    string StatusOfRequest, 
+                    string Remarks, 
+                    global::System.Nullable<global::System.DateTime> CreatedOn, 
+                    string CreatedBy, 
+                    global::System.Nullable<global::System.DateTime> UpdatedOn, 
+                    string UpdatedBy, 
+                    string Original_MeetingID) {
+            return this.Update(Original_MeetingID, MeetingDate, CandidateID, CandidateName, DOB, DesignationCode, DesignationName, Qualification, IITMExperience, IIT_Experience, NONIIT_Experience, Total_Experience, ProjectType, ProjectNo, ProjectTitle, DepartmentCode, DepartmentName, SponsoredAgency, PICode, PIName, ProjectCloseDate, Section, OutSourcingCompany, RequestFromDate, RequestToDate, DurationInMonth, FromDate, ToDate, GrossSalary, CostToProject, CommitmentNo, StatusOfRequest, Remarks, CreatedOn, CreatedBy, UpdatedOn, UpdatedBy, Original_MeetingID);
+        }
+    }
+    
+    /// <summary>
+    ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerDesigner, Microsoft.VSD" +
+        "esigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapterManager")]
+    public partial class TableAdapterManager : global::System.ComponentModel.Component {
+        
+        private UpdateOrderOption _updateOrder;
+        
+        private OutsourcingMeetingTableAdapter _outsourcingMeetingTableAdapter;
+        
+        private bool _backupDataSetBeforeUpdate;
+        
+        private global::System.Data.IDbConnection _connection;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public UpdateOrderOption UpdateOrder {
+            get {
+                return this._updateOrder;
+            }
+            set {
+                this._updateOrder = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public OutsourcingMeetingTableAdapter OutsourcingMeetingTableAdapter {
+            get {
+                return this._outsourcingMeetingTableAdapter;
+            }
+            set {
+                this._outsourcingMeetingTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool BackupDataSetBeforeUpdate {
+            get {
+                return this._backupDataSetBeforeUpdate;
+            }
+            set {
+                this._backupDataSetBeforeUpdate = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        public global::System.Data.IDbConnection Connection {
+            get {
+                if ((this._connection != null)) {
+                    return this._connection;
+                }
+                if (((this._outsourcingMeetingTableAdapter != null) 
+                            && (this._outsourcingMeetingTableAdapter.Connection != null))) {
+                    return this._outsourcingMeetingTableAdapter.Connection;
+                }
+                return null;
+            }
+            set {
+                this._connection = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        public int TableAdapterInstanceCount {
+            get {
+                int count = 0;
+                if ((this._outsourcingMeetingTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                return count;
+            }
+        }
+        
+        /// <summary>
+        ///Update rows in top-down order.
+        ///</summary>
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private int UpdateUpdatedRows(OutsourcingMeetingDS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+            int result = 0;
+            if ((this._outsourcingMeetingTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.OutsourcingMeeting.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._outsourcingMeetingTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            return result;
+        }
+        
+        /// <summary>
+        ///Insert rows in top-down order.
+        ///</summary>
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private int UpdateInsertedRows(OutsourcingMeetingDS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+            int result = 0;
+            if ((this._outsourcingMeetingTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.OutsourcingMeeting.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._outsourcingMeetingTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            return result;
+        }
+        
+        /// <summary>
+        ///Delete rows in bottom-up order.
+        ///</summary>
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private int UpdateDeletedRows(OutsourcingMeetingDS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+            int result = 0;
+            if ((this._outsourcingMeetingTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.OutsourcingMeeting.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._outsourcingMeetingTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            return result;
+        }
+        
+        /// <summary>
+        ///Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+        ///</summary>
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private global::System.Data.DataRow[] GetRealUpdatedRows(global::System.Data.DataRow[] updatedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+            if (((updatedRows == null) 
+                        || (updatedRows.Length < 1))) {
+                return updatedRows;
+            }
+            if (((allAddedRows == null) 
+                        || (allAddedRows.Count < 1))) {
+                return updatedRows;
+            }
+            global::System.Collections.Generic.List<global::System.Data.DataRow> realUpdatedRows = new global::System.Collections.Generic.List<global::System.Data.DataRow>();
+            for (int i = 0; (i < updatedRows.Length); i = (i + 1)) {
+                global::System.Data.DataRow row = updatedRows[i];
+                if ((allAddedRows.Contains(row) == false)) {
+                    realUpdatedRows.Add(row);
+                }
+            }
+            return realUpdatedRows.ToArray();
+        }
+        
+        /// <summary>
+        ///Update all changes to the dataset.
+        ///</summary>
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public virtual int UpdateAll(OutsourcingMeetingDS dataSet) {
+            if ((dataSet == null)) {
+                throw new global::System.ArgumentNullException("dataSet");
+            }
+            if ((dataSet.HasChanges() == false)) {
+                return 0;
+            }
+            if (((this._outsourcingMeetingTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._outsourcingMeetingTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            global::System.Data.IDbConnection workConnection = this.Connection;
+            if ((workConnection == null)) {
+                throw new global::System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana" +
+                        "ger TableAdapter property to a valid TableAdapter instance.");
+            }
+            bool workConnOpened = false;
+            if (((workConnection.State & global::System.Data.ConnectionState.Broken) 
+                        == global::System.Data.ConnectionState.Broken)) {
+                workConnection.Close();
+            }
+            if ((workConnection.State == global::System.Data.ConnectionState.Closed)) {
+                workConnection.Open();
+                workConnOpened = true;
+            }
+            global::System.Data.IDbTransaction workTransaction = workConnection.BeginTransaction();
+            if ((workTransaction == null)) {
+                throw new global::System.ApplicationException("The transaction cannot begin. The current data connection does not support transa" +
+                        "ctions or the current state is not allowing the transaction to begin.");
+            }
+            global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows = new global::System.Collections.Generic.List<global::System.Data.DataRow>();
+            global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows = new global::System.Collections.Generic.List<global::System.Data.DataRow>();
+            global::System.Collections.Generic.List<global::System.Data.Common.DataAdapter> adaptersWithAcceptChangesDuringUpdate = new global::System.Collections.Generic.List<global::System.Data.Common.DataAdapter>();
+            global::System.Collections.Generic.Dictionary<object, global::System.Data.IDbConnection> revertConnections = new global::System.Collections.Generic.Dictionary<object, global::System.Data.IDbConnection>();
+            int result = 0;
+            global::System.Data.DataSet backupDataSet = null;
+            if (this.BackupDataSetBeforeUpdate) {
+                backupDataSet = new global::System.Data.DataSet();
+                backupDataSet.Merge(dataSet);
+            }
+            try {
+                // ---- Prepare for update -----------
+                //
+                if ((this._outsourcingMeetingTableAdapter != null)) {
+                    revertConnections.Add(this._outsourcingMeetingTableAdapter, this._outsourcingMeetingTableAdapter.Connection);
+                    this._outsourcingMeetingTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._outsourcingMeetingTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._outsourcingMeetingTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._outsourcingMeetingTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._outsourcingMeetingTableAdapter.Adapter);
+                    }
+                }
+                // 
+                //---- Perform updates -----------
+                //
+                if ((this.UpdateOrder == UpdateOrderOption.UpdateInsertDelete)) {
+                    result = (result + this.UpdateUpdatedRows(dataSet, allChangedRows, allAddedRows));
+                    result = (result + this.UpdateInsertedRows(dataSet, allAddedRows));
+                }
+                else {
+                    result = (result + this.UpdateInsertedRows(dataSet, allAddedRows));
+                    result = (result + this.UpdateUpdatedRows(dataSet, allChangedRows, allAddedRows));
+                }
+                result = (result + this.UpdateDeletedRows(dataSet, allChangedRows));
+                // 
+                //---- Commit updates -----------
+                //
+                workTransaction.Commit();
+                if ((0 < allAddedRows.Count)) {
+                    global::System.Data.DataRow[] rows = new System.Data.DataRow[allAddedRows.Count];
+                    allAddedRows.CopyTo(rows);
+                    for (int i = 0; (i < rows.Length); i = (i + 1)) {
+                        global::System.Data.DataRow row = rows[i];
+                        row.AcceptChanges();
+                    }
+                }
+                if ((0 < allChangedRows.Count)) {
+                    global::System.Data.DataRow[] rows = new System.Data.DataRow[allChangedRows.Count];
+                    allChangedRows.CopyTo(rows);
+                    for (int i = 0; (i < rows.Length); i = (i + 1)) {
+                        global::System.Data.DataRow row = rows[i];
+                        row.AcceptChanges();
+                    }
+                }
+            }
+            catch (global::System.Exception ex) {
+                workTransaction.Rollback();
+                // ---- Restore the dataset -----------
+                if (this.BackupDataSetBeforeUpdate) {
+                    global::System.Diagnostics.Debug.Assert((backupDataSet != null));
+                    dataSet.Clear();
+                    dataSet.Merge(backupDataSet);
+                }
+                else {
+                    if ((0 < allAddedRows.Count)) {
+                        global::System.Data.DataRow[] rows = new System.Data.DataRow[allAddedRows.Count];
+                        allAddedRows.CopyTo(rows);
+                        for (int i = 0; (i < rows.Length); i = (i + 1)) {
+                            global::System.Data.DataRow row = rows[i];
+                            row.AcceptChanges();
+                            row.SetAdded();
+                        }
+                    }
+                }
+                throw ex;
+            }
+            finally {
+                if (workConnOpened) {
+                    workConnection.Close();
+                }
+                if ((this._outsourcingMeetingTableAdapter != null)) {
+                    this._outsourcingMeetingTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._outsourcingMeetingTableAdapter]));
+                    this._outsourcingMeetingTableAdapter.Transaction = null;
+                }
+                if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
+                    global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
+                    adaptersWithAcceptChangesDuringUpdate.CopyTo(adapters);
+                    for (int i = 0; (i < adapters.Length); i = (i + 1)) {
+                        global::System.Data.Common.DataAdapter adapter = adapters[i];
+                        adapter.AcceptChangesDuringUpdate = true;
+                    }
+                }
+            }
+            return result;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected virtual void SortSelfReferenceRows(global::System.Data.DataRow[] rows, global::System.Data.DataRelation relation, bool childFirst) {
+            global::System.Array.Sort<global::System.Data.DataRow>(rows, new SelfReferenceComparer(relation, childFirst));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected virtual bool MatchTableAdapterConnection(global::System.Data.IDbConnection inputConnection) {
+            if ((this._connection != null)) {
+                return true;
+            }
+            if (((this.Connection == null) 
+                        || (inputConnection == null))) {
+                return true;
+            }
+            if (string.Equals(this.Connection.ConnectionString, inputConnection.ConnectionString, global::System.StringComparison.Ordinal)) {
+                return true;
+            }
+            return false;
+        }
+        
+        /// <summary>
+        ///Update Order Option
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public enum UpdateOrderOption {
+            
+            InsertUpdateDelete = 0,
+            
+            UpdateInsertDelete = 1,
+        }
+        
+        /// <summary>
+        ///Used to sort self-referenced table's rows
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private class SelfReferenceComparer : object, global::System.Collections.Generic.IComparer<global::System.Data.DataRow> {
+            
+            private global::System.Data.DataRelation _relation;
+            
+            private int _childFirst;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal SelfReferenceComparer(global::System.Data.DataRelation relation, bool childFirst) {
+                this._relation = relation;
+                if (childFirst) {
+                    this._childFirst = -1;
+                }
+                else {
+                    this._childFirst = 1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private global::System.Data.DataRow GetRoot(global::System.Data.DataRow row, out int distance) {
+                global::System.Diagnostics.Debug.Assert((row != null));
+                global::System.Data.DataRow root = row;
+                distance = 0;
+
+                global::System.Collections.Generic.IDictionary<global::System.Data.DataRow, global::System.Data.DataRow> traversedRows = new global::System.Collections.Generic.Dictionary<global::System.Data.DataRow, global::System.Data.DataRow>();
+                traversedRows[row] = row;
+
+                global::System.Data.DataRow parent = row.GetParentRow(this._relation, global::System.Data.DataRowVersion.Default);
+                for (
+                ; ((parent != null) 
+                            && (traversedRows.ContainsKey(parent) == false)); 
+                ) {
+                    distance = (distance + 1);
+                    root = parent;
+                    traversedRows[parent] = parent;
+                    parent = parent.GetParentRow(this._relation, global::System.Data.DataRowVersion.Default);
+                }
+
+                if ((distance == 0)) {
+                    traversedRows.Clear();
+                    traversedRows[row] = row;
+                    parent = row.GetParentRow(this._relation, global::System.Data.DataRowVersion.Original);
+                    for (
+                    ; ((parent != null) 
+                                && (traversedRows.ContainsKey(parent) == false)); 
+                    ) {
+                        distance = (distance + 1);
+                        root = parent;
+                        traversedRows[parent] = parent;
+                        parent = parent.GetParentRow(this._relation, global::System.Data.DataRowVersion.Original);
+                    }
+                }
+
+                return root;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Compare(global::System.Data.DataRow row1, global::System.Data.DataRow row2) {
+                if (object.ReferenceEquals(row1, row2)) {
+                    return 0;
+                }
+                if ((row1 == null)) {
+                    return -1;
+                }
+                if ((row2 == null)) {
+                    return 1;
+                }
+
+                int distance1 = 0;
+                global::System.Data.DataRow root1 = this.GetRoot(row1, out distance1);
+
+                int distance2 = 0;
+                global::System.Data.DataRow root2 = this.GetRoot(row2, out distance2);
+
+                if (object.ReferenceEquals(root1, root2)) {
+                    return (this._childFirst * distance1.CompareTo(distance2));
+                }
+                else {
+                    global::System.Diagnostics.Debug.Assert(((root1.Table != null) 
+                                    && (root2.Table != null)));
+                    if ((root1.Table.Rows.IndexOf(root1) < root2.Table.Rows.IndexOf(root2))) {
+                        return -1;
+                    }
+                    else {
+                        return 1;
+                    }
                 }
             }
         }

@@ -29,6 +29,7 @@
                             {
                                 @Html.Hidden("minimumDt", (object)ViewBag.MinimumDate.ToString("dd/MM/yyyy"))
                             }
+                            @Html.HiddenFor(model=>model.PH,new { @id="PH"})
                             @Html.HiddenFor(model=>model.Command)
                             @Html.TextBoxFor(model => model.appointmentMasterView.EmployeeID, new { @id = "EmployeeID", @class = "ReadonlyField" })
                             @Html.ValidationMessageFor(model => model.appointmentMasterView.EmployeeID)
@@ -709,12 +710,13 @@
             var gross = $("#RecommendedSalary").val();
             var Design = $("#DesignationCode").val();
             var pfEligible = $("#PFEligible option:selected").val().trim();
+            var PH = $("#PH").val();
             if (!isNaN(parseFloat(gross)) && isFinite(gross)) {
                 $.ajax({
                     url: '@Url.Content("~/Outsource/SalaryCalculationAppointment")',
                     type: 'post',
                     dataType: "json",
-                    data: { gross: gross, Design:Design, pfEligible: pfEligible },
+                    data: { gross: gross, Design:Design, pfEligible: pfEligible,PH:PH },
                     success: function (data) {
                         if (data.result == 'success') {
                             $("#BasicSalary").val(data.BasicSalary);

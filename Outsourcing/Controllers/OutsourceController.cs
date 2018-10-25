@@ -19,6 +19,8 @@ using System.Transactions;
 using Outsourcing.BusinessModel;
 using System.Data.Linq;
 using CrystalDecisions.Shared;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace Outsourcing.Controllers
 {
@@ -173,6 +175,7 @@ namespace Outsourcing.Controllers
                 DateTime sdob;
                 string SearchDOB = null;
                 if (!string.IsNullOrEmpty(dob))
+
                     if (dob.Length == 8)
                     {
                         SearchDOB = dob.Substring(0, 2) + "/" + dob.Substring(2, 2) + "/" + dob.Substring(4, 4);
@@ -198,6 +201,8 @@ namespace Outsourcing.Controllers
             OutsourcingEmployeeDetailsView ev = new OutsourcingEmployeeDetailsView();
             ev.Genders = ev.GenderList();
             ev.CasteCategories = ev.CasteList();
+            ev.MStatus = ev.M_Status();
+            ev.BankNameList = ev.bankList();
             ev.Command = "Insert";
             ViewBag.Title = "New Candidate";
             return View(ev);
@@ -205,9 +210,9 @@ namespace Outsourcing.Controllers
         [HttpPost]
         public ActionResult NewEmployee(OutsourcingEmployeeDetailsView emp)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                try
                 {
                     OutsourcingEmployeeDetail ose = emp;
                     if (emp.Command == "Insert")
@@ -256,6 +261,7 @@ namespace Outsourcing.Controllers
                         OutsourcingEmployeeDetailsView empTemp = new OutsourcingEmployeeDetailsView();
                         empTemp.Genders = empTemp.GenderList();
                         empTemp.CasteCategories = empTemp.CasteList();
+                        empTemp.BankNameList = empTemp.bankList();
                         empTemp.Command = "Insert";
                         ViewBag.Title = "New Candidate";
                         return View(empTemp);
@@ -285,10 +291,43 @@ namespace Outsourcing.Controllers
                                 }
                                 throw new Exception("This entry already exists, Verify the following Candidate id's " + exMsg + " or  Contact Administrator");
                             }
+
                             Recruit.Entry(ose).State = EntityState.Modified;
                             Recruit.Entry(ose).Property(em => em.CreatedBy).IsModified = false;
                             Recruit.Entry(ose).Property(em => em.CreatedOn).IsModified = false;
                             Recruit.SaveChanges();
+                            // to update in appointment Master
+
+                            AppointmentMaster am = (from m in Recruit.AppointmentMasters where (m.CandidateID == ose.CandidateID) select m).FirstOrDefault();
+                            if (am != null)
+                            {
+                                if (String.IsNullOrEmpty(am.BankAccountNo) && String.IsNullOrEmpty(am.BankName) && String.IsNullOrEmpty(am.BranchName) && String.IsNullOrEmpty(am.IFSC_Code))
+                                {
+                                    am.BankAccountNo = ose.BankAccountNo;
+                                    am.IFSC_Code = ose.IFSC_Code;
+                                    am.BankName = ose.BankName;
+                                    am.BranchName = ose.BranchName;
+                                    am.DOB = ose.DOB;
+                                    am.PermanentAddress = ose.PermanentAddress;
+                                    am.CommunicationAddress = ose.CommunicationAddress;
+                                    am.MobileNumber = ose.MobileNumber;
+                                    am.EmailID = ose.EmailID;
+                                }
+                                else if (am.BankAccountNo == ose.BankAccountNo)
+                                {
+                                    am.DOB = ose.DOB;
+                                    am.PermanentAddress = ose.PermanentAddress;
+                                    am.CommunicationAddress = ose.CommunicationAddress;
+                                    am.MobileNumber = ose.MobileNumber;
+                                    am.EmailID = ose.EmailID;
+                                }
+                                else
+                                {
+                                    throw new Exception("Bank details are not updated in Appointment Master, Because they are already exists");
+                                }
+                                Recruit.SaveChanges();
+                            }
+
                         }
                         TempData["Status"] = "Update";
                         TempData["CandidateID"] = ose.CandidateID;
@@ -300,26 +339,35 @@ namespace Outsourcing.Controllers
                         OutsourcingEmployeeDetailsView empTemp = new OutsourcingEmployeeDetailsView();
                         emp.Genders = empTemp.GenderList();
                         emp.CasteCategories = empTemp.CasteList();
+                        emp.MStatus = empTemp.M_Status();
+                        emp.BankNameList = empTemp.bankList();
                         return View(emp);
                     }
                 }
-                else
+
+                catch (Exception ex)
                 {
-                    ModelState.AddModelError("", "Validation Failed");
+                    ModelState.AddModelError("", ex.Message);
                     OutsourcingEmployeeDetailsView empTemp = new OutsourcingEmployeeDetailsView();
                     emp.Genders = empTemp.GenderList();
+                    emp.MStatus = empTemp.M_Status();
                     emp.CasteCategories = empTemp.CasteList();
+                    emp.BankNameList = empTemp.bankList();
                     return View(emp);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                ModelState.AddModelError("", ex.Message);
+                ModelState.AddModelError("", "Validation Failed");
                 OutsourcingEmployeeDetailsView empTemp = new OutsourcingEmployeeDetailsView();
+                emp.MStatus = empTemp.M_Status();
                 emp.Genders = empTemp.GenderList();
                 emp.CasteCategories = empTemp.CasteList();
+                emp.BankNameList = empTemp.bankList();
                 return View(emp);
             }
+
+
         }
 
         [HttpPost]
@@ -332,7 +380,9 @@ namespace Outsourcing.Controllers
                 osc = Recruit.OutsourcingEmployeeDetails.Single(em => em.CandidateID == id);
                 OutsourcingEmployeeDetailsView oscv = osc;
                 oscv.Genders = oscv.GenderList();
+                oscv.MStatus = oscv.M_Status();
                 oscv.CasteCategories = oscv.CasteList();
+                oscv.BankNameList = oscv.bankList();
                 oscv.Command = "Update";
                 ViewBag.Title = "Update Employee";
                 return View(oscv);
@@ -349,7 +399,9 @@ namespace Outsourcing.Controllers
                 osc = Recruit.OutsourcingEmployeeDetails.Single(em => em.CandidateID == id);
                 OutsourcingEmployeeDetailsView oscv = osc;
                 oscv.Genders = oscv.GenderList();
+                oscv.MStatus = oscv.M_Status();
                 oscv.CasteCategories = oscv.CasteList();
+                oscv.BankNameList = oscv.bankList();
                 oscv.CreatedOn = osc.CreatedOn;
                 oscv.CreatedBy = osc.CreatedBy;
                 oscv.UpdatedOn = osc.UpdatedOn;
@@ -392,7 +444,7 @@ namespace Outsourcing.Controllers
 
         [HttpPost]
         public ActionResult getProjectDetails(string projectNo, string projectType, string dept)
-        {
+            {
             using (RecruitEntities RecruitEntity = new RecruitEntities())
             {
                 var pTypes = RecruitEntity.ListItemMasters.Where(em => em.ListItemValue == projectType && em.ListName == "ProjectType").Select(em => em.ListGroup).First().ToString();
@@ -470,6 +522,7 @@ namespace Outsourcing.Controllers
             OutsourcingMeetingView mv = new OutsourcingMeetingView();
             mv.Designations = mv.DesignationList();
             mv.ProjectTypes = mv.ProjectTypeList();
+            mv.Sections = mv.SectionList();
             mv.IITMExperiences = mv.IITMExperienceList();
             mv.Departments = mv.DepartmentList();
             mv.DurationTypes = mv.DurationTypeList();
@@ -517,9 +570,11 @@ namespace Outsourcing.Controllers
                     OutsourcingMeeting osm = meet;
                     if (meet.Command == "Insert")
                     {
+                        //try
+                        //{
                         using (RecruitEntities Recruit = new RecruitEntities())
                         {
-                            List<OutsourcingMeeting> tmpOM = (from m in Recruit.OutsourcingMeetings where (m.CandidateID == osm.CandidateID && (m.FromDate == osm.FromDate || m.ToDate == osm.ToDate || m.DurationInMonth == osm.DurationInMonth || m.RequestFromDate == osm.RequestFromDate || m.RequestToDate == osm.RequestToDate)) select m).ToList();
+                            List<OutsourcingMeeting> tmpOM = (from m in Recruit.OutsourcingMeetings where (m.CandidateID == osm.CandidateID && (m.StatusOfRequest != "Relieved" && m.StatusOfRequest != "ShortClosure") && (m.FromDate == osm.FromDate || m.ToDate == osm.ToDate || m.DurationInMonth == osm.DurationInMonth || m.RequestFromDate == osm.RequestFromDate || m.RequestToDate == osm.RequestToDate)) select m).ToList();
                             if (tmpOM.Any())
                             {
                                 string exMsg = "";
@@ -547,12 +602,26 @@ namespace Outsourcing.Controllers
                             Recruit.SaveChanges();
                             ViewData["MeetID"] = osm.MeetingID;
                         }
+                        //}
+                        //catch (DbEntityValidationException dbEx)
+                        //{
+                        //    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        //    {
+                        //        foreach (var validationError in validationErrors.ValidationErrors)
+                        //        {
+                        //            Trace.TraceInformation("Property: {0} Error: {1}",
+                        //                                    validationError.PropertyName,
+                        //                                    validationError.ErrorMessage);
+                        //        }
+                        //    }
+                        //}
 
                         ViewData["result"] = "True";
                         ModelState.Clear();
                         OutsourcingMeetingView mv = new OutsourcingMeetingView();
                         mv.Designations = mv.DesignationList();
                         mv.ProjectTypes = mv.ProjectTypeList();
+                        mv.Sections = mv.SectionList();
                         mv.IITMExperiences = mv.IITMExperienceList();
                         mv.Departments = mv.DepartmentList();
                         mv.DurationTypes = mv.DurationTypeList();
@@ -567,7 +636,7 @@ namespace Outsourcing.Controllers
                         osm.UpdatedOn = DateTime.Today;
                         using (RecruitEntities Recruit = new RecruitEntities())
                         {
-                            List<OutsourcingMeeting> tmpOM = (from m in Recruit.OutsourcingMeetings where (m.CandidateID == osm.CandidateID && m.MeetingID != osm.MeetingID && (m.FromDate == osm.FromDate || m.ToDate == osm.ToDate || m.DurationInMonth == osm.DurationInMonth || m.RequestFromDate == osm.RequestFromDate || m.RequestToDate == osm.RequestToDate)) select m).ToList();
+                            List<OutsourcingMeeting> tmpOM = (from m in Recruit.OutsourcingMeetings where  (m.CandidateID == osm.CandidateID && (m.StatusOfRequest != "Relieved" && m.StatusOfRequest != "ShortClosure") && m.MeetingID != osm.MeetingID && (m.FromDate == osm.FromDate || m.ToDate == osm.ToDate || m.DurationInMonth == osm.DurationInMonth || m.RequestFromDate == osm.RequestFromDate || m.RequestToDate == osm.RequestToDate)) select m).ToList();
                             if (tmpOM.Any())
                             {
                                 string exMsg = "";
@@ -592,6 +661,7 @@ namespace Outsourcing.Controllers
                         OutsourcingMeetingView mv = new OutsourcingMeetingView();
                         meet.Designations = mv.DesignationList();
                         meet.ProjectTypes = mv.ProjectTypeList();
+                        meet.Sections = mv.SectionList();
                         meet.IITMExperiences = mv.IITMExperienceList();
                         meet.Departments = mv.DepartmentList();
                         meet.DurationTypes = mv.DurationTypeList();
@@ -605,6 +675,7 @@ namespace Outsourcing.Controllers
                     OutsourcingMeetingView mv = new OutsourcingMeetingView();
                     meet.Designations = mv.DesignationList();
                     meet.ProjectTypes = mv.ProjectTypeList();
+                    meet.Sections = mv.SectionList();
                     meet.IITMExperiences = mv.IITMExperienceList();
                     meet.Departments = mv.DepartmentList();
                     meet.DurationTypes = mv.DurationTypeList();
@@ -619,6 +690,7 @@ namespace Outsourcing.Controllers
                 OutsourcingMeetingView mv = new OutsourcingMeetingView();
                 meet.Designations = mv.DesignationList();
                 meet.ProjectTypes = mv.ProjectTypeList();
+                meet.Sections = mv.SectionList();
                 meet.IITMExperiences = mv.IITMExperienceList();
                 meet.Departments = mv.DepartmentList();
                 meet.DurationTypes = mv.DurationTypeList();
@@ -638,6 +710,7 @@ namespace Outsourcing.Controllers
                 OutsourcingMeetingView osmv = osm;
                 osmv.Designations = osmv.DesignationList();
                 osmv.ProjectTypes = osmv.ProjectTypeList();
+                osmv.Sections = osmv.SectionList();
                 osmv.IITMExperiences = osmv.IITMExperienceList();
                 osmv.Departments = osmv.DepartmentList();
                 osmv.DurationTypes = osmv.DurationTypeList();
@@ -957,7 +1030,8 @@ namespace Outsourcing.Controllers
                 using (SqlConnection con1 = new SqlConnection())
                 {
                     con1.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
-                    SqlCommand cmd1 = new SqlCommand("select am.EmployeeID,am.EmployeeName,om.DOB,om.DesignationName,om.ProjectType,om.ProjectNo,om.ProjectTitle,om.DepartmentName,om.PIName,om.FromDate,om.ToDate,om.CostToProject,om.CommitmentNo from OutsourcingMeeting as om inner join AppointmentMaster as am on om.CandidateID=am.CandidateID where om.MeetingID = '" + MeetingID + "'", con1);
+                    SqlCommand cmd1 = new SqlCommand("select top 1 am.EmployeeID,am.EmployeeName,om.DOB,om.DesignationName,om.ProjectType,om.ProjectNo,om.ProjectTitle,om.DepartmentName,om.PIName,om.FromDate,om.ToDate,sd.TotalSalary as CostToProject,om.CommitmentNo from OutsourcingMeeting as om inner join AppointmentProject as am  on om.MeetingID=am.MeetingID  inner join SalaryDetails as sd on sd.EmployeeID = am.EmployeeID where am.EmployeeID = '" + EmployeeID + "' and om.MeetingID='" + MeetingID + "' order by OrderID desc", con1);
+                    //SqlCommand cmd1 = new SqlCommand("select am.EmployeeID,am.EmployeeName,om.DOB,om.DesignationName,om.ProjectType,om.ProjectNo,om.ProjectTitle,om.DepartmentName,om.PIName,om.FromDate,om.ToDate,om.CostToProject,om.CommitmentNo from OutsourcingMeeting as om inner join AppointmentMaster as am on om.CandidateID=am.CandidateID where om.MeetingID = '" + MeetingID + "'", con1);
                     //IEnumerable<DataRow> print = (from report in recruit.OutsourcingMeetings.AsEnumerable() where report.MeetingID == MeetingID select report).SingleOrDefault() as IEnumerable<DataRow>;
                     // var print = (from report in recruit.OutsourcingMeetings where report.MeetingID == MeetingID select report).SingleOrDefault();
                     SqlDataAdapter adp = new SqlDataAdapter(cmd1);
@@ -1062,14 +1136,22 @@ namespace Outsourcing.Controllers
                                                       GrossSalary = me.GrossSalary,
                                                       CostToProject = me.CostToProject
                                                   }).Single();
+                    OutsourcingEmployeeDetailsView edv = (from ed in recruit.OutsourcingEmployeeDetails
+                                                          join me in recruit.OutsourcingMeetings on ed.CandidateID equals me.CandidateID
+                                                          where me.MeetingID == MeetingID
+                                                          select new OutsourcingEmployeeDetailsView
+                                                          {
+                                                              PH = ed.PH
+                                                          }).SingleOrDefault();
                     SalaryDetailsView sdv;
                     SalaryCalculation sc = new SalaryCalculation();
-                    sc.TAMsalary(Convert.ToDecimal(adv.GrossSalary), amv.DesignationCode, out sdv);
+                    sc.TAMsalary(Convert.ToDecimal(adv.GrossSalary), amv.DesignationCode, edv.PH, out sdv);
                     NewAppointmentView nav = new NewAppointmentView();
                     nav.appointmentMasterView = amv;
                     nav.appointmentProjectView = apv;
                     nav.appointmentDetailsView = adv;
                     nav.salaryDetailsView = sdv;
+                    nav.PH = edv.PH;
                     nav.Command = "Insert";
                     ViewBag.MinimumDate = null;
                     List<SelectListItem> pf = new List<SelectListItem> { new SelectListItem { Text = "With PF", Value = "With PF" }, new SelectListItem { Text = "Without PF", Value = "Without PF" } };
@@ -1153,13 +1235,21 @@ namespace Outsourcing.Controllers
                                                       GrossSalary = me.GrossSalary,
                                                       CostToProject = me.CostToProject
                                                   }).Single();
+                    OutsourcingEmployeeDetailsView edv = (from ed in recruit.OutsourcingEmployeeDetails
+                                                          join me in recruit.OutsourcingMeetings on ed.CandidateID equals me.CandidateID
+                                                          where me.MeetingID == MeetingID
+                                                          select new OutsourcingEmployeeDetailsView
+                                                          {
+                                                              PH = ed.PH
+                                                          }).SingleOrDefault();
                     SalaryDetailsView sdv;
                     SalaryCalculation sc = new SalaryCalculation();
-                    sc.TAMsalary(Convert.ToDecimal(adv.GrossSalary), amv.DesignationCode, out sdv);
+                    sc.TAMsalary(Convert.ToDecimal(adv.GrossSalary), amv.DesignationCode, edv.PH, out sdv);
                     NewAppointmentView nav = new NewAppointmentView();
                     nav.appointmentMasterView = amv;
                     nav.appointmentProjectView = apv;
                     nav.appointmentDetailsView = adv;
+                    nav.PH = edv.PH;
                     nav.salaryDetailsView = sdv;
                     nav.Command = "ReAppointment";
                     List<SelectListItem> pf = new List<SelectListItem> { new SelectListItem { Text = "With PF", Value = "With PF" }, new SelectListItem { Text = "Without PF", Value = "Without PF" } };
@@ -1194,6 +1284,7 @@ namespace Outsourcing.Controllers
                     nav.appointmentProjectView = apv;
                     nav.appointmentDetailsView = adv;
                     nav.salaryDetailsView = sdv;
+
                     nav.Command = "Update";
                     ViewBag.Title = "Update Appointment Order";
                     ViewData["EmployeeID"] = nav.appointmentDetailsView.EmployeeID;
@@ -1207,11 +1298,13 @@ namespace Outsourcing.Controllers
                 AppointmentMasterView amv = new AppointmentMasterView();
                 AppointmentProjectView apv = new AppointmentProjectView();
                 AppointmentDetailsView adv = new AppointmentDetailsView();
+                OutsourcingEmployeeDetailsView edv = new OutsourcingEmployeeDetailsView();
                 SalaryDetailsView sdv = new SalaryDetailsView();
                 NewAppointmentView nav = new NewAppointmentView();
                 nav.appointmentMasterView = amv;
                 nav.appointmentProjectView = apv;
                 nav.appointmentDetailsView = adv;
+                // nav.OutsourcingEmployeeDetails = edv;
                 nav.salaryDetailsView = sdv;
                 ViewBag.MinimumDate = null;
                 List<SelectListItem> pf = new List<SelectListItem> { new SelectListItem { Text = "With PF", Value = "With PF" }, new SelectListItem { Text = "Without PF", Value = "Without PF" } };
@@ -1389,6 +1482,9 @@ namespace Outsourcing.Controllers
                                 };
                                 RecruitEntity.Configuration.ValidateOnSaveEnabled = false;
                                 RecruitEntity.AppointmentMasters.Attach(am);
+
+
+
                                 RecruitEntity.Entry(am).Property(em => em.DesignationCode).IsModified = true;
                                 RecruitEntity.Entry(am).Property(em => em.DesignationName).IsModified = true;
                                 RecruitEntity.Entry(am).Property(em => em.ToDate).IsModified = true;
@@ -1516,9 +1612,11 @@ namespace Outsourcing.Controllers
                 return View(nav);
             }
         }
+
+
         #endregion
         [HttpPost]
-        public ActionResult SalaryCalculationAppointment(string gross, string Design, string pfEligible)
+        public ActionResult SalaryCalculationAppointment(string gross, string Design, bool PH, string pfEligible)
         {
             try
             {
@@ -1526,13 +1624,14 @@ namespace Outsourcing.Controllers
                 SalaryCalculation sc = new SalaryCalculation();
                 decimal RecommendSalary = Convert.ToDecimal(gross);
                 var output = "fail";
-                if (RecommendSalary > 15000 && pfEligible == "Without PF")
+                //if (RecommendSalary > 15000 && pfEligible == "Without PF")
+                if (pfEligible == "Without PF") // changed by priya on request from recruitment
                 {
-                    sc.TAMsalaryWithoutPF(RecommendSalary, Design, out tmpSdv);
+                    sc.TAMsalaryWithoutPF(RecommendSalary, Design, PH, out tmpSdv);
                 }
                 else
                 {
-                    sc.TAMsalary(RecommendSalary, Design, out tmpSdv);
+                    sc.TAMsalary(RecommendSalary, Design, PH, out tmpSdv);
                 }
                 output = "success";
                 var ReturnVal = new
@@ -1585,7 +1684,7 @@ namespace Outsourcing.Controllers
 
         [HttpPost]
         [MultipleButton(Name = "action", Argument = "TAMSalaryCalculation")]
-        public ActionResult TAMSalaryCalculation(decimal RecommendSalary, string Design, string PFEligible)
+        public ActionResult TAMSalaryCalculation(decimal RecommendSalary, string Design, string PFEligible, bool PH)
         {
             using (RecruitEntities recruit = new RecruitEntities())
             {
@@ -1598,13 +1697,14 @@ namespace Outsourcing.Controllers
             {
                 SalaryDetailsView sdv;
                 SalaryCalculation sc = new SalaryCalculation();
-                if (RecommendSalary > 15000 && PFEligible == "Without PF")
+                //if (RecommendSalary > 15000 && PFEligible == "Without PF")
+                if (PFEligible == "Without PF")
                 {
-                    sc.TAMsalaryWithoutPF(Convert.ToDecimal(RecommendSalary), Design, out sdv);
+                    sc.TAMsalaryWithoutPF(Convert.ToDecimal(RecommendSalary), Design, PH, out sdv);
                 }
                 else
                 {
-                    sc.TAMsalary(Convert.ToDecimal(RecommendSalary), Design, out sdv);
+                    sc.TAMsalary(Convert.ToDecimal(RecommendSalary), Design, PH, out sdv);
                 }
                 return View(sdv);
             }
@@ -1642,7 +1742,7 @@ namespace Outsourcing.Controllers
             //DataRow dr = dt.NewRow();
             //ds.Tables["SalaryDetails"].Rows.Add()
             DataRow dr = ds.Tables["SalaryDetails"].NewRow();
-           // dr[0].Add(sal.BasicSalary);
+            // dr[0].Add(sal.BasicSalary);
             //dt.Rows.Add(sal.HRA);
             //dt.Rows.Add(sal.Bonus);
             //dt.Rows.Add(sal.SpecialAllowance);
@@ -1662,9 +1762,9 @@ namespace Outsourcing.Controllers
             dr[0] = sal.BasicSalary;
             dr[1] = sal.HRA;
             dr[2] = sal.Bonus;
-            dr[3]=sal.SpecialAllowance;
-            dr[4]=sal.GrossSalary;
-            dr[5]=sal.EmployeePF;
+            dr[3] = sal.SpecialAllowance;
+            dr[4] = sal.GrossSalary;
+            dr[5] = sal.EmployeePF;
             dr[6] = sal.EmployeeESIC;
             dr[7] = sal.ProfessionalTax;
             dr[8] = sal.NetSalary;
@@ -1678,7 +1778,7 @@ namespace Outsourcing.Controllers
             dr[16] = sal.TotalSalary;
             //ds.SalaryDetails.Rows.Add(frm[0].ToString());
             ds.Tables["SalaryDetails"].Rows.Add(dr);
-           
+
             //var rec = frm[0].ToString();
             //rpt.SetParameterValue("rec",);  
             rpt.SetDataSource(ds);
@@ -1692,24 +1792,26 @@ namespace Outsourcing.Controllers
         }
         #region appointment list
         [HttpGet]
-        public ActionResult AppointmentList(string SearchName, string dob, int? Page)
+        public ActionResult AppointmentList(string SearchName, string SearchID, int? Page)
         {
             using (RecruitEntities recruit = new RecruitEntities())
             {
                 List<AppointmentList> appList;
                 DateTime sdob;
                 string SearchDOB = null;
-                if (!string.IsNullOrEmpty(dob))
-                    if (dob.Length == 8)
-                    {
-                        SearchDOB = dob.Substring(0, 2) + "/" + dob.Substring(2, 2) + "/" + dob.Substring(4, 4);
-                    }
-                bool isDate = DateTime.TryParse(Convert.ToString(SearchDOB), out sdob);
-                if (isDate && !string.IsNullOrEmpty(SearchName))
-                    appList = (from m in recruit.AppointmentMasters where (m.EmployeeName.Contains(SearchName) && m.DOB.Equals(sdob)) select new AppointmentList { EmployeeID = m.EmployeeID, EmployeeName = m.EmployeeName, DOB = m.DOB, DesignationCode = m.DesignationCode, AppointmentDate = m.AppointmentDate, ToDate = m.ToDate, RelieveDate = m.RelieveDate, BasicSalary = m.BasicSalary }).ToList();
-                else if (string.IsNullOrEmpty(SearchName) && isDate)
-                    appList = (from m in recruit.AppointmentMasters where m.DOB.Equals(sdob) select new AppointmentList { EmployeeID = m.EmployeeID, EmployeeName = m.EmployeeName, DOB = m.DOB, DesignationCode = m.DesignationCode, AppointmentDate = m.AppointmentDate, ToDate = m.ToDate, RelieveDate = m.RelieveDate, BasicSalary = m.BasicSalary }).ToList();
-                else if (!string.IsNullOrEmpty(SearchName) && isDate == false)
+                //if (!string.IsNullOrEmpty(SearchID))
+                //if (dob.Length == 8)
+                //{
+                //    SearchDOB = dob.Substring(0, 2) + "/" + dob.Substring(2, 2) + "/" + dob.Substring(4, 4);
+                //}
+                //bool isDate = DateTime.TryParse(Convert.ToString(SearchDOB), out sdob);
+                if (!string.IsNullOrEmpty(SearchID) && !string.IsNullOrEmpty(SearchName))
+                    //appList = (from m in recruit.AppointmentMasters where (m.EmployeeName.Contains(SearchName) && m.DOB.Equals(sdob)) select new AppointmentList { EmployeeID = m.EmployeeID, EmployeeName = m.EmployeeName, DOB = m.DOB, DesignationCode = m.DesignationCode, AppointmentDate = m.AppointmentDate, ToDate = m.ToDate, RelieveDate = m.RelieveDate, BasicSalary = m.BasicSalary }).ToList();
+                    appList = (from m in recruit.AppointmentMasters where (m.EmployeeName.Contains(SearchName) && m.EmployeeID.Contains(SearchID)) select new AppointmentList { EmployeeID = m.EmployeeID, EmployeeName = m.EmployeeName, DOB = m.DOB, DesignationCode = m.DesignationCode, AppointmentDate = m.AppointmentDate, ToDate = m.ToDate, RelieveDate = m.RelieveDate, BasicSalary = m.BasicSalary }).ToList();
+                else if (string.IsNullOrEmpty(SearchName) && !string.IsNullOrEmpty(SearchID))
+                    // appList = (from m in recruit.AppointmentMasters where m.DOB.Equals(sdob) select new AppointmentList { EmployeeID = m.EmployeeID, EmployeeName = m.EmployeeName, DOB = m.DOB, DesignationCode = m.DesignationCode, AppointmentDate = m.AppointmentDate, ToDate = m.ToDate, RelieveDate = m.RelieveDate, BasicSalary = m.BasicSalary }).ToList();
+                    appList = (from m in recruit.AppointmentMasters where m.EmployeeID.Contains(SearchID) select new AppointmentList { EmployeeID = m.EmployeeID, EmployeeName = m.EmployeeName, DOB = m.DOB, DesignationCode = m.DesignationCode, AppointmentDate = m.AppointmentDate, ToDate = m.ToDate, RelieveDate = m.RelieveDate, BasicSalary = m.BasicSalary }).ToList();
+                else if (!string.IsNullOrEmpty(SearchName) && string.IsNullOrEmpty(SearchID))
                     appList = (from m in recruit.AppointmentMasters where m.EmployeeName.Contains(SearchName) select new AppointmentList { EmployeeID = m.EmployeeID, EmployeeName = m.EmployeeName, DOB = m.DOB, DesignationCode = m.DesignationCode, AppointmentDate = m.AppointmentDate, ToDate = m.ToDate, RelieveDate = m.RelieveDate, BasicSalary = m.BasicSalary }).ToList();
                 else
                     appList = (from m in recruit.AppointmentMasters orderby m.EmployeeID descending select new AppointmentList { EmployeeID = m.EmployeeID, EmployeeName = m.EmployeeName, DOB = m.DOB, DesignationCode = m.DesignationCode, AppointmentDate = m.AppointmentDate, ToDate = m.ToDate, RelieveDate = m.RelieveDate, BasicSalary = m.BasicSalary }).Take(10).ToList();
@@ -1980,7 +2082,7 @@ namespace Outsourcing.Controllers
                                 recruit.SaveChanges();
                                 transaction.Complete();
                                 ViewData["EmployeeID"] = eov.appointmentDetailsView.EmployeeID;
-                            }                         
+                            }
 
                             ViewData["Result"] = "True";
                             ViewData["status"] = "Update";
@@ -2016,7 +2118,7 @@ namespace Outsourcing.Controllers
                 using (SqlConnection con1 = new SqlConnection())
                 {
                     con1.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
-                    string sql = "select ad.EmployeeID,ad.EmployeeName,DOB,om.DesignationName,om.ProjectType,ad.ProjectNo,om.ProjectTitle,om.DepartmentName,PIName,ad.FromDate,ad.ToDate,om.CostToProject,ad.CommitmentNo from OutsourcingMeeting as om inner join AppointmentDetails as ad on ad.MeetingID=om.MeetingID and ad.EmployeeID='" + EmployeeID + "' and ad.OrderID='"+OrderID+"'";
+                    string sql = "select ad.EmployeeID,ad.EmployeeName,DOB,om.DesignationName,om.ProjectType,ad.ProjectNo,om.ProjectTitle,om.DepartmentName,PIName,ad.FromDate,ad.ToDate,ad.CostToProject,ad.CommitmentNo from OutsourcingMeeting as om inner join AppointmentDetails as ad on ad.MeetingID=om.MeetingID and ad.EmployeeID='" + EmployeeID + "' and ad.OrderID='" + OrderID + "'";
                     SqlDataAdapter sda = new SqlDataAdapter(sql, con1);
                     OutsourcingMeetingDS ds = new OutsourcingMeetingDS();
                     sda.Fill(ds.Tables["officeorder"]);
@@ -2210,7 +2312,7 @@ namespace Outsourcing.Controllers
                 using (SqlConnection con1 = new SqlConnection())
                 {
                     con1.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
-                    string sql = "select ad.EmployeeID,ad.EmployeeName,DOB,om.DesignationName,om.ProjectType,ad.ProjectNo,om.ProjectTitle,om.DepartmentName,PIName,ad.FromDate,ad.ToDate,om.CostToProject,ad.CommitmentNo from OutsourcingMeeting as om inner join AppointmentDetails as ad on ad.MeetingID=om.MeetingID and ad.EmployeeID='" + EmployeeID + "' and ad.OrderID='" + OrderID + "'";
+                    string sql = "select ad.EmployeeID,ad.EmployeeName,DOB,om.DesignationName,om.ProjectType,ad.ProjectNo,om.ProjectTitle,om.DepartmentName,PIName,ad.FromDate,ad.ToDate,ad.CostToProject,ad.CommitmentNo from OutsourcingMeeting as om inner join AppointmentDetails as ad on ad.MeetingID=om.MeetingID and ad.EmployeeID='" + EmployeeID + "' and ad.OrderID='" + OrderID + "'";
                     SqlDataAdapter sda = new SqlDataAdapter(sql, con1);
                     OutsourcingMeetingDS ds = new OutsourcingMeetingDS();
                     sda.Fill(ds.Tables["officeorder"]);
@@ -2326,31 +2428,31 @@ namespace Outsourcing.Controllers
                                     recruit.OrderRequestDetails.Add(ord);
                                     var sddata = (recruit.SalaryDetails.OrderByDescending(o => o.OrderID).FirstOrDefault(a => a.EmployeeID == eov.EmployeeID));
                                     SalaryDetail sd = new SalaryDetail()
-                                        {
-                                            EmployeeID = sddata.EmployeeID,
-                                            OrderID = sddata.OrderID + 1,
-                                            OrderType = eov.OrderType,
-                                            BasicSalary = sddata.BasicSalary,
-                                            HRA = sddata.HRA,
-                                            Bonus = sddata.Bonus,
-                                            SpecialAllowance = sddata.SpecialAllowance,
-                                            GrossSalary = sddata.GrossSalary,
-                                            EmployeePF = sddata.EmployeePF,
-                                            EmployeeESIC = sddata.EmployeeESIC,
-                                            ProfessionalTax = sddata.ProfessionalTax,
-                                            NetSalary = sddata.NetSalary,
-                                            EmployerPF = sddata.EmployerPF,
-                                            EmployerESIC = sddata.EmployerESIC,
-                                            Insurance = sddata.Insurance,
-                                            TotalContribution = sddata.TotalContribution,
-                                            GrossTotal = sddata.GrossTotal,
-                                            AgencyFee = sddata.AgencyFee,
-                                            ServiceTax = sddata.ServiceTax,
-                                            TotalSalary = sddata.TotalSalary
+                                    {
+                                        EmployeeID = sddata.EmployeeID,
+                                        OrderID = sddata.OrderID + 1,
+                                        OrderType = eov.OrderType,
+                                        BasicSalary = sddata.BasicSalary,
+                                        HRA = sddata.HRA,
+                                        Bonus = sddata.Bonus,
+                                        SpecialAllowance = sddata.SpecialAllowance,
+                                        GrossSalary = sddata.GrossSalary,
+                                        EmployeePF = sddata.EmployeePF,
+                                        EmployeeESIC = sddata.EmployeeESIC,
+                                        ProfessionalTax = sddata.ProfessionalTax,
+                                        NetSalary = sddata.NetSalary,
+                                        EmployerPF = sddata.EmployerPF,
+                                        EmployerESIC = sddata.EmployerESIC,
+                                        Insurance = sddata.Insurance,
+                                        TotalContribution = sddata.TotalContribution,
+                                        GrossTotal = sddata.GrossTotal,
+                                        AgencyFee = sddata.AgencyFee,
+                                        ServiceTax = sddata.ServiceTax,
+                                        TotalSalary = sddata.TotalSalary
 
-                                        };
-                                        recruit.SalaryDetails.Add(sd);
-                                        recruit.SaveChanges();
+                                    };
+                                    recruit.SalaryDetails.Add(sd);
+                                    recruit.SaveChanges();
                                     var l = recruit.AppointmentProjects.Where(m => m.EmployeeID.Equals(eov.EmployeeID)).FirstOrDefault();
                                     l.Remarks = eov.OrderType;
                                     recruit.SaveChanges();
@@ -2833,6 +2935,7 @@ namespace Outsourcing.Controllers
                                 recruit.Entry(mv).Property(em => em.RelieveDate).IsModified = true;
                                 recruit.Entry(mv).Property(em => em.UpdatedBy).IsModified = true;
                                 recruit.Entry(mv).Property(em => em.UpdatedOn).IsModified = true;
+                                var om = new OutsourcingMeeting { StatusOfRequest = "Relieved" };
                                 recruit.SaveChanges();
                                 transaction.Complete();
                             }
@@ -2915,7 +3018,7 @@ namespace Outsourcing.Controllers
                 using (SqlConnection con1 = new SqlConnection())
                 {
                     con1.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
-                    string sql = "select ap.ProjectNo,ap.EmployeeID,ap.EmployeeName,ap.DesignationName,ap.ProjectType,am.ProjectTitle,am.DepartmentName,am.CommitmentNo,oe.Gender,ap.RelievedOn  from OutsourcingEmployeeDetails as oe inner join OutsourcingMeeting as am on oe.CandidateID=am.CandidateID inner join appointmentProject as ap on ap.EmployeeName=am.CandidateName and ap.MeetingID=am.MeetingID where  ap.EmployeeID='" + EmployeeID + "'";
+                    string sql = "select ap.ProjectNo,ap.EmployeeID,ap.EmployeeName,ap.DesignationName,ap.ProjectType,am.ProjectTitle,am.DepartmentName,am.CommitmentNo,oe.Gender,RelieveDate  from OutsourcingEmployeeDetails as oe inner join OutsourcingMeeting as am on oe.CandidateID=am.CandidateID inner join appointmentProject as ap on ap.EmployeeName=am.CandidateName and ap.MeetingID=am.MeetingID inner join AppointmentMaster am1 on am1.EmployeeID=ap.EmployeeID where  ap.EmployeeID='" + EmployeeID + "'";
                     //"select am.EmployeeID,am.EmployeeName,om.DOB,om.DesignationName,om.ProjectType,om.ProjectNo,om.ProjectTitle,om.DepartmentName,om.PIName,om.FromDate,om.ToDate,om.CostToProject,om.CommitmentNo from OutsourcingMeeting as om inner join AppointmentMaster as am on om.CandidateID=am.CandidateID where om.MeetingID = '" + MeetingID + "')";
                     SqlDataAdapter sda = new SqlDataAdapter(sql, con1);
                     OutsourcingMeetingDS ds = new OutsourcingMeetingDS();

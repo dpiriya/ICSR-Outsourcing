@@ -27,77 +27,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OutsourcingEmployeeDetails">
-      <EntityTypeMapping TypeName="RecruitModel.OutsourcingEmployeeDetail">
-        <MappingFragment StoreEntitySet="OutsourcingEmployeeDetails">
-          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
-          <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="CasteCategory" ColumnName="CasteCategory" />
-          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
-          <ScalarProperty Name="HusbandName" ColumnName="HusbandName" />
-          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
-          <ScalarProperty Name="CommunicationAddress" ColumnName="CommunicationAddress" />
-          <ScalarProperty Name="PAN" ColumnName="PAN" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-          <ScalarProperty Name="EmergencyContactNo" ColumnName="EmergencyContactNo" />
-          <ScalarProperty Name="PF_UAN" ColumnName="PF_UAN" />
-          <ScalarProperty Name="ESIC_NO" ColumnName="ESIC_NO" />
-          <ScalarProperty Name="BankName" ColumnName="BankName" />
-          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
-          <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
-          <ScalarProperty Name="IFSC_Code" ColumnName="IFSC_Code" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OutsourcingMeetings">
-      <EntityTypeMapping TypeName="RecruitModel.OutsourcingMeeting">
-        <MappingFragment StoreEntitySet="OutsourcingMeeting">
-          <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
-          <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
-          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
-          <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
-          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
-          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
-          <ScalarProperty Name="Experience" ColumnName="Experience" />
-          <ScalarProperty Name="IITMExperience" ColumnName="IITMExperience" />
-          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
-          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
-          <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
-          <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
-          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
-          <ScalarProperty Name="SponsoredAgency" ColumnName="SponsoredAgency" />
-          <ScalarProperty Name="PICode" ColumnName="PICode" />
-          <ScalarProperty Name="PIName" ColumnName="PIName" />
-          <ScalarProperty Name="ProjectCloseDate" ColumnName="ProjectCloseDate" />
-          <ScalarProperty Name="OutSourcingCompany" ColumnName="OutSourcingCompany" />
-          <ScalarProperty Name="RequestFromDate" ColumnName="RequestFromDate" />
-          <ScalarProperty Name="RequestToDate" ColumnName="RequestToDate" />
-          <ScalarProperty Name="DurationInMonth" ColumnName="DurationInMonth" />
-          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-          <ScalarProperty Name="GrossSalary" ColumnName="GrossSalary" />
-          <ScalarProperty Name="CostToProject" ColumnName="CostToProject" />
-          <ScalarProperty Name="CommitmentNo" ColumnName="CommitmentNo" />
-          <ScalarProperty Name="StatusOfRequest" ColumnName="StatusOfRequest" />
-          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OutsourcingOffers">
       <EntityTypeMapping TypeName="RecruitModel.OutsourcingOffer">
         <MappingFragment StoreEntitySet="OutsourcingOffer">
@@ -294,6 +223,100 @@
           <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
           <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
           <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OutsourcingMeetings">
+      <EntityTypeMapping TypeName="RecruitModel.OutsourcingMeeting">
+        <MappingFragment StoreEntitySet="OutsourcingMeeting">
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="StatusOfRequest" ColumnName="StatusOfRequest" />
+          <ScalarProperty Name="CommitmentNo" ColumnName="CommitmentNo" />
+          <ScalarProperty Name="CostToProject" ColumnName="CostToProject" />
+          <ScalarProperty Name="GrossSalary" ColumnName="GrossSalary" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="DurationInMonth" ColumnName="DurationInMonth" />
+          <ScalarProperty Name="RequestToDate" ColumnName="RequestToDate" />
+          <ScalarProperty Name="RequestFromDate" ColumnName="RequestFromDate" />
+          <ScalarProperty Name="OutSourcingCompany" ColumnName="OutSourcingCompany" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="ProjectCloseDate" ColumnName="ProjectCloseDate" />
+          <ScalarProperty Name="PIName" ColumnName="PIName" />
+          <ScalarProperty Name="PICode" ColumnName="PICode" />
+          <ScalarProperty Name="SponsoredAgency" ColumnName="SponsoredAgency" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+          <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+          <ScalarProperty Name="Total_Experience" ColumnName="Total_Experience" />
+          <ScalarProperty Name="NONIIT_Experience" ColumnName="NONIIT_Experience" />
+          <ScalarProperty Name="IIT_Experience" ColumnName="IIT_Experience" />
+          <ScalarProperty Name="IITMExperience" ColumnName="IITMExperience" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+          <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+          <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_mst_Section">
+      <EntityTypeMapping TypeName="RecruitModel.tbl_mst_Section">
+        <MappingFragment StoreEntitySet="tbl_mst_Section">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+          <ScalarProperty Name="SecId" ColumnName="SecId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OutsourcingEmployeeDetails">
+      <EntityTypeMapping TypeName="RecruitModel.OutsourcingEmployeeDetail">
+        <MappingFragment StoreEntitySet="OutsourcingEmployeeDetails">
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IFSC_Code" ColumnName="IFSC_Code" />
+          <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="ESIC_NO" ColumnName="ESIC_NO" />
+          <ScalarProperty Name="PF_UAN" ColumnName="PF_UAN" />
+          <ScalarProperty Name="EmergencyContactNo" ColumnName="EmergencyContactNo" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Aadhar" ColumnName="Aadhar" />
+          <ScalarProperty Name="PAN" ColumnName="PAN" />
+          <ScalarProperty Name="CommunicationAddress" ColumnName="CommunicationAddress" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="HusbandName" ColumnName="HusbandName" />
+          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="PH" ColumnName="PH" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="CasteCategory" ColumnName="CasteCategory" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_mst_BankName">
+      <EntityTypeMapping TypeName="RecruitModel.tbl_mst_BankName">
+        <MappingFragment StoreEntitySet="tbl_mst_BankName">
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="SNO" ColumnName="SNO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

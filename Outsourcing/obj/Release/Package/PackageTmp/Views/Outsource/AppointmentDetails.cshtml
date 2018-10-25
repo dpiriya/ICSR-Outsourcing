@@ -211,7 +211,7 @@
         }
         else
         {
-            if (Membership.GetUser().UserName.ToString() == "administrator")
+            if (Membership.GetUser().UserName.ToString() == "administrator" || appMaster.RelieveDate!=null)
             {
                 <td class="noBorders" valign="middle" align="center">
                 @using (@Html.BeginForm("", "Outsource", new { EmployeeID = appMaster.EmployeeID, MeetingID = appProjets.MeetingID, OrderID = 0, cmd = "Update" }))

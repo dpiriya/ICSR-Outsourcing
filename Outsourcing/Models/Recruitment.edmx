@@ -132,12 +132,15 @@
           <Property Name="DOB" Type="date" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="CasteCategory" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="20" />
+          <Property Name="PH" Type="bit" Nullable="false" />
           <Property Name="FatherName" Type="nvarchar" MaxLength="75" Nullable="false" />
           <Property Name="MotherName" Type="nvarchar" MaxLength="75" />
           <Property Name="HusbandName" Type="nvarchar" MaxLength="75" />
           <Property Name="PermanentAddress" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="CommunicationAddress" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="PAN" Type="nvarchar" MaxLength="10" />
+          <Property Name="Aadhar" Type="nvarchar" MaxLength="20" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
           <Property Name="MobileNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="EmailID" Type="nvarchar" MaxLength="50" />
@@ -165,8 +168,10 @@
           <Property Name="DesignationCode" Type="nvarchar" MaxLength="3" Nullable="false" />
           <Property Name="DesignationName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Qualification" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Experience" Type="numeric" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="Total_Experience" Type="numeric" Precision="3" Scale="0" />
           <Property Name="IITMExperience" Type="bit" Nullable="false" />
+          <Property Name="IIT_Experience" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="NONIIT_Experience" Type="numeric" Precision="3" Scale="0" />
           <Property Name="ProjectType" Type="nvarchar" MaxLength="4" Nullable="false" />
           <Property Name="ProjectNo" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="ProjectTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
@@ -176,6 +181,7 @@
           <Property Name="PICode" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="PIName" Type="nvarchar" MaxLength="75" Nullable="false" />
           <Property Name="ProjectCloseDate" Type="date" />
+          <Property Name="Section" Type="nvarchar" MaxLength="15" />
           <Property Name="OutSourcingCompany" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="RequestFromDate" Type="date" Nullable="false" />
           <Property Name="RequestToDate" Type="date" Nullable="false" />
@@ -260,6 +266,24 @@
           <Property Name="AgencyFee" Type="decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="ServiceTax" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="TotalSalary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_mst_BankName">
+          <Key>
+            <PropertyRef Name="SNO" />
+          </Key>
+          <Property Name="SNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Recruit.dbo.tbl_mst_Section' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_mst_Section">
+          <Key>
+            <PropertyRef Name="SecId" />
+            <PropertyRef Name="SectionName" />
+          </Key>
+          <Property Name="SecId" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <Association Name="FK_AppointmentDesignation">
           <End Role="OutSourcingDesignation" Type="Self.OutSourcingDesignation" Multiplicity="1" />
@@ -443,6 +467,14 @@
           <EntitySet Name="PayStructure" EntityType="Self.PayStructure" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfessionalTax" EntityType="Self.ProfessionalTax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalaryDetails" EntityType="Self.SalaryDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_mst_BankName" EntityType="Self.tbl_mst_BankName" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_mst_Section" EntityType="Self.tbl_mst_Section" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[tbl_mst_Section].[SecId] AS [SecId], 
+[tbl_mst_Section].[SectionName] AS [SectionName], 
+[tbl_mst_Section].[IsActive] AS [IsActive]
+FROM [dbo].[tbl_mst_Section] AS [tbl_mst_Section]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_AppointmentDesignation" Association="Self.FK_AppointmentDesignation">
             <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignation" />
             <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />
@@ -524,86 +556,9 @@
           <Property Name="CreatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OutsourcingMeetings" Relationship="Self.FK_OSMeetingDesignationCode" FromRole="OutSourcingDesignation" ToRole="OutsourcingMeeting" />
           <NavigationProperty Name="AppointmentMasters" Relationship="RecruitModel.FK_AppointmentDesignation" FromRole="OutSourcingDesignation" ToRole="AppointmentMaster" />
           <NavigationProperty Name="AppointmentProjects" Relationship="RecruitModel.FK_ProjectDesignationCode" FromRole="OutSourcingDesignation" ToRole="AppointmentProject" />
-        </EntityType>
-        <EntityType Name="OutsourcingEmployeeDetail">
-          <Key>
-            <PropertyRef Name="CandidateID" />
-          </Key>
-          <Property Name="CandidateID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CandidateName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CasteCategory" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FatherName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MotherName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
-          <Property Name="HusbandName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
-          <Property Name="PermanentAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CommunicationAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PAN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="MobileNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EmergencyContactNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="PF_UAN" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="ESIC_NO" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="BankName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
-          <Property Name="BranchName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
-          <Property Name="BankAccountNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IFSC_Code" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
-          <Property Name="CreatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OutsourcingMeetings" Relationship="Self.FK_OSMeetingEmployeeID" FromRole="OutsourcingEmployeeDetails" ToRole="OutsourcingMeeting" />
-          <NavigationProperty Name="AppointmentMasters" Relationship="RecruitModel.FK_AppointmentMasterEmployee" FromRole="OutsourcingEmployeeDetail" ToRole="AppointmentMaster" />
-        </EntityType>
-        <EntityType Name="OutsourcingMeeting">
-          <Key>
-            <PropertyRef Name="MeetingID" />
-          </Key>
-          <Property Name="MeetingID" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MeetingDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CandidateID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CandidateName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DesignationCode" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DesignationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Qualification" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Experience" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
-          <Property Name="IITMExperience" Type="Boolean" Nullable="false" />
-          <Property Name="ProjectType" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProjectNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProjectTitle" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DepartmentCode" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DepartmentName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SponsoredAgency" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PICode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PIName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProjectCloseDate" Type="DateTime" Precision="0" />
-          <Property Name="OutSourcingCompany" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RequestFromDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="RequestToDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DurationInMonth" Type="Int32" />
-          <Property Name="FromDate" Type="DateTime" Precision="0" />
-          <Property Name="ToDate" Type="DateTime" Precision="0" />
-          <Property Name="GrossSalary" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="CostToProject" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
-          <Property Name="CommitmentNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="StatusOfRequest" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
-          <Property Name="CreatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OutSourcingDesignation" Relationship="Self.FK_OSMeetingDesignationCode" FromRole="OutsourcingMeeting" ToRole="OutSourcingDesignation" />
-          <NavigationProperty Name="OutsourcingEmployeeDetail" Relationship="Self.FK_OSMeetingEmployeeID" FromRole="OutsourcingMeeting" ToRole="OutsourcingEmployeeDetails" />
-          <NavigationProperty Name="OutsourcingOffer" Relationship="Self.FK_MeetingOrder" FromRole="OutsourcingMeeting" ToRole="OutsourcingOffer" />
-          <NavigationProperty Name="AppointmentDetails" Relationship="RecruitModel.FK_AppointmentDetailsMinutes" FromRole="OutsourcingMeeting" ToRole="AppointmentDetail" />
-          <NavigationProperty Name="AppointmentMasters" Relationship="RecruitModel.FK_AppointmentMasterMinutes" FromRole="OutsourcingMeeting" ToRole="AppointmentMaster" />
-          <NavigationProperty Name="AppointmentProjects" Relationship="RecruitModel.FK_AppointmentProjectMeetingID" FromRole="OutsourcingMeeting" ToRole="AppointmentProject" />
+          <NavigationProperty Name="OutsourcingMeeting" Relationship="RecruitModel.FK_OSMeetingDesignationCode" FromRole="OutSourcingDesignation" ToRole="OutsourcingMeeting" />
         </EntityType>
         <EntityType Name="OutsourcingOffer">
           <Key>
@@ -618,67 +573,17 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="0" />
           <Property Name="CreatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OutsourcingMeeting" Relationship="Self.FK_MeetingOrder" FromRole="OutsourcingOffer" ToRole="OutsourcingMeeting" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="0" />
           <Property Name="JoiningDate" Type="DateTime" Precision="0" />
           <Property Name="JoiningReportApprovedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="JoiningReportDate" Type="DateTime" Precision="0" />
           <Property Name="ApprovalChannel" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OutsourcingMeeting" Relationship="RecruitModel.FK_MeetingOrder" FromRole="OutsourcingOffer" ToRole="OutsourcingMeeting" />
         </EntityType>
-        <Association Name="FK_OSMeetingDesignationCode">
-          <End Role="OutSourcingDesignation" Type="Self.OutSourcingDesignation" Multiplicity="1" />
-          <End Role="OutsourcingMeeting" Type="Self.OutsourcingMeeting" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OutSourcingDesignation">
-              <PropertyRef Name="DesignationCode" />
-            </Principal>
-            <Dependent Role="OutsourcingMeeting">
-              <PropertyRef Name="DesignationCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OSMeetingEmployeeID">
-          <End Role="OutsourcingEmployeeDetails" Type="Self.OutsourcingEmployeeDetail" Multiplicity="1" />
-          <End Role="OutsourcingMeeting" Type="Self.OutsourcingMeeting" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OutsourcingEmployeeDetails">
-              <PropertyRef Name="CandidateID" />
-            </Principal>
-            <Dependent Role="OutsourcingMeeting">
-              <PropertyRef Name="CandidateID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MeetingOrder">
-          <End Role="OutsourcingMeeting" Type="Self.OutsourcingMeeting" Multiplicity="1" />
-          <End Role="OutsourcingOffer" Type="Self.OutsourcingOffer" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="OutsourcingMeeting">
-              <PropertyRef Name="MeetingID" />
-            </Principal>
-            <Dependent Role="OutsourcingOffer">
-              <PropertyRef Name="MeetingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="RecruitEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ListItemMasters" EntityType="Self.ListItemMaster" />
           <EntitySet Name="OutSourcingDesignations" EntityType="Self.OutSourcingDesignation" />
-          <EntitySet Name="OutsourcingEmployeeDetails" EntityType="Self.OutsourcingEmployeeDetail" />
-          <EntitySet Name="OutsourcingMeetings" EntityType="Self.OutsourcingMeeting" />
           <EntitySet Name="OutsourcingOffers" EntityType="Self.OutsourcingOffer" />
-          <AssociationSet Name="FK_OSMeetingDesignationCode" Association="Self.FK_OSMeetingDesignationCode">
-            <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignations" />
-            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OSMeetingEmployeeID" Association="Self.FK_OSMeetingEmployeeID">
-            <End Role="OutsourcingEmployeeDetails" EntitySet="OutsourcingEmployeeDetails" />
-            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MeetingOrder" Association="Self.FK_MeetingOrder">
-            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
-            <End Role="OutsourcingOffer" EntitySet="OutsourcingOffers" />
-          </AssociationSet>
           <FunctionImport Name="ConsultancyProjectDetail" ReturnType="Collection(RecruitModel.ConsultancyProjectDetail_Result)">
             <Parameter Name="Dept" Mode="In" Type="String" />
             <Parameter Name="pType" Mode="In" Type="String" />
@@ -696,24 +601,12 @@
           <EntitySet Name="AppointmentMasters" EntityType="RecruitModel.AppointmentMaster" />
           <EntitySet Name="OrderRequestDetails" EntityType="RecruitModel.OrderRequestDetail" />
           <EntitySet Name="SalaryDetails" EntityType="RecruitModel.SalaryDetail" />
-          <AssociationSet Name="FK_AppointmentDetailsMinutes" Association="RecruitModel.FK_AppointmentDetailsMinutes">
-            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
-            <End Role="AppointmentDetail" EntitySet="AppointmentDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProjectDetailsEmployeeID" Association="RecruitModel.FK_ProjectDetailsEmployeeID">
             <End Role="AppointmentMaster" EntitySet="AppointmentMasters" />
             <End Role="AppointmentDetail" EntitySet="AppointmentDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_AppointmentDesignation" Association="RecruitModel.FK_AppointmentDesignation">
             <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignations" />
-            <End Role="AppointmentMaster" EntitySet="AppointmentMasters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AppointmentMasterEmployee" Association="RecruitModel.FK_AppointmentMasterEmployee">
-            <End Role="OutsourcingEmployeeDetail" EntitySet="OutsourcingEmployeeDetails" />
-            <End Role="AppointmentMaster" EntitySet="AppointmentMasters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AppointmentMasterMinutes" Association="RecruitModel.FK_AppointmentMasterMinutes">
-            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
             <End Role="AppointmentMaster" EntitySet="AppointmentMasters" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderRequestEmployeeID" Association="RecruitModel.FK_OrderRequestEmployeeID">
@@ -731,15 +624,43 @@
             <End Role="AppointmentMaster" EntitySet="AppointmentMasters" />
             <End Role="AppointmentProject" EntitySet="AppointmentProjects" />
           </AssociationSet>
-          <AssociationSet Name="FK_AppointmentProjectMeetingID" Association="RecruitModel.FK_AppointmentProjectMeetingID">
-            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
-            <End Role="AppointmentProject" EntitySet="AppointmentProjects" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProjectDesignationCode" Association="RecruitModel.FK_ProjectDesignationCode">
             <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignations" />
             <End Role="AppointmentProject" EntitySet="AppointmentProjects" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="OutsourcingMeetings" EntityType="RecruitModel.OutsourcingMeeting" />
+          <AssociationSet Name="FK_AppointmentDetailsMinutes" Association="RecruitModel.FK_AppointmentDetailsMinutes">
+            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
+            <End Role="AppointmentDetail" EntitySet="AppointmentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentMasterMinutes" Association="RecruitModel.FK_AppointmentMasterMinutes">
+            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
+            <End Role="AppointmentMaster" EntitySet="AppointmentMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentProjectMeetingID" Association="RecruitModel.FK_AppointmentProjectMeetingID">
+            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
+            <End Role="AppointmentProject" EntitySet="AppointmentProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeetingOrder" Association="RecruitModel.FK_MeetingOrder">
+            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
+            <End Role="OutsourcingOffer" EntitySet="OutsourcingOffers" />
+          </AssociationSet>
+          <EntitySet Name="tbl_mst_Section" EntityType="RecruitModel.tbl_mst_Section" />
+          <EntitySet Name="OutsourcingEmployeeDetails" EntityType="RecruitModel.OutsourcingEmployeeDetail" />
+          <AssociationSet Name="FK_AppointmentMasterEmployee" Association="RecruitModel.FK_AppointmentMasterEmployee">
+            <End Role="OutsourcingEmployeeDetail" EntitySet="OutsourcingEmployeeDetails" />
+            <End Role="AppointmentMaster" EntitySet="AppointmentMasters" />
+          </AssociationSet>
+          <EntitySet Name="tbl_mst_BankName" EntityType="RecruitModel.tbl_mst_BankName" />
+          <AssociationSet Name="FK_OSMeetingDesignationCode" Association="RecruitModel.FK_OSMeetingDesignationCode">
+            <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignations" />
+            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OSMeetingEmployeeID" Association="RecruitModel.FK_OSMeetingEmployeeID">
+            <End Role="OutsourcingEmployeeDetail" EntitySet="OutsourcingEmployeeDetails" />
+            <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="ConsultancyProjectDetail_Result">
           <Property Type="String" Name="TITLE" Nullable="true" MaxLength="320" />
           <Property Type="String" Name="AGENCY" Nullable="true" MaxLength="5" />
@@ -782,9 +703,9 @@
           <Property Name="CreatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OutsourcingMeeting" Relationship="RecruitModel.FK_AppointmentDetailsMinutes" FromRole="AppointmentDetail" ToRole="OutsourcingMeeting" />
           <NavigationProperty Name="AppointmentMaster" Relationship="RecruitModel.FK_ProjectDetailsEmployeeID" FromRole="AppointmentDetail" ToRole="AppointmentMaster" />
           <Property Name="BasicSalary" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="OutsourcingMeeting" Relationship="RecruitModel.FK_AppointmentDetailsMinutes" FromRole="AppointmentDetail" ToRole="OutsourcingMeeting" />
         </EntityType>
         <EntityType Name="AppointmentMaster">
           <Key>
@@ -815,13 +736,13 @@
           <Property Name="UpdatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AppointmentDetails" Relationship="RecruitModel.FK_ProjectDetailsEmployeeID" FromRole="AppointmentMaster" ToRole="AppointmentDetail" />
           <NavigationProperty Name="OutSourcingDesignation" Relationship="RecruitModel.FK_AppointmentDesignation" FromRole="AppointmentMaster" ToRole="OutSourcingDesignation" />
-          <NavigationProperty Name="OutsourcingEmployeeDetail" Relationship="RecruitModel.FK_AppointmentMasterEmployee" FromRole="AppointmentMaster" ToRole="OutsourcingEmployeeDetail" />
-          <NavigationProperty Name="OutsourcingMeeting" Relationship="RecruitModel.FK_AppointmentMasterMinutes" FromRole="AppointmentMaster" ToRole="OutsourcingMeeting" />
           <NavigationProperty Name="OrderRequestDetails" Relationship="RecruitModel.FK_OrderRequestEmployeeID" FromRole="AppointmentMaster" ToRole="OrderRequestDetail" />
           <NavigationProperty Name="SalaryDetails" Relationship="RecruitModel.FK_SalaryDetailsEmployeeID" FromRole="AppointmentMaster" ToRole="SalaryDetail" />
           <Property Name="BasicSalary" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AppointmentProjects" Relationship="RecruitModel.FK_AppointmentProjectID" FromRole="AppointmentMaster" ToRole="AppointmentProject" />
+          <NavigationProperty Name="OutsourcingMeeting" Relationship="RecruitModel.FK_AppointmentMasterMinutes" FromRole="AppointmentMaster" ToRole="OutsourcingMeeting" />
+          <NavigationProperty Name="OutsourcingEmployeeDetail" Relationship="RecruitModel.FK_AppointmentMasterEmployee" FromRole="AppointmentMaster" ToRole="OutsourcingEmployeeDetail" />
         </EntityType>
         <EntityType Name="OrderRequestDetail">
           <Key>
@@ -868,18 +789,6 @@
           <Property Name="GrossTotal" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="TotalContribution" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
         </EntityType>
-        <Association Name="FK_AppointmentDetailsMinutes">
-          <End Type="RecruitModel.OutsourcingMeeting" Role="OutsourcingMeeting" Multiplicity="1" />
-          <End Type="RecruitModel.AppointmentDetail" Role="AppointmentDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OutsourcingMeeting">
-              <PropertyRef Name="MeetingID" />
-            </Principal>
-            <Dependent Role="AppointmentDetail">
-              <PropertyRef Name="MeetingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProjectDetailsEmployeeID">
           <End Type="RecruitModel.AppointmentMaster" Role="AppointmentMaster" Multiplicity="1" />
           <End Type="RecruitModel.AppointmentDetail" Role="AppointmentDetail" Multiplicity="*" />
@@ -901,30 +810,6 @@
             </Principal>
             <Dependent Role="AppointmentMaster">
               <PropertyRef Name="DesignationCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AppointmentMasterEmployee">
-          <End Type="RecruitModel.OutsourcingEmployeeDetail" Role="OutsourcingEmployeeDetail" Multiplicity="1" />
-          <End Type="RecruitModel.AppointmentMaster" Role="AppointmentMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OutsourcingEmployeeDetail">
-              <PropertyRef Name="CandidateID" />
-            </Principal>
-            <Dependent Role="AppointmentMaster">
-              <PropertyRef Name="CandidateID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AppointmentMasterMinutes">
-          <End Type="RecruitModel.OutsourcingMeeting" Role="OutsourcingMeeting" Multiplicity="1" />
-          <End Type="RecruitModel.AppointmentMaster" Role="AppointmentMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OutsourcingMeeting">
-              <PropertyRef Name="MeetingID" />
-            </Principal>
-            <Dependent Role="AppointmentMaster">
-              <PropertyRef Name="MeetingID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -998,8 +883,8 @@
           <Property Name="RelievedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AppointmentMaster" Relationship="RecruitModel.FK_AppointmentProjectID" FromRole="AppointmentProject" ToRole="AppointmentMaster" />
-          <NavigationProperty Name="OutsourcingMeeting" Relationship="RecruitModel.FK_AppointmentProjectMeetingID" FromRole="AppointmentProject" ToRole="OutsourcingMeeting" />
           <NavigationProperty Name="OutSourcingDesignation" Relationship="RecruitModel.FK_ProjectDesignationCode" FromRole="AppointmentProject" ToRole="OutSourcingDesignation" />
+          <NavigationProperty Name="OutsourcingMeeting" Relationship="RecruitModel.FK_AppointmentProjectMeetingID" FromRole="AppointmentProject" ToRole="OutsourcingMeeting" />
         </EntityType>
         <Association Name="FK_AppointmentProjectID">
           <End Type="RecruitModel.AppointmentMaster" Role="AppointmentMaster" Multiplicity="1" />
@@ -1010,18 +895,6 @@
             </Principal>
             <Dependent Role="AppointmentProject">
               <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AppointmentProjectMeetingID">
-          <End Type="RecruitModel.OutsourcingMeeting" Role="OutsourcingMeeting" Multiplicity="1" />
-          <End Type="RecruitModel.AppointmentProject" Role="AppointmentProject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OutsourcingMeeting">
-              <PropertyRef Name="MeetingID" />
-            </Principal>
-            <Dependent Role="AppointmentProject">
-              <PropertyRef Name="MeetingID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1037,7 +910,190 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="OutsourcingMeeting">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+          </Key>
+          <Property Name="MeetingID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="MeetingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CandidateID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CandidateName" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DesignationCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DesignationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qualification" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IITMExperience" Type="Boolean" Nullable="false" />
+          <Property Name="IIT_Experience" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="NONIIT_Experience" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="Total_Experience" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="ProjectType" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectNo" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectTitle" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="SponsoredAgency" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="PICode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="PIName" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectCloseDate" Type="DateTime" Precision="0" />
+          <Property Name="Section" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="OutSourcingCompany" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="RequestFromDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RequestToDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DurationInMonth" Type="Int32" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <Property Name="GrossSalary" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="CostToProject" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="CommitmentNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="StatusOfRequest" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppointmentDetails" Relationship="RecruitModel.FK_AppointmentDetailsMinutes" FromRole="OutsourcingMeeting" ToRole="AppointmentDetail" />
+          <NavigationProperty Name="AppointmentMasters" Relationship="RecruitModel.FK_AppointmentMasterMinutes" FromRole="OutsourcingMeeting" ToRole="AppointmentMaster" />
+          <NavigationProperty Name="AppointmentProjects" Relationship="RecruitModel.FK_AppointmentProjectMeetingID" FromRole="OutsourcingMeeting" ToRole="AppointmentProject" />
+          <NavigationProperty Name="OutsourcingOffer" Relationship="RecruitModel.FK_MeetingOrder" FromRole="OutsourcingMeeting" ToRole="OutsourcingOffer" />
+          <NavigationProperty Name="OutSourcingDesignation" Relationship="RecruitModel.FK_OSMeetingDesignationCode" FromRole="OutsourcingMeeting" ToRole="OutSourcingDesignation" />
+          <NavigationProperty Name="OutsourcingEmployeeDetails" Relationship="RecruitModel.FK_OSMeetingEmployeeID" FromRole="OutsourcingMeeting" ToRole="OutsourcingEmployeeDetail" />
+        </EntityType>
+        <Association Name="FK_AppointmentDetailsMinutes">
+          <End Type="RecruitModel.OutsourcingMeeting" Role="OutsourcingMeeting" Multiplicity="1" />
+          <End Type="RecruitModel.AppointmentDetail" Role="AppointmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OutsourcingMeeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="AppointmentDetail">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentMasterMinutes">
+          <End Type="RecruitModel.OutsourcingMeeting" Role="OutsourcingMeeting" Multiplicity="1" />
+          <End Type="RecruitModel.AppointmentMaster" Role="AppointmentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OutsourcingMeeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="AppointmentMaster">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentProjectMeetingID">
+          <End Type="RecruitModel.OutsourcingMeeting" Role="OutsourcingMeeting" Multiplicity="1" />
+          <End Type="RecruitModel.AppointmentProject" Role="AppointmentProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OutsourcingMeeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="AppointmentProject">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeetingOrder">
+          <End Type="RecruitModel.OutsourcingMeeting" Role="OutsourcingMeeting" Multiplicity="1" />
+          <End Type="RecruitModel.OutsourcingOffer" Role="OutsourcingOffer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="OutsourcingMeeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="OutsourcingOffer">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_mst_Section">
+          <Key>
+            <PropertyRef Name="SecId" />
+            <PropertyRef Name="SectionName" />
+          </Key>
+          <Property Name="SecId" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SectionName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="OutsourcingEmployeeDetail">
+          <Key>
+            <PropertyRef Name="CandidateID" />
+          </Key>
+          <Property Name="CandidateID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CandidateName" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="CasteCategory" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PH" Type="Boolean" Nullable="false" />
+          <Property Name="FatherName" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="MotherName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="HusbandName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentAddress" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CommunicationAddress" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PAN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Aadhar" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmergencyContactNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="PF_UAN" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ESIC_NO" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="BankName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="BranchName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="BankAccountNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IFSC_Code" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppointmentMasters" Relationship="RecruitModel.FK_AppointmentMasterEmployee" FromRole="OutsourcingEmployeeDetail" ToRole="AppointmentMaster" />
+          <NavigationProperty Name="OutsourcingMeeting" Relationship="RecruitModel.FK_OSMeetingEmployeeID" FromRole="OutsourcingEmployeeDetail" ToRole="OutsourcingMeeting" />
+        </EntityType>
+        <Association Name="FK_AppointmentMasterEmployee">
+          <End Type="RecruitModel.OutsourcingEmployeeDetail" Role="OutsourcingEmployeeDetail" Multiplicity="1" />
+          <End Type="RecruitModel.AppointmentMaster" Role="AppointmentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OutsourcingEmployeeDetail">
+              <PropertyRef Name="CandidateID" />
+            </Principal>
+            <Dependent Role="AppointmentMaster">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_mst_BankName">
+          <Key>
+            <PropertyRef Name="SNO" />
+          </Key>
+          <Property Name="SNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_OSMeetingDesignationCode">
+          <End Type="RecruitModel.OutSourcingDesignation" Role="OutSourcingDesignation" Multiplicity="1" />
+          <End Type="RecruitModel.OutsourcingMeeting" Role="OutsourcingMeeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OutSourcingDesignation">
+              <PropertyRef Name="DesignationCode" />
+            </Principal>
+            <Dependent Role="OutsourcingMeeting">
+              <PropertyRef Name="DesignationCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OSMeetingEmployeeID">
+          <End Type="RecruitModel.OutsourcingEmployeeDetail" Role="OutsourcingEmployeeDetail" Multiplicity="1" />
+          <End Type="RecruitModel.OutsourcingMeeting" Role="OutsourcingMeeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OutsourcingEmployeeDetail">
+              <PropertyRef Name="CandidateID" />
+            </Principal>
+            <Dependent Role="OutsourcingMeeting">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1062,77 +1118,6 @@
                 <ScalarProperty Name="UpperAgeLimit" ColumnName="UpperAgeLimit" />
                 <ScalarProperty Name="Qualifications" ColumnName="Qualifications" />
                 <ScalarProperty Name="Experience" ColumnName="Experience" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OutsourcingEmployeeDetails">
-            <EntityTypeMapping TypeName="RecruitModel.OutsourcingEmployeeDetail">
-              <MappingFragment StoreEntitySet="OutsourcingEmployeeDetails">
-                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
-                <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="CasteCategory" ColumnName="CasteCategory" />
-                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
-                <ScalarProperty Name="HusbandName" ColumnName="HusbandName" />
-                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
-                <ScalarProperty Name="CommunicationAddress" ColumnName="CommunicationAddress" />
-                <ScalarProperty Name="PAN" ColumnName="PAN" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="EmergencyContactNo" ColumnName="EmergencyContactNo" />
-                <ScalarProperty Name="PF_UAN" ColumnName="PF_UAN" />
-                <ScalarProperty Name="ESIC_NO" ColumnName="ESIC_NO" />
-                <ScalarProperty Name="BankName" ColumnName="BankName" />
-                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
-                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
-                <ScalarProperty Name="IFSC_Code" ColumnName="IFSC_Code" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OutsourcingMeetings">
-            <EntityTypeMapping TypeName="RecruitModel.OutsourcingMeeting">
-              <MappingFragment StoreEntitySet="OutsourcingMeeting">
-                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
-                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
-                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
-                <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
-                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
-                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
-                <ScalarProperty Name="Experience" ColumnName="Experience" />
-                <ScalarProperty Name="IITMExperience" ColumnName="IITMExperience" />
-                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
-                <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
-                <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
-                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
-                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
-                <ScalarProperty Name="SponsoredAgency" ColumnName="SponsoredAgency" />
-                <ScalarProperty Name="PICode" ColumnName="PICode" />
-                <ScalarProperty Name="PIName" ColumnName="PIName" />
-                <ScalarProperty Name="ProjectCloseDate" ColumnName="ProjectCloseDate" />
-                <ScalarProperty Name="OutSourcingCompany" ColumnName="OutSourcingCompany" />
-                <ScalarProperty Name="RequestFromDate" ColumnName="RequestFromDate" />
-                <ScalarProperty Name="RequestToDate" ColumnName="RequestToDate" />
-                <ScalarProperty Name="DurationInMonth" ColumnName="DurationInMonth" />
-                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-                <ScalarProperty Name="GrossSalary" ColumnName="GrossSalary" />
-                <ScalarProperty Name="CostToProject" ColumnName="CostToProject" />
-                <ScalarProperty Name="CommitmentNo" ColumnName="CommitmentNo" />
-                <ScalarProperty Name="StatusOfRequest" ColumnName="StatusOfRequest" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
@@ -1339,6 +1324,100 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OutsourcingMeetings">
+            <EntityTypeMapping TypeName="RecruitModel.OutsourcingMeeting">
+              <MappingFragment StoreEntitySet="OutsourcingMeeting">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="StatusOfRequest" ColumnName="StatusOfRequest" />
+                <ScalarProperty Name="CommitmentNo" ColumnName="CommitmentNo" />
+                <ScalarProperty Name="CostToProject" ColumnName="CostToProject" />
+                <ScalarProperty Name="GrossSalary" ColumnName="GrossSalary" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="DurationInMonth" ColumnName="DurationInMonth" />
+                <ScalarProperty Name="RequestToDate" ColumnName="RequestToDate" />
+                <ScalarProperty Name="RequestFromDate" ColumnName="RequestFromDate" />
+                <ScalarProperty Name="OutSourcingCompany" ColumnName="OutSourcingCompany" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="ProjectCloseDate" ColumnName="ProjectCloseDate" />
+                <ScalarProperty Name="PIName" ColumnName="PIName" />
+                <ScalarProperty Name="PICode" ColumnName="PICode" />
+                <ScalarProperty Name="SponsoredAgency" ColumnName="SponsoredAgency" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+                <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+                <ScalarProperty Name="Total_Experience" ColumnName="Total_Experience" />
+                <ScalarProperty Name="NONIIT_Experience" ColumnName="NONIIT_Experience" />
+                <ScalarProperty Name="IIT_Experience" ColumnName="IIT_Experience" />
+                <ScalarProperty Name="IITMExperience" ColumnName="IITMExperience" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+                <ScalarProperty Name="DesignationCode" ColumnName="DesignationCode" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_mst_Section">
+            <EntityTypeMapping TypeName="RecruitModel.tbl_mst_Section">
+              <MappingFragment StoreEntitySet="tbl_mst_Section">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="SecId" ColumnName="SecId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OutsourcingEmployeeDetails">
+            <EntityTypeMapping TypeName="RecruitModel.OutsourcingEmployeeDetail">
+              <MappingFragment StoreEntitySet="OutsourcingEmployeeDetails">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IFSC_Code" ColumnName="IFSC_Code" />
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="ESIC_NO" ColumnName="ESIC_NO" />
+                <ScalarProperty Name="PF_UAN" ColumnName="PF_UAN" />
+                <ScalarProperty Name="EmergencyContactNo" ColumnName="EmergencyContactNo" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Aadhar" ColumnName="Aadhar" />
+                <ScalarProperty Name="PAN" ColumnName="PAN" />
+                <ScalarProperty Name="CommunicationAddress" ColumnName="CommunicationAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="HusbandName" ColumnName="HusbandName" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="PH" ColumnName="PH" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="CasteCategory" ColumnName="CasteCategory" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_mst_BankName">
+            <EntityTypeMapping TypeName="RecruitModel.tbl_mst_BankName">
+              <MappingFragment StoreEntitySet="tbl_mst_BankName">
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="SNO" ColumnName="SNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1353,7 +1432,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

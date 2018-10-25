@@ -32,7 +32,7 @@ namespace Outsourcing.Models
         public string UpdatedBy { get; set; }
         public decimal BasicSalary { get; set; }
     
-        public virtual OutsourcingMeeting OutsourcingMeeting { get; set; }
         public virtual AppointmentMaster AppointmentMaster { get; set; }
+        public virtual OutsourcingMeeting OutsourcingMeeting { get; set; }
     }
 }

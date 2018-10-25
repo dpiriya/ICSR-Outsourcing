@@ -16,9 +16,9 @@ namespace Outsourcing.Models
     {
         public OutSourcingDesignation()
         {
-            this.OutsourcingMeetings = new HashSet<OutsourcingMeeting>();
             this.AppointmentMasters = new HashSet<AppointmentMaster>();
             this.AppointmentProjects = new HashSet<AppointmentProject>();
+            this.OutsourcingMeeting = new HashSet<OutsourcingMeeting>();
         }
     
         public string DesignationCode { get; set; }
@@ -32,8 +32,8 @@ namespace Outsourcing.Models
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public string UpdatedBy { get; set; }
     
-        public virtual ICollection<OutsourcingMeeting> OutsourcingMeetings { get; set; }
         public virtual ICollection<AppointmentMaster> AppointmentMasters { get; set; }
         public virtual ICollection<AppointmentProject> AppointmentProjects { get; set; }
+        public virtual ICollection<OutsourcingMeeting> OutsourcingMeeting { get; set; }
     }
 }

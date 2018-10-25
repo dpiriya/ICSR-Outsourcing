@@ -127,12 +127,15 @@
     <Property Name="DOB" Type="date" Nullable="false" />
     <Property Name="Gender" Type="nvarchar" MaxLength="1" Nullable="false" />
     <Property Name="CasteCategory" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="MaritalStatus" Type="nvarchar" MaxLength="20" />
+    <Property Name="PH" Type="bit" Nullable="false" />
     <Property Name="FatherName" Type="nvarchar" MaxLength="75" Nullable="false" />
     <Property Name="MotherName" Type="nvarchar" MaxLength="75" />
     <Property Name="HusbandName" Type="nvarchar" MaxLength="75" />
     <Property Name="PermanentAddress" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="CommunicationAddress" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="PAN" Type="nvarchar" MaxLength="10" />
+    <Property Name="Aadhar" Type="nvarchar" MaxLength="20" />
     <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
     <Property Name="MobileNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
     <Property Name="EmailID" Type="nvarchar" MaxLength="50" />
@@ -160,8 +163,10 @@
     <Property Name="DesignationCode" Type="nvarchar" MaxLength="3" Nullable="false" />
     <Property Name="DesignationName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Qualification" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Experience" Type="numeric" Precision="3" Scale="1" Nullable="false" />
+    <Property Name="Total_Experience" Type="numeric" Precision="3" Scale="0" />
     <Property Name="IITMExperience" Type="bit" Nullable="false" />
+    <Property Name="IIT_Experience" Type="numeric" Precision="3" Scale="0" />
+    <Property Name="NONIIT_Experience" Type="numeric" Precision="3" Scale="0" />
     <Property Name="ProjectType" Type="nvarchar" MaxLength="4" Nullable="false" />
     <Property Name="ProjectNo" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="ProjectTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
@@ -171,6 +176,7 @@
     <Property Name="PICode" Type="nvarchar" MaxLength="5" Nullable="false" />
     <Property Name="PIName" Type="nvarchar" MaxLength="75" Nullable="false" />
     <Property Name="ProjectCloseDate" Type="date" />
+    <Property Name="Section" Type="nvarchar" MaxLength="15" />
     <Property Name="OutSourcingCompany" Type="nvarchar" MaxLength="5" Nullable="false" />
     <Property Name="RequestFromDate" Type="date" Nullable="false" />
     <Property Name="RequestToDate" Type="date" Nullable="false" />
@@ -255,6 +261,24 @@
     <Property Name="AgencyFee" Type="decimal" Precision="6" Scale="2" Nullable="false" />
     <Property Name="ServiceTax" Type="decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="TotalSalary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_mst_BankName">
+    <Key>
+      <PropertyRef Name="SNO" />
+    </Key>
+    <Property Name="SNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Recruit.dbo.tbl_mst_Section' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_mst_Section">
+    <Key>
+      <PropertyRef Name="SecId" />
+      <PropertyRef Name="SectionName" />
+    </Key>
+    <Property Name="SecId" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="SectionName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
   </EntityType>
   <Association Name="FK_AppointmentDesignation">
     <End Role="OutSourcingDesignation" Type="Self.OutSourcingDesignation" Multiplicity="1" />
@@ -438,6 +462,14 @@
     <EntitySet Name="PayStructure" EntityType="Self.PayStructure" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProfessionalTax" EntityType="Self.ProfessionalTax" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalaryDetails" EntityType="Self.SalaryDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_mst_BankName" EntityType="Self.tbl_mst_BankName" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_mst_Section" EntityType="Self.tbl_mst_Section" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[tbl_mst_Section].[SecId] AS [SecId], 
+[tbl_mst_Section].[SectionName] AS [SectionName], 
+[tbl_mst_Section].[IsActive] AS [IsActive]
+FROM [dbo].[tbl_mst_Section] AS [tbl_mst_Section]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_AppointmentDesignation" Association="Self.FK_AppointmentDesignation">
       <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignation" />
       <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />

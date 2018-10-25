@@ -32,7 +32,7 @@ namespace Outsourcing.Models
         public string Remarks { get; set; }
     
         public virtual AppointmentMaster AppointmentMaster { get; set; }
-        public virtual OutsourcingMeeting OutsourcingMeeting { get; set; }
         public virtual OutSourcingDesignation OutSourcingDesignation { get; set; }
+        public virtual OutsourcingMeeting OutsourcingMeeting { get; set; }
     }
 }

@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Membership.GetUser().UserName.ToString() == "administrator")
+{
+    @Html.ActionLink("Administration", "Administration","Account")    
+}

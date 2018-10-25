@@ -1,0 +1,6 @@
+﻿@using Outsourcing.CustomHelper
+@model Boolean
+@{
+    var option = Html.OptionsForBoolean(m => m).Single(o => o.Value == (Model ? Boolean.TrueString : Boolean.FalseString));   
+}
+<span data-boolean-value="@Model.ToString().ToLowerInvariant()">@option.Text</span>

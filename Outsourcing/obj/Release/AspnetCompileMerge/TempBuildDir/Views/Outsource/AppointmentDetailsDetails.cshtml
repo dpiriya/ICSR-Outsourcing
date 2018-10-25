@@ -1,0 +1,412 @@
+﻿@model Outsourcing.ViewModel.ExtensionOrderView
+<link href="~/Content/TableView.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Appointment Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table align="center">
+    <tr style="border:none">
+        <td style="vertical-align:top;border:none;">
+            <h4>Appointment Details</h4>
+            <fieldset>
+                <table class="TableDetail">
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.EmployeeID)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.EmployeeID)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.EmployeeName)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.EmployeeName)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.MeetingID)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.MeetingID)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.OrderID)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.OrderID)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.OrderType)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.OrderType)
+                            </div>
+
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.ProjectNo)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.ProjectNo)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.FromDate)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.FromDate)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.ToDate)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.ToDate)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.BasicSalary)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.BasicSalary)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.GrossSalary)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.GrossSalary)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.CostToProject)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.CostToProject)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.CommitmentNo)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.CommitmentNo)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.appointmentDetailsView.Remarks)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.appointmentDetailsView.Remarks)
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </td>
+        <td style="border:none;">
+            <h4>Salary Details</h4>
+            <fieldset>
+                <table class="TableDetail SalaryDetailStyle">
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.BasicSalary)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.BasicSalary)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.HRA)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.HRA)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.Bonus)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.Bonus)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.SpecialAllowance)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.SpecialAllowance)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.GrossSalary)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.GrossSalary)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.EmployeePF)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.EmployeePF)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.EmployeeESIC)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.EmployeeESIC)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.ProfessionalTax)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.ProfessionalTax)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.TotalDeduction)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.TotalDeduction)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.NetSalary)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.NetSalary)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.EmployerPF)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.EmployerPF)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.EmployerESIC)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.EmployerESIC)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.Insurance)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.Insurance)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.TotalContribution)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.TotalContribution)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.GrossTotal)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.GrossTotal)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.AgencyFee)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.AgencyFee)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.GrossTotalwithAgencyFee)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.GrossTotalwithAgencyFee)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.ServiceTax)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.ServiceTax)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.salaryDetailsView.TotalSalary)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.salaryDetailsView.TotalSalary)
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </td>
+    </tr>
+</table>
+<p>
+    @Html.ActionLink("Appointment Details", "AppointmentDetails", new { id = Model.appointmentDetailsView.EmployeeID })
+</p>

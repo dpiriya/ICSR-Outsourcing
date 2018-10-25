@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Outsourcing.ViewModel.OutsourcingMeetingView>
+<link href="~/Content/TableView.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Minutes List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="titleView">
+    <h3>Minutes List</h3>
+</div>
+<table class="Table1">    
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CandidateID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CandidateName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DesignationCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectNo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        using (@Html.BeginForm("", "Outsource", new {id=item.MeetingID}))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CandidateID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CandidateName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DesignationCode)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectNo)
+            </td>
+            <td>
+                <input type="submit" class="SubmitBlue" value="Edit" name="action:NewMinutes" onclick="target = '_self';" />
+                <input type="submit" class="SubmitBlue" value="Details" name="action:MinutesDetails" onclick="target = '_self';"/>                
+                <input type="submit" class="SubmitBlue" value="Delete" name="action:MinutesDelete" onclick="return confirm ('Are you sure!!! Do you want to delete this Minutes - @item.MeetingID - @item.CandidateName ')" />   
+                <input type="submit" class="SubmitBlue" value="Summary Sheet" onclick="target = '_blank';" name="action:MinutesSummary"/>   
+            </td>
+        </tr>
+    }
+    }
+</table>
+@{
+    if (ViewData["Status"] != "" && ViewData["Status"] != null)
+    {
+        var ActionType = ViewData["Status"].ToString();
+        ViewData["Status"] = null;
+        var results = ViewData["MeetID"];
+        if (ActionType == "Update")
+        {
+            <script type="text/javascript" language="javascript">
+                alert(" The Minute id @results is updated successfully");
+            </script>
+        }
+        else if (ActionType == "Delete")
+        {
+            <script type="text/javascript" language="javascript">
+                alert(" The Minute id @results is deleted successfully");
+            </script>
+        }
+    }
+}

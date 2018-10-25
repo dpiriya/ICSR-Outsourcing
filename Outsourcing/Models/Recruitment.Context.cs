@@ -30,8 +30,6 @@ namespace Outsourcing.Models
     
         public DbSet<ListItemMaster> ListItemMasters { get; set; }
         public DbSet<OutSourcingDesignation> OutSourcingDesignations { get; set; }
-        public DbSet<OutsourcingEmployeeDetail> OutsourcingEmployeeDetails { get; set; }
-        public DbSet<OutsourcingMeeting> OutsourcingMeetings { get; set; }
         public DbSet<OutsourcingOffer> OutsourcingOffers { get; set; }
         public DbSet<AppointmentDetail> AppointmentDetails { get; set; }
         public DbSet<AppointmentMaster> AppointmentMasters { get; set; }
@@ -40,6 +38,10 @@ namespace Outsourcing.Models
         public DbSet<PayStructure> PayStructures { get; set; }
         public DbSet<ProfessionalTax> ProfessionalTaxes { get; set; }
         public DbSet<AppointmentProject> AppointmentProjects { get; set; }
+        public DbSet<OutsourcingMeeting> OutsourcingMeetings { get; set; }
+        public DbSet<tbl_mst_Section> tbl_mst_Section { get; set; }
+        public DbSet<OutsourcingEmployeeDetail> OutsourcingEmployeeDetails { get; set; }
+        public DbSet<tbl_mst_BankName> tbl_mst_BankName { get; set; }
     
         public virtual ObjectResult<ConsultancyProjectDetail_Result> ConsultancyProjectDetail(string dept, string pType, string projectNo)
         {

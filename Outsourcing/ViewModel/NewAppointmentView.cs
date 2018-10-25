@@ -10,6 +10,7 @@ namespace Outsourcing.ViewModel
         public AppointmentMasterView appointmentMasterView {get; set;}
         public AppointmentProjectView appointmentProjectView {get; set;}
         public AppointmentDetailsView appointmentDetailsView {get; set;}
+        public bool PH { get; set;}
         public SalaryDetailsView salaryDetailsView { get; set;}
         public string Command { get; set; }
     }

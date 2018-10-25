@@ -1,0 +1,13 @@
+﻿   
+   @{
+    var placeholder = string.Empty;
+    if(ViewData.ModelMetadata.AdditionalValues.ContainsKey("placeholder"))
+    {
+        placeholder = ViewData.ModelMetadata.AdditionalValues["placeholder"] as string;
+    }
+}
+<span>
+    @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, new {placeholder=ViewData.ModelMetadata.Watermark })
+</span>
+
+

@@ -186,39 +186,6 @@ F:\ApplicationBackup\Recruitment\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourc
 E:\ICSR Outsourcing\Outsourcing\bin\Outsourcing.dll.config
 E:\ICSR Outsourcing\Outsourcing\bin\Outsourcing.dll
 E:\ICSR Outsourcing\Outsourcing\bin\Outsourcing.pdb
-E:\ICSR Outsourcing\Outsourcing\bin\Antlr3.Runtime.dll
-E:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.CrystalReports.Engine.dll
-E:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportSource.dll
-E:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.Shared.dll
-E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.AspNet.dll
-E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.Core.dll
-E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.Consumer.dll
-E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.dll
-E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.dll
-E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-E:\ICSR Outsourcing\Outsourcing\bin\EntityFramework.dll
-E:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.Edm.dll
-E:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.OData.dll
-E:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Infrastructure.dll
-E:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
-E:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.WebPages.OAuth.dll
-E:\ICSR Outsourcing\Outsourcing\bin\Newtonsoft.Json.dll
-E:\ICSR Outsourcing\Outsourcing\bin\PagedList.dll
-E:\ICSR Outsourcing\Outsourcing\bin\PagedList.Mvc.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Net.Http.Formatting.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Spatial.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Helpers.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.OData.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.WebHost.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Mvc.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Optimization.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Razor.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Deployment.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.dll
-E:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Razor.dll
-E:\ICSR Outsourcing\Outsourcing\bin\WebGrease.dll
-E:\ICSR Outsourcing\Outsourcing\bin\WebMatrix.WebData.dll
 E:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
 E:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
 E:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
@@ -286,3 +253,454 @@ E:\ICSR Outsourcing\Outsourcing\bin\zh-Hans\System.Spatial.resources.dll
 E:\ICSR Outsourcing\Outsourcing\bin\zh-Hant\System.Spatial.resources.dll
 E:\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.dll
 E:\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.pdb
+E:\ICSR Outsourcing\Outsourcing\bin\Antlr3.Runtime.dll
+E:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.CrystalReports.Engine.dll
+E:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportSource.dll
+E:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.Shared.dll
+E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.AspNet.dll
+E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.Core.dll
+E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.dll
+E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.dll
+E:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\ICSR Outsourcing\Outsourcing\bin\EntityFramework.dll
+E:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.Edm.dll
+E:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.OData.dll
+E:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Infrastructure.dll
+E:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+E:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.WebPages.OAuth.dll
+E:\ICSR Outsourcing\Outsourcing\bin\Newtonsoft.Json.dll
+E:\ICSR Outsourcing\Outsourcing\bin\PagedList.dll
+E:\ICSR Outsourcing\Outsourcing\bin\PagedList.Mvc.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Net.Http.Formatting.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Spatial.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Helpers.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.OData.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.WebHost.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Mvc.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Optimization.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Web.Razor.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Deployment.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.dll
+E:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Razor.dll
+E:\ICSR Outsourcing\Outsourcing\bin\WebGrease.dll
+E:\ICSR Outsourcing\Outsourcing\bin\WebMatrix.WebData.dll
+E:\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.csprojResolveAssemblyReference.cache
+F:\ICSR Outsourcing\Outsourcing\bin\Outsourcing.dll.config
+F:\ICSR Outsourcing\Outsourcing\bin\Outsourcing.dll
+F:\ICSR Outsourcing\Outsourcing\bin\Outsourcing.pdb
+F:\ICSR Outsourcing\Outsourcing\bin\Antlr3.Runtime.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.CrystalReports.Engine.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportSource.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.Shared.dll
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.AspNet.dll
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.Core.dll
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.Consumer.dll
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.dll
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.dll
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+F:\ICSR Outsourcing\Outsourcing\bin\EntityFramework.dll
+F:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.Edm.dll
+F:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.OData.dll
+F:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Infrastructure.dll
+F:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+F:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.WebPages.OAuth.dll
+F:\ICSR Outsourcing\Outsourcing\bin\Newtonsoft.Json.dll
+F:\ICSR Outsourcing\Outsourcing\bin\PagedList.dll
+F:\ICSR Outsourcing\Outsourcing\bin\PagedList.Mvc.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Net.Http.Formatting.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Spatial.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Helpers.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.OData.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.WebHost.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Mvc.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Optimization.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Razor.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Deployment.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.dll
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Razor.dll
+F:\ICSR Outsourcing\Outsourcing\bin\WebGrease.dll
+F:\ICSR Outsourcing\Outsourcing\bin\WebMatrix.WebData.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+F:\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+F:\ICSR Outsourcing\Outsourcing\bin\stdole.dll
+F:\ICSR Outsourcing\Outsourcing\bin\PagedList.xml
+F:\ICSR Outsourcing\Outsourcing\bin\PagedList.Mvc.xml
+F:\ICSR Outsourcing\Outsourcing\bin\EntityFramework.xml
+F:\ICSR Outsourcing\Outsourcing\bin\Newtonsoft.Json.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Net.Http.Formatting.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Helpers.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.WebHost.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Mvc.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Razor.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Deployment.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Razor.xml
+F:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.WebPages.OAuth.xml
+F:\ICSR Outsourcing\Outsourcing\bin\WebMatrix.WebData.xml
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.AspNet.xml
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.Core.xml
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.Consumer.xml
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.xml
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.xml
+F:\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.OData.xml
+F:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.Edm.xml
+F:\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.OData.xml
+F:\ICSR Outsourcing\Outsourcing\bin\System.Spatial.xml
+F:\ICSR Outsourcing\Outsourcing\bin\de\Microsoft.Data.Edm.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\es\Microsoft.Data.Edm.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\fr\Microsoft.Data.Edm.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\it\Microsoft.Data.Edm.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\ja\Microsoft.Data.Edm.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\ko\Microsoft.Data.Edm.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\ru\Microsoft.Data.Edm.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\de\Microsoft.Data.OData.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\es\Microsoft.Data.OData.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\fr\Microsoft.Data.OData.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\it\Microsoft.Data.OData.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\ja\Microsoft.Data.OData.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\ko\Microsoft.Data.OData.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\ru\Microsoft.Data.OData.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\de\System.Spatial.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\es\System.Spatial.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\fr\System.Spatial.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\it\System.Spatial.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\ja\System.Spatial.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\ko\System.Spatial.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\ru\System.Spatial.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\zh-Hans\System.Spatial.resources.dll
+F:\ICSR Outsourcing\Outsourcing\bin\zh-Hant\System.Spatial.resources.dll
+F:\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.dll
+F:\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.pdb
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Outsourcing.dll.config
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Outsourcing.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Outsourcing.pdb
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Antlr3.Runtime.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportSource.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.Shared.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.AspNet.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.Core.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.Consumer.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\EntityFramework.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.Edm.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.OData.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Infrastructure.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.WebPages.OAuth.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Newtonsoft.Json.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\PagedList.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\PagedList.Mvc.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Net.Http.Formatting.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Spatial.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Helpers.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.OData.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.WebHost.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Mvc.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Optimization.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Razor.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Deployment.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Razor.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\WebGrease.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\WebMatrix.WebData.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\stdole.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\PagedList.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\PagedList.Mvc.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\EntityFramework.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Newtonsoft.Json.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Net.Http.Formatting.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Helpers.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.WebHost.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Mvc.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Razor.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Deployment.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Razor.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.WebPages.OAuth.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\WebMatrix.WebData.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.AspNet.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.Core.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.Consumer.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.OData.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.Edm.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.OData.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\System.Spatial.xml
+D:\priya\ICSR Outsourcing\Outsourcing\bin\de\Microsoft.Data.Edm.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\es\Microsoft.Data.Edm.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\fr\Microsoft.Data.Edm.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\it\Microsoft.Data.Edm.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\ja\Microsoft.Data.Edm.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\ko\Microsoft.Data.Edm.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\ru\Microsoft.Data.Edm.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\de\Microsoft.Data.OData.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\es\Microsoft.Data.OData.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\fr\Microsoft.Data.OData.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\it\Microsoft.Data.OData.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\ja\Microsoft.Data.OData.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\ko\Microsoft.Data.OData.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\ru\Microsoft.Data.OData.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\de\System.Spatial.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\es\System.Spatial.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\fr\System.Spatial.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\it\System.Spatial.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\ja\System.Spatial.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\ko\System.Spatial.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\ru\System.Spatial.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\zh-Hans\System.Spatial.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\bin\zh-Hant\System.Spatial.resources.dll
+D:\priya\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.dll
+D:\priya\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.pdb
+D:\priya\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.csprojResolveAssemblyReference.cache
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Outsourcing.dll.config
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Outsourcing.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Outsourcing.pdb
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Antlr3.Runtime.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.AspNet.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.Core.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\EntityFramework.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.Edm.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.OData.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Infrastructure.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.WebPages.OAuth.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Newtonsoft.Json.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\PagedList.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\PagedList.Mvc.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Net.Http.Formatting.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Spatial.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Helpers.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.OData.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.WebHost.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Mvc.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Optimization.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Razor.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Deployment.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Razor.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\WebGrease.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\WebMatrix.WebData.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\stdole.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\PagedList.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\PagedList.Mvc.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\EntityFramework.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Newtonsoft.Json.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Net.Http.Formatting.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Helpers.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.WebHost.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Mvc.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Razor.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Deployment.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Razor.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.WebPages.OAuth.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\WebMatrix.WebData.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.AspNet.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.Core.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.Consumer.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.OData.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.Edm.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.OData.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Spatial.xml
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\de\Microsoft.Data.Edm.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\es\Microsoft.Data.Edm.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\fr\Microsoft.Data.Edm.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\it\Microsoft.Data.Edm.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ja\Microsoft.Data.Edm.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ko\Microsoft.Data.Edm.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ru\Microsoft.Data.Edm.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\de\Microsoft.Data.OData.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\es\Microsoft.Data.OData.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\fr\Microsoft.Data.OData.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\it\Microsoft.Data.OData.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ja\Microsoft.Data.OData.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ko\Microsoft.Data.OData.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ru\Microsoft.Data.OData.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\de\System.Spatial.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\es\System.Spatial.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\fr\System.Spatial.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\it\System.Spatial.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ja\System.Spatial.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ko\System.Spatial.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ru\System.Spatial.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hans\System.Spatial.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hant\System.Spatial.resources.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.csproj.CoreCompileInputs.cache
+E:\Development Folder\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.pdb
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.CrystalReports.Engine.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportSource.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.Shared.dll
+E:\Development Folder\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.csprojResolveAssemblyReference.cache
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Outsourcing.dll.config
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Outsourcing.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Outsourcing.pdb
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Antlr3.Runtime.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.CrystalReports.Engine.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportSource.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.Shared.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.AspNet.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.Core.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.Consumer.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\EntityFramework.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.Edm.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.OData.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Infrastructure.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.WebPages.OAuth.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Newtonsoft.Json.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\PagedList.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\PagedList.Mvc.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Net.Http.Formatting.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Spatial.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Helpers.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.OData.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.WebHost.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Mvc.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Optimization.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Razor.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Deployment.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Razor.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\WebGrease.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\WebMatrix.WebData.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\stdole.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\PagedList.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\PagedList.Mvc.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\EntityFramework.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Newtonsoft.Json.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Net.Http.Formatting.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Helpers.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.WebHost.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Mvc.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Razor.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Deployment.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.WebPages.Razor.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Web.WebPages.OAuth.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\WebMatrix.WebData.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.AspNet.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.Core.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.Consumer.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OAuth.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Web.Http.OData.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.Edm.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\Microsoft.Data.OData.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\System.Spatial.xml
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\de\Microsoft.Data.Edm.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\es\Microsoft.Data.Edm.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\fr\Microsoft.Data.Edm.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\it\Microsoft.Data.Edm.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ja\Microsoft.Data.Edm.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ko\Microsoft.Data.Edm.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ru\Microsoft.Data.Edm.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\de\Microsoft.Data.OData.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\es\Microsoft.Data.OData.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\fr\Microsoft.Data.OData.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\it\Microsoft.Data.OData.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ja\Microsoft.Data.OData.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ko\Microsoft.Data.OData.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ru\Microsoft.Data.OData.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\de\System.Spatial.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\es\System.Spatial.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\fr\System.Spatial.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\it\System.Spatial.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ja\System.Spatial.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ko\System.Spatial.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\ru\System.Spatial.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hans\System.Spatial.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\bin\zh-Hant\System.Spatial.resources.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.csproj.CoreCompileInputs.cache
+F:\Development Folder\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.dll
+F:\Development Folder\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.pdb
+F:\Development Folder\ICSR Outsourcing\Outsourcing\obj\Debug\Outsourcing.csprojResolveAssemblyReference.cache

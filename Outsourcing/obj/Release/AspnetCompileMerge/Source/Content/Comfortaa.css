@@ -1,0 +1,20 @@
+﻿@charset "utf-8";
+/* CSS Document */
+@font-face {
+  font-family: 'Comfortaa';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Comfortaa Light'), local('Comfortaa-Light'), url('../Fonts/Comfortaa-Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Comfortaa';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Comfortaa'), local('Comfortaa-Regular'), url('../Fonts/Comfortaa-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Comfortaa';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Comfortaa Bold'), local('Comfortaa-Bold'), url('../Fonts/Comfortaa-Bold.woff2') format('woff2');
+}

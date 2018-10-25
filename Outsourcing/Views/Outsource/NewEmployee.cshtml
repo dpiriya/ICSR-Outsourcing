@@ -1,5 +1,5 @@
 ﻿@model Outsourcing.ViewModel.OutsourcingEmployeeDetailsView
-
+@using Outsourcing.CustomHelper
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -38,7 +38,7 @@
                         @Html.LabelFor(model => model.DOB)
                     </div>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.DOB,"{0:dd/MM/yyyy}", new {id="DOB"})
+                        @Html.TextBoxFor(model => model.DOB,"{0:dd/mm/yyyy}", new {id="DOB"})
                         @Html.ValidationMessageFor(model => model.DOB)
                     </div>
                 </td>
@@ -53,17 +53,43 @@
                         @Html.ValidationMessageFor(model => model.Gender)
                     </div>
                 </td>
+                <td>                    
+                        <div class="editor-label" >
+                            @Html.LabelFor(model => model.Age)
+                        </div>
+                        <div class="editor-field" >
+                            @Html.TextBoxFor(model => model.Age, new { id="Age", @class="ReadonlyField"})
+                        </div>                 
+                      </td>             
+            </tr>
+            <tr>                
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MaritalStatus)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.MaritalStatus,Model.MStatus,"--Select Status--")
+                    </div>  
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PH)
+                    </div>
+                    <div class="editor-field">
+                        @Html.CheckBoxFor(model => model.PH)
+                    </div>
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <div class="editor-label">
                         @Html.LabelFor(model => model.CasteCategory)
                     </div>
                     <div class="editor-field">
-                        @Html.DropDownListFor(model => model.CasteCategory, Model.CasteCategories,"--Select Caste--")
+                        @Html.DropDownListFor(model => model.CasteCategory, Model.CasteCategories, "--Select Caste--")
                         @Html.ValidationMessageFor(model => model.CasteCategory)
                     </div>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <div class="editor-label">
                         @Html.LabelFor(model => model.FatherName)
@@ -73,6 +99,9 @@
                         @Html.ValidationMessageFor(model => model.FatherName)
                     </div>
                 </td>
+                
+            </tr>
+            <tr>
                 <td>
                     <div class="editor-label">
                         @Html.LabelFor(model => model.MotherName)
@@ -82,8 +111,6 @@
                         @Html.ValidationMessageFor(model => model.MotherName)
                     </div>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <div class="editor-label">
                         @Html.LabelFor(model => model.HusbandName)
@@ -93,6 +120,9 @@
                         @Html.ValidationMessageFor(model => model.HusbandName)
                     </div>
                 </td>
+               
+            </tr>
+            <tr>
                 <td>
                     <div class="editor-label">
                         @Html.LabelFor(model => model.PermanentAddress)
@@ -102,8 +132,6 @@
                         @Html.ValidationMessageFor(model => model.PermanentAddress)
                     </div>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <div class="editor-label">
                         @Html.LabelFor(model => model.CommunicationAddress)
@@ -113,15 +141,8 @@
                         @Html.ValidationMessageFor(model => model.CommunicationAddress)
                     </div>
                 </td>
-                <td>
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.PAN)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.PAN)
-                        @Html.ValidationMessageFor(model => model.PAN)
-                    </div>
-                </td>
+               
+               
             </tr>
             <tr>
                 <td>
@@ -142,17 +163,9 @@
                         @Html.ValidationMessageFor(model => model.MobileNumber)
                     </div>
                 </td>
+              
             </tr>
             <tr>
-                <td>
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.EmailID)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.EmailID)
-                        @Html.ValidationMessageFor(model => model.EmailID)
-                    </div>
-                </td>
                 <td>
                     <div class="editor-label">
                         @Html.LabelFor(model => model.EmergencyContactNo)
@@ -162,7 +175,38 @@
                         @Html.ValidationMessageFor(model => model.EmergencyContactNo)
                     </div>
                 </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.EmailID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.EmailID)
+                        @Html.ValidationMessageFor(model => model.EmailID)
+                    </div>
+                </td>                
+               
             </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PAN)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PAN)
+                        @Html.ValidationMessageFor(model => model.PAN)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Aadhar)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Aadhar)
+                        @Html.ValidationMessageFor(model => model.Aadhar)
+                    </div>
+                </td>
+               
+                </tr>
             <tr>
                 <td>
                     <div class="editor-label">
@@ -182,6 +226,7 @@
                         @Html.ValidationMessageFor(model => model.ESIC_NO)
                     </div>
                 </td>
+                <td></td>
             </tr>
             <tr><th colspan="2">Saving Bank Account Details</th></tr>
             <tr>
@@ -190,7 +235,8 @@
                         @Html.LabelFor(model => model.BankName)
                     </div>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.BankName)
+                        @Html.DropDownListFor(model=>model.BankName,Model.BankNameList,"--Select Bank--")
+                        @*(model => model.CasteCategory, Model.CasteCategories, "--Select Caste--")*@                       
                         @Html.ValidationMessageFor(model => model.BankName)
                     </div>
                 </td>
@@ -268,13 +314,24 @@
                 }
             });
         });
-        $("#CandidateID").attr('readOnly', 'true');
+        $("#CandidateID").attr('readOnly', 'true');       
         $("#DOB").attr('readOnly', 'true');
         $("#DOB").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", changeYear: true, changeMonth: true, minDate: "-110y", maxDate: "-18y" });
         $("#ConfirmBankAccountNo").bind('copy paste cut', function (e) {
             e.preventDefault();
         });
-});
+    });
+    $("#DOB").change(function() {        
+        //var dob = $("#DOB").val(); 
+        var dob = $('#DOB').datepicker('option', 'dateFormat', 'mm/dd/yy').val();
+        dob = new Date(dob);        
+        var today = new Date();
+        var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+        $("#Age").val(age);       
+    });
+   //$("#PH").val=$("#PH").is(':checked');
+    
+    
 </script>
 }
 @{
