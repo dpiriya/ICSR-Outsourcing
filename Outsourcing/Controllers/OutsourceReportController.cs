@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Outsourcing.BusinessModel;
 using System.Data.Linq;
 using Outsourcing.ViewModel;
-using Outsourcing.Models;
+
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -15,8 +15,9 @@ using Outsourcing.Datasets;
 using System.IO;
 using System.Text;
 using System.Transactions;
-using Outsourcing.Datasets;
 using System.Globalization;
+using CrystalDecisions.Shared;
+using DataLayer.Repository;
 
 namespace Outsourcing.Controllers
 {
@@ -241,7 +242,8 @@ namespace Outsourcing.Controllers
                                     tmpQry = "D.FromDate between convert(date,'" + mrv.FromDate + "',103) and convert(date,'" + mrv.ToDate + "',103)";
                                     tmpTitle = "Appointment Date From " + Convert.ToDateTime(mrv.FromDate).ToShortDateString() + " To " + Convert.ToDateTime(mrv.ToDate).ToShortDateString();
                                 }
-                                string sql = "select D.CreatedOn as EntryDate, D.EmployeeID,D.EmployeeName,D.ProjectNo,P.DepartmentCode,P.DesignationCode,D.BasicSalary, D.GrossSalary, D.FromDate AS AppointmentDate ,D.ToDate from AppointmentDetails D  inner join AppointmentProject P on D.EmployeeID=P.EmployeeID and D.MeetingID =P.MeetingID AND D.OrderType ='Appointment' and " + tmpQry;
+                                string sql = "select ROW_NUMBER() over (order by D.EmployeeID), D.EmployeeID,D.EmployeeName,case when (p.PartTime=0) then 'Full' else 'Part' end as Part_Full,P.DesignationName,D.ProjectNo,D.CommitmentNo,P.DepartmentCode, D.FromDate AS AppointmentDate ,D.ToDate,D.BasicSalary,sa.HRA,sa.Bonus,sa.SpecialAllowance,D.GrossSalary,am.BankName,am.BankAccountNo,am.BranchName,am.IFSC_Code,case when (sa.EmployeePF>1) then 'Yes' else 'No' end as PF_Eligibility,case when (sa.EmployeeESIC>1) then 'Yes' else 'No' end as ESIC_Eligibilty, D.CreatedOn as EntryDate from AppointmentDetails D  inner join AppointmentProject P on D.EmployeeID=P.EmployeeID and D.MeetingID =P.MeetingID AND D.OrderType ='Appointment' inner join SalaryDetails sa on sa.EmployeeID=D.EmployeeID and sa.OrderID=D.OrderID inner join myview v on v.employeeid=sa.EmployeeID inner join AppointmentMaster am on am.EmployeeID=P.EmployeeID and " + tmpQry;
+                                //string sql = "select D.CreatedOn as EntryDate, D.EmployeeID,D.EmployeeName,D.ProjectNo,P.DepartmentCode,P.DesignationCode,D.BasicSalary, D.GrossSalary, D.FromDate AS AppointmentDate ,D.ToDate from AppointmentDetails D  inner join AppointmentProject P on D.EmployeeID=P.EmployeeID and D.MeetingID =P.MeetingID AND D.OrderType ='Appointment' and " + tmpQry;
                                 SqlDataAdapter sda = new SqlDataAdapter(sql, con);
                                 ReportsDS ds = new ReportsDS();
                                 sda.Fill(ds.Tables["DtAppointmentList"]);
@@ -280,7 +282,8 @@ namespace Outsourcing.Controllers
                                     tmpQry = "D.FromDate between convert(date,'" + mrv.FromDate + "',103) and convert(date,'" + mrv.ToDate + "',103)";
                                     tmpTitle = "Effective Date From " + Convert.ToDateTime(mrv.FromDate).ToShortDateString() + " To " + Convert.ToDateTime(mrv.ToDate).ToShortDateString();
                                 }
-                                string sql = "select D.CreatedOn as EntryDate,D.EmployeeID,D.EmployeeName,D.ProjectNo,P.DepartmentCode,P.DesignationCode,(D.GrossSalary-(select top 1 GrossSalary from AppointmentDetails where EmployeeID=d.EmployeeID and MeetingID=d.MeetingID and OrderID < D.OrderID order by OrderID desc)) as IncrementAmount,D.GrossSalary,P.AppointmentDate AS AppointmentDate,D.FromDate as EffectFromDate,D.ToDate from AppointmentDetails D  inner join AppointmentProject P on D.EmployeeID=P.EmployeeID and D.MeetingID =P.MeetingID AND D.OrderType ='Enhancement' and " + tmpQry;
+                                string sql = "select ROW_NUMBER() over (order by D.EmployeeID), D.EmployeeID,D.EmployeeName,P.DesignationName,P.AppointmentDate,P.ToDate,D.FromDate as IncrementDt,( select top 1 BasicSalary from (select Top 2 BasicSalary,OrderID from AppointmentDetails where EmployeeID=d.EmployeeID and MeetingID=d.MeetingID order by OrderID desc) as Pre_BasicSalary order by OrderID),(D.GrossSalary-(select top 1 GrossSalary from AppointmentDetails where EmployeeID=d.EmployeeID and MeetingID=d.MeetingID and OrderID < D.OrderID order by OrderID desc)) as IncrementAmount,D.BasicSalary,sa.HRA,sa.Bonus,sa.SpecialAllowance,sa.GrossSalary,case when (sa.EmployeePF>1) then 'Yes' else 'No' end,case when (sa.EmployeeESIC>1) then 'Yes' else 'No' end,D.CreatedOn as EntryDate from AppointmentDetails D  inner join AppointmentProject P on D.EmployeeID=P.EmployeeID and D.MeetingID =P.MeetingID AND D.OrderType ='Enhancement' inner join SalaryDetails sa on sa.EmployeeID=D.EmployeeID and sa.OrderID=D.OrderID inner join myview v on sa.EmployeeID=v.employeeid and sa.OrderID=v.orderid and " + tmpQry;
+                                //string sql = "select D.CreatedOn as EntryDate,D.EmployeeID,D.EmployeeName,D.ProjectNo,P.DepartmentCode,P.DesignationCode,(D.GrossSalary-(select top 1 GrossSalary from AppointmentDetails where EmployeeID=d.EmployeeID and MeetingID=d.MeetingID and OrderID < D.OrderID order by OrderID desc)) as IncrementAmount,D.GrossSalary,P.AppointmentDate AS AppointmentDate,D.FromDate as EffectFromDate,D.ToDate from AppointmentDetails D  inner join AppointmentProject P on D.EmployeeID=P.EmployeeID and D.MeetingID =P.MeetingID AND D.OrderType ='Enhancement' and " + tmpQry;
                                 SqlDataAdapter sda = new SqlDataAdapter(sql, con);
                                 ReportsDS ds = new ReportsDS();
                                 sda.Fill(ds.Tables["DtEnhancementList"]);
@@ -427,6 +430,46 @@ namespace Outsourcing.Controllers
                                     return null;
                                 }
                             }
+                            //else if(mrv.OrderType== "StopPayment")
+                            //{
+                            //    string tmpTitle;
+                            //    if (mrv.ReportBasedOn == "EntryDate")
+                            //    {
+                            //        tmpQry = "d.CreatedOn between convert(date,'" + mrv.FromDate + "',103) and convert(date,'" + mrv.ToDate + "',103)";
+                            //        tmpTitle = "Entry Date From " + Convert.ToDateTime(mrv.FromDate).ToShortDateString() + " To " + Convert.ToDateTime(mrv.ToDate).ToShortDateString();
+                            //    }
+                            //    else
+                            //    {
+                            //        tmpQry = "D.FromDate between convert(date,'" + mrv.FromDate + "',103) and convert(date,'" + mrv.ToDate + "',103)";
+                            //        tmpTitle = "StopPayment Date From " + Convert.ToDateTime(mrv.FromDate).ToShortDateString() + " To " + Convert.ToDateTime(mrv.ToDate).ToShortDateString();
+                            //    }
+                            //    string sql ="select D.CreatedOn as EntryDate,P.EmployeeID,P.EmployeeName,P.ProjectNo,P.DepartmentCode,P.DesignationCode,(SELECT TOP 1 BasicSalary FROM AppointmentDetails where OrderType in ('StopPayment') and EmployeeID = P.EmployeeID and MeetingID = P.MeetingID ORDER BY FromDate DESC) as BasicSalary, (SELECT TOP 1 GrossSalary FROM AppointmentDetails where OrderType in ('StopPayment') and EmployeeID = P.EmployeeID and MeetingID = P.MeetingID ORDER BY FromDate DESC) as GrossSalary,M.AppointmentDate,M.ToDate,M.RelieveDate as RelieveDate from AppointmentProject P inner join AppointmentMaster M on P.EmployeeID=M.EmployeeID and P.ProjectRelieveDate = M.RelieveDate and " + tmpQry;
+                            //    SqlDataAdapter sda = new SqlDataAdapter(sql, con);
+                            //    ReportsDS ds = new ReportsDS();
+                            //    sda.Fill(ds.Tables["DtRelieveList"]);
+                            //    if (mrv.DocumentFormat == "PDF")
+                            //    {
+                            //        ReportClass rptClsRelieve = new ReportClass();
+                            //        rptClsRelieve.FileName = Server.MapPath("~/Reports/RelieveList.rpt");
+                            //        rptClsRelieve.Load();
+                            //        rptClsRelieve.SetDataSource(ds.Tables["DtRelieveList"]);
+                            //        ((CrystalDecisions.CrystalReports.Engine.TextObject)rptClsRelieve.ReportDefinition.Sections["Section1"].ReportObjects["txtTitle"]).Text = "Relieve List based on " + tmpTitle;
+                            //        Stream fileStream = rptClsRelieve.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                            //        return File(fileStream, "application/pdf");
+                            //    }
+                            //    else if (mrv.DocumentFormat == "XLS" || mrv.DocumentFormat == "XLSX")
+                            //    {
+                            //        GenerateExcel ge = new GenerateExcel();
+                            //        ge.ExportToExcel(ds.Tables["DtRelieveList"], "RelieveList");
+                            //        return null;
+                            //    }
+                            //    else
+                            //    {
+                            //        GenerateExcel ge = new GenerateExcel();
+                            //        ge.ExportToWord(ds.Tables["DtRelieveList"], "RelieveList");
+                            //        return null;
+                            //    }
+                            //}
                             else
                             {
                                 return null;
@@ -480,16 +523,15 @@ namespace Outsourcing.Controllers
                 }
                 else if (OrderType == "Relieve")
                 {
-                    orv = (from M in recruit.AppointmentMasters
-                           join P in recruit.AppointmentProjects on M.EmployeeID equals P.EmployeeID
-                           join D in recruit.AppointmentDetails on new { a = P.EmployeeID, b = P.MeetingID } equals new { a = D.EmployeeID, b = D.MeetingID }
-                           join O in recruit.OrderRequestDetails on new { a = D.EmployeeID, b = D.OrderID } equals new { a = O.EmployeeID, b = O.OrderID }
-                           where O.OrderType == "Relieve" && O.RequestID == null && O.OrderRequestDate == null
+                    orv = (from P in recruit.AppointmentProjects
+                           join D in recruit.AppointmentDetails on new {a=P.EmployeeID,b=P.MeetingID} equals new {a=D.EmployeeID,b=D.MeetingID}
+                           join V in recruit.myview on new { a = D.EmployeeID, b = D.OrderID } equals new { a = V.employeeid, b = (int)V.orderid }
+                           join O in recruit.OrderRequestDetails on D.EmployeeID equals O.EmployeeID where O.OrderID == 100 && O.RequestID == null && O.OrderRequestDate == null
                            select new OrderRequestView
                            {
-                               EmployeeID = M.EmployeeID,
+                               EmployeeID = D.EmployeeID,
                                CreatedOn = D.CreatedOn,
-                               EmployeeName = P.EmployeeName,
+                               EmployeeName = D.EmployeeName,
                                DesignationName = P.DesignationName,
                                ProjectNo = P.ProjectNo,
                                PIName = P.PIName,
@@ -498,6 +540,25 @@ namespace Outsourcing.Controllers
                                ToDate = D.ToDate,
                                BasicSalary = D.BasicSalary
                            }).ToList();
+                
+                    //orv = (from M in recruit.AppointmentMasters
+                    //       join P in recruit.AppointmentProjects on M.EmployeeID equals P.EmployeeID
+                    //       join D in recruit.AppointmentDetails on new { a = P.EmployeeID, b = P.MeetingID } equals new { a = D.EmployeeID, b = D.MeetingID }
+                    //       join O in recruit.OrderRequestDetails on new { a = D.EmployeeID, b = D.OrderID } equals new { a = O.EmployeeID, b = O.OrderID }
+                    //       where O.OrderType == "Relieve" && O.RequestID == null && O.OrderRequestDate == null
+                    //       select new OrderRequestView
+                    //       {
+                    //           EmployeeID = M.EmployeeID,
+                    //           CreatedOn = D.CreatedOn,
+                    //           EmployeeName = P.EmployeeName,
+                    //           DesignationName = P.DesignationName,
+                    //           ProjectNo = P.ProjectNo,
+                    //           PIName = P.PIName,
+                    //           DepartmentCode = P.DepartmentCode,
+                    //           FromDate = D.FromDate,
+                    //           ToDate = D.ToDate,
+                    //           BasicSalary = D.BasicSalary
+                    //       }).ToList();
                 }
                 else
                 {
@@ -701,9 +762,9 @@ namespace Outsourcing.Controllers
                             SqlDataAdapter sda = new SqlDataAdapter("select P.EmployeeID,P.EmployeeName,P.ProjectNo,P.DepartmentCode,P.DesignationCode,m.BasicSalary, m.AppointmentDate,m.ToDate from AppointmentProject P inner join AppointmentMaster m on m.EmployeeID=p.EmployeeID and m.MeetingID=p.MeetingID and m.RelieveDate is null and m.ToDate between convert(date, '" + mrv.FromDate + "', 103) and convert(date, '" + mrv.ToDate + "', 103) ", con);
                             ReportsDS ds = new ReportsDS();
                             sda.Fill(ds.Tables["Reminder"]);
-                            Outsourcing.Reports.ToDateReminder rpt = new Outsourcing.Reports.ToDateReminder();
-                            //ReportClass rpt = new ReportClass();
-                            //rpt.FileName = Server.MapPath("~/Reports/ToDateReminder.rpt");
+                            //Outsourcing.Reports.ToDateReminder rpt = new Outsourcing.Reports.ToDateReminder();
+                            ReportClass rpt = new ReportClass();
+                            rpt.FileName = Server.MapPath("~/Reports/ToDateReminder.rpt");
                             rpt.Load();
                             rpt.SetDataSource(ds.Tables["Reminder"]);
                             if (mrv.DocumentFormat == "PDF")
@@ -879,7 +940,62 @@ namespace Outsourcing.Controllers
         public ActionResult MasterTables()
         {
             return View();
-        }     
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult MasterTables(string Command)
+        {
+            using (RecruitEntities recruit = new RecruitEntities())
+            {
+                using (SqlConnection con1 = new SqlConnection())
+                {
+                    con1.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
+                    string sql="";
+                    if (Command == "Format 1")
+                    {
+                       sql = "select  am.EmployeeID,am.EmployeeName,am.CandidateID,am.dob,am.DesignationCode,am.DesignationName,om.Qualification,om.DepartmentCode,am.AppointmentDate,am.ToDate,am.RelieveDate,am.PermanentAddress,am.CommunicationAddress,am.MobileNumber,am.EmailID,om.GrossSalary,am.BankName,am.BranchName,am.BankAccountNo,am.IFSC_Code,am.OutSourcingCompany,oe.Gender,oe.CasteCategory,oe.MaritalStatus,oe.ph,oe.FatherName,oe.MotherName,oe.HusbandName,oe.PAN,oe.Aadhar,oe.PhoneNumber,oe.EmergencyContactNo,ap.ProjectRelieveDate,am.Remarks from AppointmentMaster am inner join OutsourcingEmployeeDetails oe on am.CandidateID = oe.CandidateID inner join OutsourcingMeeting om on om.MeetingID = am.MeetingID inner join AppointmentProject ap on ap.EmployeeID=am.EmployeeID where  am.RelieveDate is null and ap.ProjectRelieveDate is null";
+                    }
+                    if(Command=="Format 2")
+                    {
+                       sql = "select  am.EmployeeID,am.EmployeeName,am.CandidateID,sa.GrossSalary,sa.BasicSalary,SA.HRA,sa.Bonus,sa.SpecialAllowance,sa.EmployeePF,sa.EmployeeESIC,sa.ProfessionalTax,sa.EmployerPF,sa.EmployerESIC,sa.Insurance,sa.NetSalary,sa.AgencyFee,sa.ServiceTax,sa.TotalSalary,om.ProjectNo,om.DesignationName,am.AppointmentDate,am.ToDate,am.BankAccountNo,am.BankName,am.BranchName,am.IFSC_Code,case when (om.PartTime=0) then 'Full' else 'Part' end,case when (om.ProjectNo='IC0910ICS039ICOHDEAN') then 'ICSR' else 'NON-ICSR' end,am.Remarks from AppointmentMaster am inner join SalaryDetails sa on am.EmployeeID=sa.EmployeeID inner join myview v on v.employeeid=sa.EmployeeID and v.orderid =sa.OrderID inner join OutsourcingMeeting om on om.MeetingID=am.MeetingID where am.RelieveDate is null";
+                    }
+                    SqlDataAdapter sda = new SqlDataAdapter(sql, con1);
+                    ReportsDS ds = new ReportsDS();
+                    if (Command == "Format 1")
+                    {
+                        sda.Fill(ds.Tables["Master"]);
+                    }
+                    else if(Command == "Format 2")
+                    { sda.Fill(ds.Tables["Master1"]); }
+                       
+                    GenerateExcel ge = new GenerateExcel();
+                    if (Command == "Format 1")
+                    {
+                        ge.ExportToExcel(ds.Tables["Master"], "Master");
+                    }
+                    else if (Command == "Format 2")
+                    { ge.ExportToExcel(ds.Tables["Master1"], "Master1"); }
+                    
+                    return null;
+                }
+            }            
+        }
+        public ActionResult Payroll()
+        {
+            return View();
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Payroll(string Download)
+        {
+            using (RecruitEntities recruit = new RecruitEntities())
+            {
+                using (SqlConnection con1 = new SqlConnection())
+                {
+                    con1.ConnectionString = ConfigurationManager.ConnectionStrings["Recruit"].ConnectionString;
+                    //string sql="select a"
+                }
+            }
+            return View();
+        }
     }  
 }
 

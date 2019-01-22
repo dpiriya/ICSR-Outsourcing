@@ -10,9 +10,9 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using WebMatrix.Data;
 using Outsourcing.Filters;
-using Outsourcing.Models;
-using Outsourcing.ViewModelAccount;
 
+using Outsourcing.ViewModelAccount;
+using DataLayer.Repository;
 
 namespace Outsourcing.Controllers
 {
@@ -46,6 +46,11 @@ namespace Outsourcing.Controllers
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 Session["UserName"] = model.UserName;
+                if(Session["UserName"].ToString()=="tnm")
+                {
+                    return RedirectToAction("Reports", "OutsourceReport");
+                }
+                else
                 return RedirectToLocal(returnUrl);
             }
 
@@ -393,7 +398,7 @@ namespace Outsourcing.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("OutsourcingModule", "Outsource");
             }
         }
 

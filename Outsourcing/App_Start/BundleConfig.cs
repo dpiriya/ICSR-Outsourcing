@@ -28,6 +28,8 @@ namespace Outsourcing
                         "~/Scripts/modernizr-*"));
             //bundles.Add(new ScriptBundle("~/bundles/datatable").Include(
             //            "~/Scripts/DataTables/*.js"));
+            bundles.Add(new ScriptBundle("~/bundles/sweet").Include(              
+               "~/Scripts/swal/sweetalert.min.js"));
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                         "~/Content/bootstrap.css",
@@ -48,9 +50,11 @@ namespace Outsourcing
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+            bundles.Add(new StyleBundle("~/bundles/sweetcss").Include(
+                "~/Content/sweetalert.css"));
             //bundles.Add(new StyleBundle("~/Content/datatablecss").Include(
-                        //"~/Content/DataTables/css"));
-
+            //"~/Content/DataTables/css"));
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

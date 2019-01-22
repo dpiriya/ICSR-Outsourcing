@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RecruitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AppointmentDetails">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="OrderType" />
+      <PropertyRef Name="FromDate" />
+    </Key>
+    <Property Name="EmployeeID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="MeetingID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="OrderType" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ProjectNo" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="FromDate" Type="date" Nullable="false" />
+    <Property Name="ToDate" Type="date" Nullable="false" />
+    <Property Name="BasicSalary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="GrossSalary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="CostToProject" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="CommitmentNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedOn" Type="date" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="UpdatedOn" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="AppointmentMaster">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="MeetingID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="CandidateID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="DesignationCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="DesignationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AppointmentDate" Type="date" Nullable="false" />
+    <Property Name="ToDate" Type="date" Nullable="false" />
+    <Property Name="RelieveDate" Type="date" />
+    <Property Name="BasicSalary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="PermanentAddress" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="CommunicationAddress" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="EmailID" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="75" />
+    <Property Name="BranchName" Type="nvarchar" MaxLength="75" />
+    <Property Name="BankAccountNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="IFSC_Code" Type="nvarchar" MaxLength="11" />
+    <Property Name="OutSourcingCompany" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="CreatedOn" Type="date" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="UpdatedOn" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="AppointmentProject">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="MeetingID" />
+    </Key>
+    <Property Name="EmployeeID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="MeetingID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="DesignationCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="DesignationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProjectType" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="PartTime" Type="bit" Nullable="false" />
+    <Property Name="ProjectNo" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="PICode" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="PIName" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="DepartmentCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="AppointmentDate" Type="date" Nullable="false" />
+    <Property Name="ToDate" Type="date" Nullable="false" />
+    <Property Name="ProjectRelieveDate" Type="date" />
+    <Property Name="RelievedOn" Type="date" />
+    <Property Name="RelievedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ListItemMaster">
+    <Key>
+      <PropertyRef Name="ListName" />
+      <PropertyRef Name="ListItemValue" />
+    </Key>
+    <Property Name="ListName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ListItemValue" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ListItemText" Type="nvarchar" MaxLength="50" />
+    <Property Name="ListGroup" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="OrderRequestDetails">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="EmployeeID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="OrderType" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="RequestID" Type="int" />
+    <Property Name="OrderRequestDate" Type="date" />
+    <Property Name="OrderReceiveDate" Type="date" />
+    <Property Name="CreatedOn" Type="date" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="UpdatedOn" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="OutSourcingDesignation">
+    <Key>
+      <PropertyRef Name="DesignationCode" />
+    </Key>
+    <Property Name="DesignationCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="DesignationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LowerAgeLimit" Type="smallint" />
+    <Property Name="UpperAgeLimit" Type="smallint" />
+    <Property Name="Qualifications" Type="nvarchar" MaxLength="50" />
+    <Property Name="Experience" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedOn" Type="date" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="UpdatedOn" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="OutsourcingEmployeeDetails">
+    <Key>
+      <PropertyRef Name="CandidateID" />
+    </Key>
+    <Property Name="CandidateID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CandidateName" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="CasteCategory" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="MaritalStatus" Type="nvarchar" MaxLength="20" />
+    <Property Name="PH" Type="bit" Nullable="false" />
+    <Property Name="FatherName" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="MotherName" Type="nvarchar" MaxLength="75" />
+    <Property Name="HusbandName" Type="nvarchar" MaxLength="75" />
+    <Property Name="PermanentAddress" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="CommunicationAddress" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="PAN" Type="nvarchar" MaxLength="10" />
+    <Property Name="Aadhar" Type="nvarchar" MaxLength="20" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="EmailID" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmergencyContactNo" Type="nvarchar" MaxLength="15" />
+    <Property Name="PF_UAN" Type="nvarchar" MaxLength="15" />
+    <Property Name="ESIC_NO" Type="nvarchar" MaxLength="15" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="75" />
+    <Property Name="BranchName" Type="nvarchar" MaxLength="75" />
+    <Property Name="BankAccountNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="IFSC_Code" Type="nvarchar" MaxLength="11" />
+    <Property Name="CreatedOn" Type="date" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="UpdatedOn" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="OutsourcingMeeting">
+    <Key>
+      <PropertyRef Name="MeetingID" />
+    </Key>
+    <Property Name="MeetingID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="MeetingDate" Type="date" Nullable="false" />
+    <Property Name="CandidateID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CandidateName" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="PartTime" Type="bit" Nullable="false" />
+    <Property Name="DesignationCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="DesignationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Qualification" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Total_Experience" Type="numeric" Precision="4" Scale="2" />
+    <Property Name="IITMExperience" Type="bit" Nullable="false" />
+    <Property Name="IIT_Experience" Type="numeric" Precision="4" Scale="2" />
+    <Property Name="NONIIT_Experience" Type="numeric" Precision="4" Scale="2" />
+    <Property Name="ProjectType" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="ProjectNo" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ProjectTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="DepartmentCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="DepartmentName" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="SponsoredAgency" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="PICode" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="PIName" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="ProjectCloseDate" Type="date" />
+    <Property Name="Section" Type="nvarchar" MaxLength="15" />
+    <Property Name="OutSourcingCompany" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="RequestFromDate" Type="date" Nullable="false" />
+    <Property Name="RequestToDate" Type="date" Nullable="false" />
+    <Property Name="DurationInMonth" Type="int" />
+    <Property Name="FromDate" Type="date" />
+    <Property Name="ToDate" Type="date" />
+    <Property Name="GrossSalary" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="CostToProject" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="CommitmentNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="StatusOfRequest" Type="nvarchar" MaxLength="20" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedOn" Type="date" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="UpdatedOn" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="OutsourcingOffer">
+    <Key>
+      <PropertyRef Name="MeetingID" />
+    </Key>
+    <Property Name="MeetingID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RequestID" Type="int" Nullable="false" />
+    <Property Name="OfferRequestDate" Type="date" Nullable="false" />
+    <Property Name="OfferReceivedDate" Type="date" />
+    <Property Name="JoiningDate" Type="date" />
+    <Property Name="JoiningReportApprovedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="JoiningReportDate" Type="date" />
+    <Property Name="ApprovalChannel" Type="nvarchar" MaxLength="30" />
+    <Property Name="OfferStatus" Type="nvarchar" MaxLength="15" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedOn" Type="date" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="UpdatedOn" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="PayStructure">
+    <Key>
+      <PropertyRef Name="EffectiveDate" />
+      <PropertyRef Name="HeadName" />
+    </Key>
+    <Property Name="EffectiveDate" Type="date" Nullable="false" />
+    <Property Name="HeadName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="HeadValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CreatedOn" Type="date" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="UpdatedOn" Type="date" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="ProfessionalTax">
+    <Key>
+      <PropertyRef Name="EffectiveDate" />
+      <PropertyRef Name="PayRangeFrom" />
+    </Key>
+    <Property Name="EffectiveDate" Type="date" Nullable="false" />
+    <Property Name="PayRangeFrom" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="PayRangeTo" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="ProfessionalTax" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalaryDetails">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="EmployeeID" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="OrderType" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="BasicSalary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="HRA" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="Bonus" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="SpecialAllowance" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="GrossSalary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="EmployeePF" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="EmployeeESIC" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="ProfessionalTax" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="NetSalary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="EmployerPF" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="EmployerESIC" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="Insurance" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="TotalContribution" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="GrossTotal" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="AgencyFee" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="ServiceTax" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="TotalSalary" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_mst_BankName">
+    <Key>
+      <PropertyRef Name="SNO" />
+    </Key>
+    <Property Name="SNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Recruit.dbo.tbl_mst_Section' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_mst_Section">
+    <Key>
+      <PropertyRef Name="SecId" />
+      <PropertyRef Name="SectionName" />
+    </Key>
+    <Property Name="SecId" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="SectionName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Recruit.dbo.myview' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="myview">
+    <Key>
+      <PropertyRef Name="employeeid" />
+    </Key>
+    <Property Name="orderid" Type="int" />
+    <Property Name="employeeid" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AppointmentDesignation">
+    <End Role="OutSourcingDesignation" Type="Self.OutSourcingDesignation" Multiplicity="1" />
+    <End Role="AppointmentMaster" Type="Self.AppointmentMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OutSourcingDesignation">
+        <PropertyRef Name="DesignationCode" />
+      </Principal>
+      <Dependent Role="AppointmentMaster">
+        <PropertyRef Name="DesignationCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppointmentDetailsMinutes">
+    <End Role="OutsourcingMeeting" Type="Self.OutsourcingMeeting" Multiplicity="1" />
+    <End Role="AppointmentDetails" Type="Self.AppointmentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OutsourcingMeeting">
+        <PropertyRef Name="MeetingID" />
+      </Principal>
+      <Dependent Role="AppointmentDetails">
+        <PropertyRef Name="MeetingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppointmentMasterEmployee">
+    <End Role="OutsourcingEmployeeDetails" Type="Self.OutsourcingEmployeeDetails" Multiplicity="1" />
+    <End Role="AppointmentMaster" Type="Self.AppointmentMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OutsourcingEmployeeDetails">
+        <PropertyRef Name="CandidateID" />
+      </Principal>
+      <Dependent Role="AppointmentMaster">
+        <PropertyRef Name="CandidateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppointmentMasterMinutes">
+    <End Role="OutsourcingMeeting" Type="Self.OutsourcingMeeting" Multiplicity="1" />
+    <End Role="AppointmentMaster" Type="Self.AppointmentMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OutsourcingMeeting">
+        <PropertyRef Name="MeetingID" />
+      </Principal>
+      <Dependent Role="AppointmentMaster">
+        <PropertyRef Name="MeetingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppointmentProjectID">
+    <End Role="AppointmentMaster" Type="Self.AppointmentMaster" Multiplicity="1" />
+    <End Role="AppointmentProject" Type="Self.AppointmentProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppointmentMaster">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="AppointmentProject">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppointmentProjectMeetingID">
+    <End Role="OutsourcingMeeting" Type="Self.OutsourcingMeeting" Multiplicity="1" />
+    <End Role="AppointmentProject" Type="Self.AppointmentProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OutsourcingMeeting">
+        <PropertyRef Name="MeetingID" />
+      </Principal>
+      <Dependent Role="AppointmentProject">
+        <PropertyRef Name="MeetingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MeetingOrder">
+    <End Role="OutsourcingMeeting" Type="Self.OutsourcingMeeting" Multiplicity="1" />
+    <End Role="OutsourcingOffer" Type="Self.OutsourcingOffer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="OutsourcingMeeting">
+        <PropertyRef Name="MeetingID" />
+      </Principal>
+      <Dependent Role="OutsourcingOffer">
+        <PropertyRef Name="MeetingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderRequestEmployeeID">
+    <End Role="AppointmentMaster" Type="Self.AppointmentMaster" Multiplicity="1" />
+    <End Role="OrderRequestDetails" Type="Self.OrderRequestDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppointmentMaster">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="OrderRequestDetails">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectDesignationCode">
+    <End Role="OutSourcingDesignation" Type="Self.OutSourcingDesignation" Multiplicity="1" />
+    <End Role="AppointmentProject" Type="Self.AppointmentProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OutSourcingDesignation">
+        <PropertyRef Name="DesignationCode" />
+      </Principal>
+      <Dependent Role="AppointmentProject">
+        <PropertyRef Name="DesignationCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectDetailsEmployeeID">
+    <End Role="AppointmentMaster" Type="Self.AppointmentMaster" Multiplicity="1" />
+    <End Role="AppointmentDetails" Type="Self.AppointmentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppointmentMaster">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="AppointmentDetails">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalaryDetailsEmployeeID">
+    <End Role="AppointmentMaster" Type="Self.AppointmentMaster" Multiplicity="1" />
+    <End Role="SalaryDetails" Type="Self.SalaryDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppointmentMaster">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="SalaryDetails">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ConsultancyProjectDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Dept" Type="nvarchar" Mode="In" />
+    <Parameter Name="pType" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProjectNo" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Coordinator" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CoorCode" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Department" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sponsoredProjectDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dept" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProjectNo" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="RecruitModelStoreContainer">
+    <EntitySet Name="AppointmentDetails" EntityType="Self.AppointmentDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppointmentMaster" EntityType="Self.AppointmentMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppointmentProject" EntityType="Self.AppointmentProject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListItemMaster" EntityType="Self.ListItemMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderRequestDetails" EntityType="Self.OrderRequestDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OutSourcingDesignation" EntityType="Self.OutSourcingDesignation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OutsourcingEmployeeDetails" EntityType="Self.OutsourcingEmployeeDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OutsourcingMeeting" EntityType="Self.OutsourcingMeeting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OutsourcingOffer" EntityType="Self.OutsourcingOffer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayStructure" EntityType="Self.PayStructure" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfessionalTax" EntityType="Self.ProfessionalTax" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryDetails" EntityType="Self.SalaryDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_mst_BankName" EntityType="Self.tbl_mst_BankName" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_mst_Section" EntityType="Self.tbl_mst_Section" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_mst_Section].[SecId] AS [SecId], 
+    [tbl_mst_Section].[SectionName] AS [SectionName], 
+    [tbl_mst_Section].[IsActive] AS [IsActive]
+    FROM [dbo].[tbl_mst_Section] AS [tbl_mst_Section]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="myview" EntityType="Self.myview" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [myview].[orderid] AS [orderid], 
+    [myview].[employeeid] AS [employeeid]
+    FROM [dbo].[myview] AS [myview]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_AppointmentDesignation" Association="Self.FK_AppointmentDesignation">
+      <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignation" />
+      <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppointmentDetailsMinutes" Association="Self.FK_AppointmentDetailsMinutes">
+      <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeeting" />
+      <End Role="AppointmentDetails" EntitySet="AppointmentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppointmentMasterEmployee" Association="Self.FK_AppointmentMasterEmployee">
+      <End Role="OutsourcingEmployeeDetails" EntitySet="OutsourcingEmployeeDetails" />
+      <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppointmentMasterMinutes" Association="Self.FK_AppointmentMasterMinutes">
+      <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeeting" />
+      <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppointmentProjectID" Association="Self.FK_AppointmentProjectID">
+      <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />
+      <End Role="AppointmentProject" EntitySet="AppointmentProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppointmentProjectMeetingID" Association="Self.FK_AppointmentProjectMeetingID">
+      <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeeting" />
+      <End Role="AppointmentProject" EntitySet="AppointmentProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MeetingOrder" Association="Self.FK_MeetingOrder">
+      <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeeting" />
+      <End Role="OutsourcingOffer" EntitySet="OutsourcingOffer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderRequestEmployeeID" Association="Self.FK_OrderRequestEmployeeID">
+      <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />
+      <End Role="OrderRequestDetails" EntitySet="OrderRequestDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectDesignationCode" Association="Self.FK_ProjectDesignationCode">
+      <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignation" />
+      <End Role="AppointmentProject" EntitySet="AppointmentProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectDetailsEmployeeID" Association="Self.FK_ProjectDetailsEmployeeID">
+      <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />
+      <End Role="AppointmentDetails" EntitySet="AppointmentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalaryDetailsEmployeeID" Association="Self.FK_SalaryDetailsEmployeeID">
+      <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />
+      <End Role="SalaryDetails" EntitySet="SalaryDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

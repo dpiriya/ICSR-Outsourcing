@@ -207,6 +207,7 @@
     <EntitySetMapping Name="AppointmentProjects">
       <EntityTypeMapping TypeName="RecruitModel.AppointmentProject">
         <MappingFragment StoreEntitySet="AppointmentProject">
+          <ScalarProperty Name="PartTime" ColumnName="PartTime" />
           <ScalarProperty Name="Remarks" ColumnName="Remarks" />
           <ScalarProperty Name="RelievedBy" ColumnName="RelievedBy" />
           <ScalarProperty Name="RelievedOn" ColumnName="RelievedOn" />
@@ -229,6 +230,7 @@
     <EntitySetMapping Name="OutsourcingMeetings">
       <EntityTypeMapping TypeName="RecruitModel.OutsourcingMeeting">
         <MappingFragment StoreEntitySet="OutsourcingMeeting">
+          <ScalarProperty Name="PartTime" ColumnName="PartTime" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -317,6 +319,14 @@
         <MappingFragment StoreEntitySet="tbl_mst_BankName">
           <ScalarProperty Name="BankName" ColumnName="BankName" />
           <ScalarProperty Name="SNO" ColumnName="SNO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="myview">
+      <EntityTypeMapping TypeName="RecruitModel.myview">
+        <MappingFragment StoreEntitySet="myview">
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+          <ScalarProperty Name="orderid" ColumnName="orderid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

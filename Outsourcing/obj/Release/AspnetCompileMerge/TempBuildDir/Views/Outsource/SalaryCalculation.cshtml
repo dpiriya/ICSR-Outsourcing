@@ -1,0 +1,121 @@
+﻿@using System.Collections
+@model Outsourcing.ViewModel.SalaryDetailsModel
+
+@Scripts.Render("~/bundles/jquery")
+<link href="~/Content/HelperStyle1.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "SalaryCalculation";
+}
+
+
+@using (@Html.BeginForm("SalaryCalculation", "Outsource", FormMethod.Post, new { id = "form1" }))
+{
+    <h2 align="center">SalaryCalculation</h2>
+    <br />
+    <div class="row">
+        <div class="col-md-4" align="center">
+            @Html.RadioButton("Eemp", "Existing Employee", new { @class = "type" })
+            @Html.Label("Existing Employee")
+        </div>
+        <div class="col-md-4" align="center">
+            @Html.RadioButton("Eemp", "New Employee", new { @class = "type" })
+            @Html.Label("New Employee")
+        </div>
+        <div class="col-md-4" align="center">
+            @Html.RadioButton("Eemp", "PartTime", new { @class = "type" })
+            @Html.Label("PartTime")
+        </div>
+    </div>
+    <table id="Salarytbl">
+        <tr>
+            <td>Recommended Salary</td>
+            <td>@Html.TextBox("RecommendSalary", null, new { @style = "width:120px" })</td>
+            <td>Designation</td>
+            <td>@Html.DropDownList("Design", new SelectList((IEnumerable)ViewData["Designation"], "Value", "Text"), "--Select Designation--", new { @class = "small-input", @style = "width:200px" }) </td>
+            <td>Name</td>
+            <td>@Html.TextBox("Name", null, new { @style = "width:150px" })</td>
+            <td>@Html.Label("PH")</td>
+            <td>@Html.CheckBox("PH", false)</td>
+            <td><input type="submit" id="btnCalculate" @*name="btnCalculate"*@ name="action:SalaryCalculation" class="SubmitViolet1" onclick="return Verify()" value="Calculate" /></td>
+        </tr>
+    </table>
+    <br />
+    <div id="dcid" style="display:none">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1" style="padding: 5px;margin: 5px 0 6px 0;">
+                    @Html.Label("CandidateID")
+                </div>
+                <div class="col-md-1">
+                    @Html.DropDownList("CID", new SelectList((IEnumerable)ViewData["CID"], "Value", "Text"), "--Select--", new { @class = "small-input", @style = "width:200px" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@using (@Html.BeginForm("rptsalary", "Outsource", FormMethod.Post, new { id = "form2" }))
+{
+    <div id="Old" style="display:none">
+        @Html.Partial("_SalaryDetails", Model)
+    </div>
+    <div id="New" style="display:none">
+        @Html.Partial("_SalaryDetailsNew", Model)
+    </div>
+    <table>
+        <tr>
+            <td>
+                <p>
+                    <input type="submit" class="SubmitViolet" value="Print" name="action:rptsalary" onclick="print()" />
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Back", "OutsourcingModule", "OutSource")
+            </td>
+        </tr>
+    </table>
+}
+<script type="text/javascript">
+    $('.type').change(function () {
+        var emp = $("input:radio[name=Eemp]:checked").val();
+        if (emp == 'Existing Employee') {
+            $('#dcid').css("display", "block");            
+        }
+        else {
+            $('#dcid').css("display", "none");
+            $('#Salarytbl').css("display", "block"); 
+            if (emp == 'New Employee' && $('#RecommendSalary').val() <= "15000") {
+                $('#PF').css('display', 'block');                
+            }
+            else
+            {
+                $('#PF').css('display', 'none');
+            }
+            if (emp != 'PartTime') { $('#Insurance').css('display', 'block'); }
+            else { $('#Insurance').css('display', 'none'); }
+           
+        }
+    });
+    if ($('input:radio[name=Eemp]:checked').val() != "Existing Employee")  {
+        $('#New').css("display", "block");
+        $('#Old').css("display", "none");
+    }
+    else {
+        $('#Old').css("display", "block");
+        $('#New').css("display", "none");
+    }
+    function Verify() {
+        var sl = $("#Design option:selected").val();
+        if (sl == '' || sl == null) { if ($(".red1").length == 0) $("#Design").after('<div class="red1">* Select Designation</div>'); return false; }
+        else {
+            $("#Design").next(".red1").remove(); return true;
+        }
+    }
+    function print() {
+        $('#form2').submit();
+    }
+</script>
+
+
+

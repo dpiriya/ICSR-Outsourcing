@@ -4,9 +4,10 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using Outsourcing.Models;
+
 using System.ComponentModel.DataAnnotations.Schema;
 using Outsourcing.CustomDataAnnotations;
+using DataLayer.Repository;
 
 namespace Outsourcing.ViewModel 
 {
@@ -20,7 +21,10 @@ namespace Outsourcing.ViewModel
         [Display(Name = "Meeting Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> MeetingDate { get; set; }
+        public DateTime? MeetingDate { get; set; }
+
+        [Display(Name ="PartTime")]
+        public bool PartTime { get; set; }
 
         [Required]
         [Display(Name = "Candidate ID")]
@@ -33,7 +37,7 @@ namespace Outsourcing.ViewModel
         [Required]
         [Display(Name = "Date of Birth")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> DOB { get; set; }
+        public DateTime? DOB { get; set; }
 
         [Required]
         [Display(Name = "Designation Code")]                
@@ -52,20 +56,20 @@ namespace Outsourcing.ViewModel
         [Required]
         [Display(Name = "IITM Experience")]
         [BooleanDisplayValuesAsYesNo]
-        public Nullable<bool> IITMExperience { get; set; }
+        public bool? IITMExperience { get; set; }
         public IEnumerable<SelectListItem> IITMExperiences { get; set; }
 
         [Required]
         [Display(Name = "IIT Experience in Years")]
-        public Nullable<decimal> IIT_Experience { get; set; }
+        public decimal? IIT_Experience { get; set; }
 
         [Required]
         [Display(Name = "Non IIT Experience in Years")]
-        public Nullable<decimal> NONIIT_Experience { get; set; }
+        public decimal? NONIIT_Experience { get; set; }
 
         [Required]
         [Display(Name = "Total Experience")]       
-        public Nullable<decimal> Total_Experience { get; set; }
+        public decimal? Total_Experience { get; set; }
 
        
 
@@ -97,7 +101,7 @@ namespace Outsourcing.ViewModel
 
         [Display(Name = "Project Closure Date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> ProjectCloseDate { get; set; }
+        public DateTime? ProjectCloseDate { get; set; }
 
         [Display(Name ="Section")]
         public string Section { get; set; }
@@ -119,12 +123,12 @@ namespace Outsourcing.ViewModel
         [Required]
         [Display(Name = "Requested From Date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> RequestFromDate { get; set; }
+        public DateTime? RequestFromDate { get; set; }
         
         [Required]
         [Display(Name = "Requested To Date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> RequestToDate { get; set; }
+        public DateTime? RequestToDate { get; set; }
 
         [Required]
         [Display(Name = "Duration Recommended")]
@@ -132,25 +136,25 @@ namespace Outsourcing.ViewModel
         public IEnumerable<SelectListItem> DurationTypes { get; set; }
 
         [Display(Name = "Duration in Months")]
-        public Nullable<int> DurationInMonth { get; set; }
+        public int? DurationInMonth { get; set; }
 
         [Display(Name = "From Date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> FromDate { get; set; }
+        public DateTime? FromDate { get; set; }
 
         [Display(Name = "To Date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]        
-        public Nullable<System.DateTime> ToDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
         [Required]
         [DataType(DataType.Currency)]
         [Display(Name = "Gross Salary")]   
-        public Nullable<decimal> GrossSalary { get; set; }
+        public decimal? GrossSalary { get; set; }
 
         [Required]
         [DataType(DataType.Currency)]
         [Display(Name = "Cost To Project")] 
-        public Nullable<decimal> CostToProject { get; set; }
+        public decimal? CostToProject { get; set; }
 
         [Display(Name = "Commitment No")]         
         public string CommitmentNo { get; set; }
@@ -160,7 +164,7 @@ namespace Outsourcing.ViewModel
         public string CreatedBy { get; set; }
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)] 
-        public Nullable<System.DateTime> UpdatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
         public string UpdatedBy { get; set; }
         public string Command { get; set; }
         
@@ -251,6 +255,7 @@ namespace Outsourcing.ViewModel
                 IIT_Experience = Convert.ToDecimal(mv.IIT_Experience),
                 NONIIT_Experience=Convert.ToDecimal(mv.NONIIT_Experience),
                 Total_Experience=Convert.ToDecimal(mv.Total_Experience),
+                PartTime=mv.PartTime,
                 ProjectType =mv.ProjectType,
                 Section=mv.Section,
                 ProjectNo =mv.ProjectNo,
@@ -268,7 +273,7 @@ namespace Outsourcing.ViewModel
                 ToDate=mv.ToDate, 
                 GrossSalary=Convert.ToDecimal(mv.GrossSalary),
                 CostToProject=Convert.ToDecimal(mv.CostToProject),  
-                CommitmentNo=mv.CommitmentNo,  
+                CommitmentNo=mv.CommitmentNo,                  
                 OutSourcingCompany=mv.OutSourcingCompany                 
             };
         }
@@ -289,6 +294,7 @@ namespace Outsourcing.ViewModel
                 IITMExperience = mv.IITMExperience,
                 NONIIT_Experience = mv.NONIIT_Experience,
                 Total_Experience = mv.Total_Experience,
+                PartTime=mv.PartTime,
                 ProjectType = mv.ProjectType,
                 Section=mv.Section,
                 ProjectNo = mv.ProjectNo,

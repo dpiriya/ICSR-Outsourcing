@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using Outsourcing.Models;
+
+using DataLayer.Repository;
 
 namespace Outsourcing.ViewModel
 {
@@ -75,8 +76,8 @@ namespace Outsourcing.ViewModel
                 OrderID=ad.OrderID,
                 OrderType=ad.OrderType,
                 ProjectNo=ad.ProjectNo,
-                FromDate=ad.FromDate,
-                ToDate=ad.ToDate,
+                FromDate=Convert.ToDateTime(ad.FromDate),
+                ToDate=Convert.ToDateTime(ad.ToDate),
                 BasicSalary=ad.BasicSalary,
                 GrossSalary=ad.GrossSalary,
                 CostToProject=ad.CostToProject,

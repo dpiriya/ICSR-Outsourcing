@@ -65,6 +65,7 @@
     <Property Name="DesignationCode" Type="nvarchar" MaxLength="3" Nullable="false" />
     <Property Name="DesignationName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ProjectType" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="PartTime" Type="bit" Nullable="false" />
     <Property Name="ProjectNo" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="PICode" Type="nvarchar" MaxLength="5" Nullable="false" />
     <Property Name="PIName" Type="nvarchar" MaxLength="75" Nullable="false" />
@@ -160,13 +161,14 @@
     <Property Name="CandidateID" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="CandidateName" Type="nvarchar" MaxLength="75" Nullable="false" />
     <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="PartTime" Type="bit" Nullable="false" />
     <Property Name="DesignationCode" Type="nvarchar" MaxLength="3" Nullable="false" />
     <Property Name="DesignationName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Qualification" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Total_Experience" Type="numeric" Precision="3" Scale="0" />
+    <Property Name="Total_Experience" Type="numeric" Precision="4" Scale="2" />
     <Property Name="IITMExperience" Type="bit" Nullable="false" />
-    <Property Name="IIT_Experience" Type="numeric" Precision="3" Scale="0" />
-    <Property Name="NONIIT_Experience" Type="numeric" Precision="3" Scale="0" />
+    <Property Name="IIT_Experience" Type="numeric" Precision="4" Scale="2" />
+    <Property Name="NONIIT_Experience" Type="numeric" Precision="4" Scale="2" />
     <Property Name="ProjectType" Type="nvarchar" MaxLength="4" Nullable="false" />
     <Property Name="ProjectNo" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="ProjectTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
@@ -280,6 +282,15 @@ warning 6002: The table/view 'Recruit.dbo.tbl_mst_Section' does not have a prima
     <Property Name="SectionName" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="IsActive" Type="bit" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Recruit.dbo.myview' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="myview">
+    <Key>
+      <PropertyRef Name="employeeid" />
+    </Key>
+    <Property Name="orderid" Type="int" />
+    <Property Name="employeeid" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
   <Association Name="FK_AppointmentDesignation">
     <End Role="OutSourcingDesignation" Type="Self.OutSourcingDesignation" Multiplicity="1" />
     <End Role="AppointmentMaster" Type="Self.AppointmentMaster" Multiplicity="*" />
@@ -376,30 +387,6 @@ warning 6002: The table/view 'Recruit.dbo.tbl_mst_Section' does not have a prima
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OSMeetingDesignationCode">
-    <End Role="OutSourcingDesignation" Type="Self.OutSourcingDesignation" Multiplicity="1" />
-    <End Role="OutsourcingMeeting" Type="Self.OutsourcingMeeting" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OutSourcingDesignation">
-        <PropertyRef Name="DesignationCode" />
-      </Principal>
-      <Dependent Role="OutsourcingMeeting">
-        <PropertyRef Name="DesignationCode" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OSMeetingEmployeeID">
-    <End Role="OutsourcingEmployeeDetails" Type="Self.OutsourcingEmployeeDetails" Multiplicity="1" />
-    <End Role="OutsourcingMeeting" Type="Self.OutsourcingMeeting" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OutsourcingEmployeeDetails">
-        <PropertyRef Name="CandidateID" />
-      </Principal>
-      <Dependent Role="OutsourcingMeeting">
-        <PropertyRef Name="CandidateID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ProjectDesignationCode">
     <End Role="OutSourcingDesignation" Type="Self.OutSourcingDesignation" Multiplicity="1" />
     <End Role="AppointmentProject" Type="Self.AppointmentProject" Multiplicity="*" />
@@ -470,6 +457,12 @@ warning 6002: The table/view 'Recruit.dbo.tbl_mst_Section' does not have a prima
 [tbl_mst_Section].[IsActive] AS [IsActive]
 FROM [dbo].[tbl_mst_Section] AS [tbl_mst_Section]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="myview" EntityType="Self.myview" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[myview].[orderid] AS [orderid], 
+[myview].[employeeid] AS [employeeid]
+FROM [dbo].[myview] AS [myview]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_AppointmentDesignation" Association="Self.FK_AppointmentDesignation">
       <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignation" />
       <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />
@@ -501,14 +494,6 @@ FROM [dbo].[tbl_mst_Section] AS [tbl_mst_Section]</DefiningQuery>
     <AssociationSet Name="FK_OrderRequestEmployeeID" Association="Self.FK_OrderRequestEmployeeID">
       <End Role="AppointmentMaster" EntitySet="AppointmentMaster" />
       <End Role="OrderRequestDetails" EntitySet="OrderRequestDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OSMeetingDesignationCode" Association="Self.FK_OSMeetingDesignationCode">
-      <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignation" />
-      <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeeting" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OSMeetingEmployeeID" Association="Self.FK_OSMeetingEmployeeID">
-      <End Role="OutsourcingEmployeeDetails" EntitySet="OutsourcingEmployeeDetails" />
-      <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeeting" />
     </AssociationSet>
     <AssociationSet Name="FK_ProjectDesignationCode" Association="Self.FK_ProjectDesignationCode">
       <End Role="OutSourcingDesignation" EntitySet="OutSourcingDesignation" />

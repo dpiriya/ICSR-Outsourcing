@@ -12,13 +12,13 @@ namespace Outsourcing.ViewModel
         [Required]
         [Display(Name = "From Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FromDate { get; set; }
 
         [Required]
         [Display(Name = "To Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ToDate { get; set; }
 
         [Required]
@@ -42,7 +42,8 @@ namespace Outsourcing.ViewModel
                 new SelectListItem { Text = "Enhancement Order", Value = "Enhancement"},
                 new SelectListItem { Text = "Extension Order", Value = "Extension"},
                 new SelectListItem { Text = "Project Relieve Order", Value = "ProjectRelieve"},
-                new SelectListItem { Text = "Relieve Order", Value = "Relieve"}                
+                new SelectListItem { Text = "Relieve Order", Value = "Relieve"},
+                new SelectListItem{Text="StopPayment Order",Value="StopPayment"}
             };
             return ol;
         }

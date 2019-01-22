@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Outsourcing.Models;
+
 using Outsourcing.CustomDataAnnotations;
+using System.Globalization;
+using DataLayer.Repository;
 
 namespace Outsourcing.ViewModel
 {
@@ -20,8 +22,8 @@ namespace Outsourcing.ViewModel
 
         [Required]
         [Display(Name = "Date of Birth")]
-        //[DataType(DataType.Date),DisplayFormat(DataFormatString="{0:dd/MM/yyyy}",ApplyFormatInEditMode=true)]
-        public Nullable<System.DateTime> DOB { get; set; }
+       [DataType(DataType.Date),DisplayFormat(DataFormatString="{0:dd/MM/yyyy}",ApplyFormatInEditMode=true)]
+        public DateTime? DOB { get; set; }
 
         [Display(Name = "Age")]
         public int Age { get; set; }
@@ -52,7 +54,7 @@ namespace Outsourcing.ViewModel
         [Display(Name = "Mother Name")]
         public string MotherName { get; set; }
 
-        [Display(Name = "Husband Name")]
+        [Display(Name = "Spouse Name")]
         public string HusbandName { get; set; }
 
         [Required]
@@ -101,12 +103,12 @@ namespace Outsourcing.ViewModel
         [Display(Name = "Branch Name")]
         public string BranchName { get; set; }
 
-        [RegularExpression("^[0-9]{10,20}$", ErrorMessage = "Length should not exceed 20")]
+        [RegularExpression("^[0-9]{8,20}$", ErrorMessage = "Length should not exceed 20")]
         [Display(Name = "Bank Account No")]
         public string BankAccountNo { get; set; }
 
         [System.ComponentModel.DataAnnotations.Compare("BankAccountNo",ErrorMessage="The confirm Bank Account Number does not match with Bank Account Number")]
-        [RegularExpression("^[0-9]{10,20}$",ErrorMessage= "Length should not exceed 20")]
+        [RegularExpression("^[0-9]{6,20}$",ErrorMessage= "Length should not exceed 20")]
         [Display(Name = "Re-Enter Bank Account No")]
         public string ConfirmBankAccountNo { get; set; }
 
@@ -160,7 +162,7 @@ namespace Outsourcing.ViewModel
             {
                 CandidateID = om.CandidateID,
                 CandidateName = om.CandidateName,
-                DOB = om.DOB,
+                DOB =  om.DOB,
                 Gender = om.Gender,
                 CasteCategory = om.CasteCategory,
                 PH=om.PH,

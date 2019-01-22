@@ -1,0 +1,155 @@
+﻿@model Outsourcing.ViewModel.SalaryDetailsModel
+<table>       
+    <tr>       
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.RecommendedSalary)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.RecommendedSalary, new { @id = "RecommendedSalary" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.RecommendedSalary)
+            </div>
+        </td>
+    </tr>
+    <tr><th colspan="2">Deduction</th></tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsNewView.Insurance)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsNewView.Insurance, new { @id = "Insurance" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsNewView.Insurance)
+            </div>
+        </td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.EmployeeESIC)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.EmployeeESIC, new { @id = "EmployeeESIC" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.EmployeeESIC)
+            </div>
+        </td></tr><tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.ProfessionalTax)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.ProfessionalTax, new { @id = "ProfessionalTax" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.ProfessionalTax)
+            </div>
+        </td>
+    </tr>
+    <tr>       
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.TotalDeduction)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.TotalDeduction, new { @id = "TotalDeduction" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.TotalDeduction)
+            </div>
+        </td>  
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.NetSalary)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.NetSalary, new { @id = "NetSalary" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.NetSalary)
+            </div>
+        </td>
+    </tr>
+    <tr><th colspan="2">Contribution</th></tr>
+    <tr>        
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.EmployerESIC)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.EmployerESIC, new { @id = "EmployerESIC" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.EmployerESIC)
+            </div>
+        </td>          
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.TotalContribution)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.TotalContribution, new { @id = "TotalContribution" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.TotalContribution)
+            </div>
+        </td>
+    </tr>
+    <tr>       
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.GrossTotal)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.GrossTotal, new { @id = "GrossTotal" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.GrossTotal)
+            </div>
+        </td>   
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.AgencyFee)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.AgencyFee, new { @id = "AgencyFee" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.AgencyFee)
+            </div>
+        </td>
+        </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.GrossTotalwithAgencyFee)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.GrossTotalwithAgencyFee, new { @id = "GrossTotalwithAgencyFee" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.GrossTotalwithAgencyFee)
+            </div>
+        </td>    
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.GST)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.GST, new { @id = "GST" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.GST)
+            </div>
+        </td>
+        </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SalaryDetailsPartView.TotalSalary)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SalaryDetailsPartView.TotalSalary, new { @id = "TotalSalary" })
+                @Html.ValidationMessageFor(model => model.SalaryDetailsPartView.TotalSalary)
+            </div>
+        </td>
+        <td>
+            @Html.HiddenFor(m => m.EmployeeName)
+            @Html.HiddenFor(m => m.PH)
+            @Html.HiddenFor(m => m.type)
+        </td>
+    </tr>
+</table>
+
+
+    <script type="text/javascript">
+        
+        $("#EmployeeESIC,#ProfessionalTax,#TotalDeduction").change(function () {
+            var add = parseInt($("#EmployeeESIC").val()) + parseInt($("#ProfessionalTax").val()) + parseInt($("#TotalDeduction").val());
+            $("#NetSalary").val(add);
+        });
+        $("#EmployerESIC,#TotalDeduction").change(function () {
+            var add = parseInt($("#EmployerESIC").val()) + parseInt($("#TotalContribution").val());
+            $("#GrossTotal").val(add);
+        });
+        </script>
+

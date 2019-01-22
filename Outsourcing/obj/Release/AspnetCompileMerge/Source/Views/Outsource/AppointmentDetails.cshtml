@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<Outsourcing.ViewModel.AppointmentDetailsView>
 <link href="~/Content/TableView.css" rel="stylesheet" type="text/css" />
+@Scripts.Render("~/bundles/sweet")
+@Styles.Render("~/bundles/sweetcss")
 @{
     ViewBag.Title = "AppointmentDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var appMaster = ViewData["AppointmentMaster"] as Outsourcing.ViewModel.AppointmentMasterView;
-    var appProjets = ViewData["appointmentProjects"] as Outsourcing.Models.AppointmentProject;
-    
+    var appProjets = ViewData["appointmentProjects"] as DataLayer.Repository.AppointmentProject;
+
 }
 <div style="color:red;font-weight:bold;text-align:center">
     @Html.ValidationMessage("Error")
@@ -107,7 +109,7 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.OrderType)
-                            </td> 
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ProjectNo)
                             </td>
@@ -124,7 +126,7 @@
                                 @Html.DisplayFor(modelItem => item.CostToProject)
                             </td>
                             <td class="actionColumn">
-                                @if (appMaster.RelieveDate == null || Membership.GetUser().UserName.ToString() == "administrator" )
+                                @if (appMaster.RelieveDate == null || Membership.GetUser().UserName.ToString() == "administrator")
                                 {
                                     if (i == 1)
                                     {
@@ -132,6 +134,7 @@
                                         {
                                             <input type="submit" class="SubmitBlue" value="Edit" name="action:NewAppointment" onclick="target = '_self';" />
                                             <input type="submit" class="SubmitBlue" value="Report" name="action:Officeorder" onclick="target = '_self';" />
+
                                         }
                                         else if (item.OrderType == "Enhancement")
                                         {
@@ -162,7 +165,10 @@
                                     }
                                 }
                                 <input type="submit" class="SubmitBlue" value="Details" name="action:AppointmentDetailsDetails" onclick="target = '_self';" />
-
+                                @*@if (Membership.GetUser().UserName.ToString() == "administrator")
+                                {
+                                    <input type="submit" class="SubmitBlue" value="Delete" name="action:AppointmentDetailsDelete" onclick="return deletealert();" />
+                                }*@
                             </td>
                         </tr>
                     }
@@ -185,7 +191,7 @@
                     {
                         <input type="submit" class="SubmitBlueSameSize" value="Relieve From Agency" name="action:RelieveOrder" onclick="target = '_self';" /> <br /><br />
                     }
-                    else if (appProjets.Remarks=="StopPayment")
+                    else if (appProjets.Remarks == "StopPayment")
                     {
                         <input type="submit" class="SubmitBlueSameSize" value="Rejoin" name="action:Rejoin" onclick="target = '_self';" /><br /><br />
                         <input type="submit" class="SubmitBlueSameSize" value="Relieve From Project" name="action:ProjectRelieveOrder" onclick="target = '_self';" /> <br /><br />
@@ -195,7 +201,7 @@
                     {
                         <input type="submit" class="SubmitBlueSameSize" value="Extension" name="action:ExtensionOrder" onclick="target = '_self';" /> <br /><br />
                         <input type="submit" class="SubmitBlueSameSize" value="Enhancement" name="action:EnhancementOrder" onclick="target = '_self';" /> <br /><br />
-                        <input type="submit" class="SubmitBlueSameSize" value="Stop Payment" name="action:StopPayment" onclick="target = '_self';"/><br/><br/>
+                        <input type="submit" class="SubmitBlueSameSize" value="Stop Payment" name="action:StopPayment" onclick="target = '_self';" /><br /><br />
                         <input type="submit" class="SubmitBlueSameSize" value="Relieve From Project" name="action:ProjectRelieveOrder" onclick="target = '_self';" /> <br /><br />
                         <input type="submit" class="SubmitBlueSameSize" value="Relieve From Agency" name="action:RelieveOrder" onclick="target = '_self';" /> <br /><br />
                     }
@@ -204,25 +210,25 @@
                 {
                     if (appProjets.ProjectRelieveDate != null)
                     {
-                    <input type="submit" class="SubmitBlue" value="Reappointment" name="action:NewAppointment" onclick="target = '_self';" /> 
-                    }                
+                        <input type="submit" class="SubmitBlue" value="Reappointment" name="action:NewAppointment" onclick="target = '_self';" />
+                    }
                 }
             </td>
         }
         else
         {
-            if (Membership.GetUser().UserName.ToString() == "administrator" || appMaster.RelieveDate!=null)
+            if (Membership.GetUser().UserName.ToString() == "administrator" || appMaster.RelieveDate != null)
             {
                 <td class="noBorders" valign="middle" align="center">
-                @using (@Html.BeginForm("", "Outsource", new { EmployeeID = appMaster.EmployeeID, MeetingID = appProjets.MeetingID, OrderID = 0, cmd = "Update" }))
-                {
-                <input type="submit" class="SubmitBlueSameSize" value="Edit Relieve Order" name="action:RelieveOrder" onclick="target = '_self';" /><br /><br />
-                <input type="submit" class="SubmitBlueSameSize" value="Report Relieve Order" name="action:rptrelieve" onclick="target = '_self';"/><br /><br />
-                }
+                    @using (@Html.BeginForm("", "Outsource", new { EmployeeID = appMaster.EmployeeID, MeetingID = appProjets.MeetingID, OrderID = 0, cmd = "Update" }))
+                    {
+                        <input type="submit" class="SubmitBlueSameSize" value="Edit Relieve Order" name="action:RelieveOrder" onclick="target = '_self';" /><br /><br />
+                        <input type="submit" class="SubmitBlueSameSize" value="Report Relieve Order" name="action:rptrelieve" onclick="target = '_self';" /><br /><br />
+                    }
                 </td>
             }
         }
-        </tr>
+    </tr>
 </table>
 @*<script>
         function stoppaymentrpt(empid, oid) {
@@ -230,3 +236,32 @@
             @*/@Url.Action("rptstoppayment", "Outsource",new {empid= empid, oid=oid });
         };
     </script>*@
+
+<script>
+    function deletealert() {
+                    alert('Hi');
+                //var defaultaction = $(ctl).prop("name");
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted cant be recover!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: true,
+            closeOnCancel: true
+
+        }, function (isConfirm) {
+            if (isConfirm) {              
+                //command: "Delete";
+                alert('Hi');
+                $('#Ddeletebtn').submit();
+            }
+            else
+                alert("You chosed not to delete");
+        });
+                }
+
+
+</script>

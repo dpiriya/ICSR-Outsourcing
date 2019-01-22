@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Outsourcing.Models;
+using DataLayer.Repository;
+
 
 namespace Outsourcing.ViewModel
 {

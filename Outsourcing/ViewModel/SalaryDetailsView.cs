@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using Outsourcing.Models;
+using DataLayer.Repository;
 
 namespace Outsourcing.ViewModel
 {
@@ -11,6 +11,8 @@ namespace Outsourcing.ViewModel
     {
         [Display(Name = "Employee ID")]
         public string EmployeeID { get; set; }
+        //[Display(Name = "Employee Name")]
+        //public string EmployeeName { get; set; }
 
         [Display(Name = "Order ID")]
         public int OrderID { get; set; }
@@ -93,6 +95,9 @@ namespace Outsourcing.ViewModel
         [Required]
         [Display(Name = "Cost To Project(CTP) Per Month")]
         public decimal TotalSalary { get; set; }
+        //public bool PH { get; set; }
+        //public string type { get; set; }
+        //public string desig { get; set; }
 
         public static implicit operator SalaryDetailsView(SalaryDetail sd)
         {

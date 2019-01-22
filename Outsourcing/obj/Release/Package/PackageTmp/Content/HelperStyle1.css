@@ -101,6 +101,13 @@ textarea {
         border: inherit;
         width: auto;
     }
+input[type="radio"] {
+    background: transparent;
+    border: inherit;
+    width: auto;
+    float:left;
+    height:15px;
+}
  .ReadonlyField {
         background-color:#d3d7d7;   
     }

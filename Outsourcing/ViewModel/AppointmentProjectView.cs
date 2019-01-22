@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using Outsourcing.Models;
+
+using DataLayer.Repository;
 
 namespace Outsourcing.ViewModel
 {
@@ -63,6 +64,7 @@ namespace Outsourcing.ViewModel
         public string Remarks { get; set; }
         public Nullable<System.DateTime> RelievedOn { get; set; }
         public string RelievedBy { get; set; }
+        public bool PartTime { get; set; }
 
         public static implicit operator AppointmentProjectView(AppointmentProject ap)
         {
@@ -79,7 +81,8 @@ namespace Outsourcing.ViewModel
                 ProjectType=ap.ProjectType,
                 ProjectNo=ap.ProjectNo,
                 AppointmentDate = ap.AppointmentDate,
-                ToDate = ap.ToDate
+                ToDate = ap.ToDate,
+                PartTime=ap.PartTime
             };
         }
 
@@ -99,7 +102,7 @@ namespace Outsourcing.ViewModel
                 ProjectNo = apv.ProjectNo,                
                 AppointmentDate = Convert.ToDateTime(apv.AppointmentDate),
                 ToDate = Convert.ToDateTime(apv.ToDate),
-                
+                PartTime=apv.PartTime
             };
         }
     }

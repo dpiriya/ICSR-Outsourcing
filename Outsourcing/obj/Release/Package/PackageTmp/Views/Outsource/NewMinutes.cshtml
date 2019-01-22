@@ -4,7 +4,10 @@
     @*ViewBag.Title = "New Minutes";*@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@*<script src="~/Scripts/jquery-ui-1.12.1.js"></script>*@
 <link href="~/Content/HelperStyle1.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/themes/base/datepicker.css" rel="stylesheet" />
+
 <h3>@ViewBag.Title</h3>
 
 @using (Html.BeginForm("NewMinutes", "Outsource"))
@@ -14,97 +17,105 @@
 
     <fieldset>
         <table>
-    <tr id="trMeetID"><td colspan="2">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.MeetingID)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.MeetingID, new {@class = "ReadonlyField" })
-                @Html.ValidationMessageFor(model => model.MeetingID)
-            </div>
-        </td></tr>
-    <tr><th colspan="2">Employee Details</th></tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CandidateID)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.CandidateID, new {@class = "ReadonlyField" })
-                @Html.ValidationMessageFor(model => model.CandidateID)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CandidateName)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.CandidateName, new { @class = "ReadonlyField" })
-                @Html.ValidationMessageFor(model => model.CandidateName)
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.DOB)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.DOB, "{0:dd/MM/yyyy}", new { @class = "ReadonlyField" })
-                @Html.ValidationMessageFor(model => model.DOB)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.DesignationCode)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.DesignationCode, Model.Designations, "--Select Designation--")
-                @Html.ValidationMessageFor(model => model.DesignationCode)
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.DesignationName)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.DesignationName, new { @class = "ReadonlyField" })
-                @Html.ValidationMessageFor(model => model.DesignationName)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Qualification)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Qualification)
-                @Html.ValidationMessageFor(model => model.Qualification)
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.IITMExperience)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.IITMExperience, Html.OptionsForBoolean(model => model.IITMExperience), "--Select Yes/No--")
-                @Html.ValidationMessageFor(model => model.IITMExperience)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.IIT_Experience)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.IIT_Experience)
-                @Html.ValidationMessageFor(model => model.IIT_Experience)
-            </div>
-        </td>   
-        
-    </tr>
+            <tr id="trMeetID">
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MeetingID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.MeetingID, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.MeetingID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">@Html.LabelFor(model => model.PartTime)</div>
+                    <div class="editor-field">
+                        @Html.CheckBoxFor(model => model.PartTime)
+                    </div>
+                </td>
+            </tr>
+            <tr><th colspan="2">Employee Details</th></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CandidateID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CandidateID, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.CandidateID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CandidateName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CandidateName, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.CandidateName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DOB)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.DOB, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.DOB)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DesignationCode)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.DesignationCode, Model.Designations, "--Select Designation--")
+                        @Html.ValidationMessageFor(model => model.DesignationCode)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DesignationName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.DesignationName, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.DesignationName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Qualification)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Qualification)
+                        @Html.ValidationMessageFor(model => model.Qualification)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.IITMExperience)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.IITMExperience, Html.OptionsForBoolean(model => model.IITMExperience), "--Select Yes/No--")
+                        @Html.ValidationMessageFor(model => model.IITMExperience)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.IIT_Experience)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.IIT_Experience)
+                        @Html.ValidationMessageFor(model => model.IIT_Experience)
+                    </div>
+                </td>
+
+            </tr>
             <tr>
                 <td>
                     <div class="editor-label">
@@ -120,134 +131,134 @@
                         @Html.LabelFor(model => model.Total_Experience)
                     </div>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.Total_Experience,new { @class = "ReadonlyField" })
+                        @Html.TextBoxFor(model => model.Total_Experience, new { @class = "ReadonlyField" })
                         @Html.ValidationMessageFor(model => model.Total_Experience)
                     </div>
                 </td>
 
             </tr>
-    <tr><th colspan="2">Project Details</th></tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ProjectType)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.ProjectType, Model.ProjectTypes, "--Select Project Type --")
-                @Html.ValidationMessageFor(model => model.ProjectType)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.DepartmentCode)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.DepartmentCode, Model.Departments, "--Select Department--")
-                @Html.ValidationMessageFor(model => model.DepartmentCode)
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.DepartmentName)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.DepartmentName, new { @class = "ReadonlyField" })
-                @Html.ValidationMessageFor(model => model.DepartmentName)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ProjectNo)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ProjectNo)
-                @Html.ValidationMessageFor(model => model.ProjectNo)
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ProjectTitle)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.ProjectTitle, new { @class = "ReadonlyField" })
-                @Html.ValidationMessageFor(model => model.ProjectTitle)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.SponsoredAgency)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.SponsoredAgency, new { @class = "ReadonlyField" })
-                @Html.ValidationMessageFor(model => model.SponsoredAgency)
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.PICode)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.PICode)
-                @Html.ValidationMessageFor(model => model.PICode)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.PIName)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.PIName, new { @class = "ReadonlyField" })
-                @Html.ValidationMessageFor(model => model.PIName)
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ProjectCloseDate)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.ProjectCloseDate, "{0:dd/MM/yyyy}", new { @class = "ReadonlyField" })
-                @Html.ValidationMessageFor(model => model.ProjectCloseDate)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Section)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.Section, Model.Sections, "--Select Section--")
-                @Html.ValidationMessageFor(model => model.Section)
-            </div>
-        </td>
-    </tr>
-    <tr><th colspan="2">Appointment Details</th></tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.RequestFromDate)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.RequestFromDate)
-                @Html.ValidationMessageFor(model => model.RequestFromDate)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.RequestToDate)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.RequestToDate)
-                @Html.ValidationMessageFor(model => model.RequestToDate)
-            </div>
-        </td>
-    </tr>
+            <tr><th colspan="2">Project Details</th></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProjectType)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.ProjectType, Model.ProjectTypes, "--Select Project Type --")
+                        @Html.ValidationMessageFor(model => model.ProjectType)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DepartmentCode)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.DepartmentCode, Model.Departments, "--Select Department--")
+                        @Html.ValidationMessageFor(model => model.DepartmentCode)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DepartmentName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.DepartmentName, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.DepartmentName)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProjectNo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ProjectNo)
+                        @Html.ValidationMessageFor(model => model.ProjectNo)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProjectTitle)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ProjectTitle, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.ProjectTitle)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SponsoredAgency)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.SponsoredAgency, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.SponsoredAgency)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PICode)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PICode)
+                        @Html.ValidationMessageFor(model => model.PICode)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PIName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.PIName, new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.PIName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ProjectCloseDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ProjectCloseDate, "{0:dd/MM/yyyy}", new { @class = "ReadonlyField" })
+                        @Html.ValidationMessageFor(model => model.ProjectCloseDate)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Section)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.Section, Model.Sections, "--Select Section--")
+                        @Html.ValidationMessageFor(model => model.Section)
+                    </div>
+                </td>
+            </tr>
+            <tr><th colspan="2">Appointment Details</th></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.RequestFromDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.RequestFromDate)
+                        @Html.ValidationMessageFor(model => model.RequestFromDate)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.RequestToDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.RequestToDate)
+                        @Html.ValidationMessageFor(model => model.RequestToDate)
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <div class="editor-label">
@@ -268,87 +279,87 @@
                     </div>
                 </td>
             </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.FromDate)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.FromDate)
-                @Html.ValidationMessageFor(model => model.FromDate)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ToDate)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.ToDate)
-                @Html.ValidationMessageFor(model => model.ToDate)
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.GrossSalary)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.GrossSalary)
-                @Html.ValidationMessageFor(model => model.GrossSalary)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CostToProject)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CostToProject)
-                @Html.ValidationMessageFor(model => model.CostToProject)
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CommitmentNo)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CommitmentNo)
-                @Html.ValidationMessageFor(model => model.CommitmentNo)
-            </div>
-        </td>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.MeetingDate)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.MeetingDate)
-                @Html.ValidationMessageFor(model => model.MeetingDate)
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.OutSourcingCompany)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.OutSourcingCompany, Model.OutSourcingCompanies, "--Select Outsource Agency--")
-                @Html.ValidationMessageFor(model => model.OutSourcingCompany)
-            </div>
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td colspan="2" align="center">
-            <p>
-                @Html.HiddenFor(model=>model.Command)
-                <input type="submit" class="SubmitViolet" value="Save" />
-            </p>
-        </td>
-    </tr>
-    </table>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FromDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.FromDate)
+                        @Html.ValidationMessageFor(model => model.FromDate)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ToDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ToDate)
+                        @Html.ValidationMessageFor(model => model.ToDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.GrossSalary)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.GrossSalary)
+                        @Html.ValidationMessageFor(model => model.GrossSalary)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CostToProject)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CostToProject)
+                        @Html.ValidationMessageFor(model => model.CostToProject)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CommitmentNo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CommitmentNo)
+                        @Html.ValidationMessageFor(model => model.CommitmentNo)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MeetingDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.MeetingDate)
+                        @Html.ValidationMessageFor(model => model.MeetingDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.OutSourcingCompany)
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.OutSourcingCompany, Model.OutSourcingCompanies, "--Select Outsource Agency--")
+                        @Html.ValidationMessageFor(model => model.OutSourcingCompany)
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <p>
+                        @Html.HiddenFor(model => model.Command)
+                        <input type="submit" class="SubmitViolet" value="Save" />
+                    </p>
+                </td>
+            </tr>
+        </table>
     </fieldset>
 }
 
@@ -356,8 +367,9 @@
     <table>
         <tr>
             <td>
-                @Html.ActionLink("Minutes List", "MinutesList") 
-            </td><td>
+                @Html.ActionLink("Minutes List", "MinutesList")
+            </td>
+            <td>
                 @Html.ActionLink("Employee List", "EmployeeList")
             </td>
         </tr>
@@ -366,7 +378,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function () {
         $(function () {
             $('input:text:first').focus();
@@ -399,18 +411,18 @@
         $("#SponsoredAgency").attr('readOnly', 'true');
         $("#PIName").attr('readOnly', 'true');
         $("#ProjectCloseDate").attr('readOnly', 'true');
-      
-        $("#FromDate").attr('readOnly', 'true');
+
+        //$("#FromDate").attr('readOnly', 'true');
         $("#FromDate").attr("placeholder", "dd/MM/yyyy").datepicker({
             dateFormat: "dd/mm/yy",
-            onSelect: function (date) {
+            onSelect: function () {
                 var dt = $("#FromDate").datepicker('getDate');
                 dt.setDate(dt.getDate() + 1);
                 $("#ToDate").val('');
                 $("#ToDate").datepicker('option', 'minDate', dt);
             }
         });
-        $("#ToDate").attr('readOnly', 'true');
+        //$("#ToDate").attr('readOnly', 'true');
         $("#ToDate").attr("placeholder", "dd/MM/yyyy").datepicker({
             dateFormat: "dd/mm/yy", changeMonth: "true",
             onClose: function () {
@@ -426,7 +438,7 @@
         $("#ToDate").keyup(function (e) {if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this);}});
         $("#MeetingDate").attr('readOnly', 'true');
         $("#MeetingDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", minDate: "-1y", maxDate:"3m", beforeShowDay: function (date) { var day = date.getDay(); return [(day != 1 && day != 3 && day != 4 && day != 5 && day != 6 && day != 0), ''] } });
-        $("#RequestFromDate").attr('readOnly', 'true');
+        //$("#RequestFromDate").attr('readOnly', 'true');
         $("#RequestFromDate").attr("placeholder", "dd/MM/yyyy").datepicker({
             dateFormat: "dd/mm/yy",
             onSelect: function (date) {
@@ -436,7 +448,7 @@
                 $("#RequestToDate").datepicker('option', 'minDate', dt);
             }
         });
-        $("#RequestToDate").attr('readOnly', 'true');
+        //$("#RequestToDate").attr('readOnly', 'true');
         $("#RequestToDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", changeMonth: "true" });
         $("#RequestToDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
         $("#DesignationCode").change(function () {
@@ -519,7 +531,7 @@
                 alert('Please enter PI Code');
             }
         });
-        //to add total experience automatically 
+        //to add total experience automatically
         $("#NONIIT_Experience").blur(function add() {
               $("#Total_Experience").val(parseFloat($("#IIT_Experience").val()) +parseFloat($("#NONIIT_Experience").val()));
         });
@@ -641,15 +653,15 @@
             }
         });*/
     });
-</script>
+    </script>
 }
-@{    
+@{
     if (ViewData["result"] != "" && ViewData["result"] != null)
     {
         ViewData["result"] = null;
         var results = ViewData["MeetID"];
         <script type="text/javascript" language="javascript">
             alert("The New Minute Added Successfully, The Employee ID is : @results");
-    </script>
-    }    
+        </script>
+    }
 }

@@ -389,6 +389,8 @@
               <xs:element name="AgencyFee" msprop:Generator_ColumnVarNameInTable="columnAgencyFee" msprop:Generator_ColumnPropNameInRow="AgencyFee" msprop:Generator_ColumnPropNameInTable="AgencyFeeColumn" msprop:Generator_UserColumnName="AgencyFee" type="xs:decimal" />
               <xs:element name="ServiceTax" msprop:Generator_ColumnVarNameInTable="columnServiceTax" msprop:Generator_ColumnPropNameInRow="ServiceTax" msprop:Generator_ColumnPropNameInTable="ServiceTaxColumn" msprop:Generator_UserColumnName="ServiceTax" type="xs:decimal" />
               <xs:element name="TotalSalary" msprop:Generator_ColumnVarNameInTable="columnTotalSalary" msprop:Generator_ColumnPropNameInRow="TotalSalary" msprop:Generator_ColumnPropNameInTable="TotalSalaryColumn" msprop:Generator_UserColumnName="TotalSalary" type="xs:decimal" />
+              <xs:element name="EmployeeName" msprop:Generator_ColumnVarNameInTable="columnEmployeeName" msprop:Generator_ColumnPropNameInRow="EmployeeName" msprop:Generator_ColumnPropNameInTable="EmployeeNameColumn" msprop:Generator_UserColumnName="EmployeeName" type="xs:string" minOccurs="0" />
+              <xs:element name="Desig" msprop:Generator_ColumnVarNameInTable="columnDesig" msprop:Generator_ColumnPropNameInRow="Desig" msprop:Generator_ColumnPropNameInTable="DesigColumn" msprop:Generator_UserColumnName="Desig" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -628,6 +630,27 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SalaryDetailsNew" msprop:Generator_TableClassName="SalaryDetailsNewDataTable" msprop:Generator_TableVarName="tableSalaryDetailsNew" msprop:Generator_RowChangedName="SalaryDetailsNewRowChanged" msprop:Generator_TablePropName="SalaryDetailsNew" msprop:Generator_RowDeletingName="SalaryDetailsNewRowDeleting" msprop:Generator_RowChangingName="SalaryDetailsNewRowChanging" msprop:Generator_RowEvHandlerName="SalaryDetailsNewRowChangeEventHandler" msprop:Generator_RowDeletedName="SalaryDetailsNewRowDeleted" msprop:Generator_RowClassName="SalaryDetailsNewRow" msprop:Generator_UserTableName="SalaryDetailsNew" msprop:Generator_RowEvArgName="SalaryDetailsNewRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RecommendedSalary" msprop:Generator_ColumnVarNameInTable="columnRecommendedSalary" msprop:Generator_ColumnPropNameInRow="RecommendedSalary" msprop:Generator_ColumnPropNameInTable="RecommendedSalaryColumn" msprop:Generator_UserColumnName="RecommendedSalary" type="xs:string" minOccurs="0" />
+              <xs:element name="EmployeePF" msprop:Generator_ColumnVarNameInTable="columnEmployeePF" msprop:Generator_ColumnPropNameInRow="EmployeePF" msprop:Generator_ColumnPropNameInTable="EmployeePFColumn" msprop:Generator_UserColumnName="EmployeePF" type="xs:decimal" />
+              <xs:element name="EmployeeESIC" msprop:Generator_ColumnVarNameInTable="columnEmployeeESIC" msprop:Generator_ColumnPropNameInRow="EmployeeESIC" msprop:Generator_ColumnPropNameInTable="EmployeeESICColumn" msprop:Generator_UserColumnName="EmployeeESIC" type="xs:decimal" />
+              <xs:element name="ProfessionalTax" msprop:Generator_ColumnVarNameInTable="columnProfessionalTax" msprop:Generator_ColumnPropNameInRow="ProfessionalTax" msprop:Generator_ColumnPropNameInTable="ProfessionalTaxColumn" msprop:Generator_UserColumnName="ProfessionalTax" type="xs:decimal" />
+              <xs:element name="NetSalary" msprop:Generator_ColumnVarNameInTable="columnNetSalary" msprop:Generator_ColumnPropNameInRow="NetSalary" msprop:Generator_ColumnPropNameInTable="NetSalaryColumn" msprop:Generator_UserColumnName="NetSalary" type="xs:decimal" />
+              <xs:element name="EmployerPF" msprop:Generator_ColumnVarNameInTable="columnEmployerPF" msprop:Generator_ColumnPropNameInRow="EmployerPF" msprop:Generator_ColumnPropNameInTable="EmployerPFColumn" msprop:Generator_UserColumnName="EmployerPF" type="xs:decimal" />
+              <xs:element name="EmployerESIC" msprop:Generator_ColumnVarNameInTable="columnEmployerESIC" msprop:Generator_ColumnPropNameInRow="EmployerESIC" msprop:Generator_ColumnPropNameInTable="EmployerESICColumn" msprop:Generator_UserColumnName="EmployerESIC" type="xs:decimal" />
+              <xs:element name="Insurance" msprop:Generator_ColumnVarNameInTable="columnInsurance" msprop:Generator_ColumnPropNameInRow="Insurance" msprop:Generator_ColumnPropNameInTable="InsuranceColumn" msprop:Generator_UserColumnName="Insurance" type="xs:decimal" />
+              <xs:element name="TotalContribution" msprop:Generator_ColumnVarNameInTable="columnTotalContribution" msprop:Generator_ColumnPropNameInRow="TotalContribution" msprop:Generator_ColumnPropNameInTable="TotalContributionColumn" msprop:Generator_UserColumnName="TotalContribution" type="xs:decimal" />
+              <xs:element name="GrossTotal" msprop:Generator_ColumnVarNameInTable="columnGrossTotal" msprop:Generator_ColumnPropNameInRow="GrossTotal" msprop:Generator_ColumnPropNameInTable="GrossTotalColumn" msprop:Generator_UserColumnName="GrossTotal" type="xs:decimal" />
+              <xs:element name="AgencyFee" msprop:Generator_ColumnVarNameInTable="columnAgencyFee" msprop:Generator_ColumnPropNameInRow="AgencyFee" msprop:Generator_ColumnPropNameInTable="AgencyFeeColumn" msprop:Generator_UserColumnName="AgencyFee" type="xs:decimal" />
+              <xs:element name="ServiceTax" msprop:Generator_ColumnVarNameInTable="columnServiceTax" msprop:Generator_ColumnPropNameInRow="ServiceTax" msprop:Generator_ColumnPropNameInTable="ServiceTaxColumn" msprop:Generator_UserColumnName="ServiceTax" type="xs:decimal" />
+              <xs:element name="TotalSalary" msprop:Generator_ColumnVarNameInTable="columnTotalSalary" msprop:Generator_ColumnPropNameInRow="TotalSalary" msprop:Generator_ColumnPropNameInTable="TotalSalaryColumn" msprop:Generator_UserColumnName="TotalSalary" type="xs:decimal" />
+              <xs:element name="EmployeeName" msprop:Generator_ColumnVarNameInTable="columnEmployeeName" msprop:Generator_ColumnPropNameInRow="EmployeeName" msprop:Generator_ColumnPropNameInTable="EmployeeNameColumn" msprop:Generator_UserColumnName="EmployeeName" type="xs:string" minOccurs="0" />
+              <xs:element name="Desig" msprop:Generator_ColumnVarNameInTable="columnDesig" msprop:Generator_ColumnPropNameInRow="Desig" msprop:Generator_ColumnPropNameInTable="DesigColumn" msprop:Generator_UserColumnName="Desig" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

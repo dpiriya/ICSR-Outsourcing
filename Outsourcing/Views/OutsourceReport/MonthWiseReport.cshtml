@@ -21,7 +21,7 @@
                 </td>
                 <td>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.FromDate)
+                        @Html.TextBoxFor(model => model.FromDate)
                         @Html.ValidationMessageFor(model => model.FromDate)
                     </div>
                 </td>
@@ -34,7 +34,7 @@
                 </td>
                 <td>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.ToDate)
+                        @Html.TextBoxFor(model => model.ToDate)
                         @Html.ValidationMessageFor(model => model.ToDate)
                     </div>
                 </td>
@@ -104,17 +104,20 @@
     @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#FromDate").attr('readOnly', 'true');
-        $("#FromDate").attr("placeholder", "dd/MM/yyyy").datepicker({
+        //$("#FromDate").attr('readOnly', 'true');
+        $("#FromDate").datepicker({
             dateFormat: "dd/mm/yy",
             onSelect: function (date) {
                 var dt = $("#FromDate").datepicker('getDate');
                 dt.setDate(dt.getDate() + 1);
+                //var dt = $("#FromDate").datepicker('getDate');
+                //dt.setDate(dt.getDate() + 1);
                 $("#ToDate").val('');
                 $("#ToDate").datepicker('option', 'minDate', dt);
             }
         });
-        $("#ToDate").attr('readOnly', 'true');
+        $("#FromDate").attr("placeholder", "dd/MM/yyyy");
+        //$("#ToDate").attr('readOnly', 'true');
         $("#ToDate").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", changeMonth: "true" });
         $("#ToDate").keyup(function (e) { if (e.keyCode == 8 || e.keyCode == 46) { $.datepicker._clearDate(this); } });
     });

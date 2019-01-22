@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c08e9b2f9cc141c7ac52b547b1110276" Name="Diagram1">
+        <EntityTypeShape EntityType="RecruitModel.tbl_mst_BankName" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RecruitModel.tbl_mst_Section" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RecruitModel.myview" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RecruitModel.SalaryDetail" Width="1.5" PointX="8.25" PointY="19.75" />
+        <EntityTypeShape EntityType="RecruitModel.OutSourcingDesignation" Width="1.5" PointX="10.375" PointY="7" />
+        <EntityTypeShape EntityType="RecruitModel.AppointmentDetail" Width="1.5" PointX="11.25" PointY="15" />
+        <EntityTypeShape EntityType="RecruitModel.AppointmentProject" Width="1.5" PointX="12.625" PointY="8.875" />
+        <EntityTypeShape EntityType="RecruitModel.OrderRequestDetail" Width="1.5" PointX="8.25" PointY="15.25" />
+        <EntityTypeShape EntityType="RecruitModel.OutsourcingEmployeeDetail" Width="1.5" PointX="3.75" PointY="17.875" />
+        <EntityTypeShape EntityType="RecruitModel.OutsourcingMeeting" Width="1.5" PointX="3.75" PointY="6.75" />
+        <EntityTypeShape EntityType="RecruitModel.OutsourcingOffer" Width="1.5" PointX="6" PointY="15.75" />
+        <AssociationConnector Association="RecruitModel.FK_AppointmentDetailsMinutes" />
+        <AssociationConnector Association="RecruitModel.FK_AppointmentProjectMeetingID" />
+        <AssociationConnector Association="RecruitModel.FK_ProjectDesignationCode" />
+        <AssociationConnector Association="RecruitModel.FK_MeetingOrder" />
+        <EntityTypeShape EntityType="RecruitModel.AppointmentMaster" Width="1.5" PointX="14" PointY="15" />
+        <EntityTypeShape EntityType="RecruitModel.ListItemMaster" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RecruitModel.PayStructure" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RecruitModel.ProfessionalTax" Width="1.5" PointX="4.75" PointY="0.75" />
+        <AssociationConnector Association="RecruitModel.FK_ProjectDetailsEmployeeID" />
+        <AssociationConnector Association="RecruitModel.FK_AppointmentDesignation" />
+        <AssociationConnector Association="RecruitModel.FK_AppointmentMasterEmployee" />
+        <AssociationConnector Association="RecruitModel.FK_AppointmentMasterMinutes" />
+        <AssociationConnector Association="RecruitModel.FK_AppointmentProjectID" />
+        <AssociationConnector Association="RecruitModel.FK_OrderRequestEmployeeID" />
+        <AssociationConnector Association="RecruitModel.FK_SalaryDetailsEmployeeID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

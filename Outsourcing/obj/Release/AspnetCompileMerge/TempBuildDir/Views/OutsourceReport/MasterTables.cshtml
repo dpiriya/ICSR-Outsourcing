@@ -1,14 +1,22 @@
 ﻿@{
     ViewBag.Title = "MasterTables";
 }
+@using (Html.BeginForm("MasterTables", "OutsourceReport"))
+{
 
-<div style="left:30px;position:relative;">
-    <h3>Download Master Tables</h3>
-    <table>
-        <tr>
-            <td>
-              <input type="submit" value="Download" name="Download"></input>
-            </td>
-        </tr>
-    </table>
-</div>
+    <div style="left:30px;position:relative;">
+        <h3>Download Master Tables</h3>
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" value="Format 1" name="Command" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Format 2" name="Command"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+}

@@ -4,6 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/HelperStyle1.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<link href="~/Content/themes/base/datepicker.css" rel="stylesheet" />
+
 @using (Html.BeginForm("NewEmployee","Outsource"))
 {
     @Html.AntiForgeryToken()
@@ -38,7 +41,7 @@
                         @Html.LabelFor(model => model.DOB)
                     </div>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.DOB,"{0:dd/MM/yyyy}", new {id="DOB"})
+                        @Html.TextBoxFor(model => model.DOB)
                         @Html.ValidationMessageFor(model => model.DOB)
                     </div>
                 </td>
@@ -58,7 +61,7 @@
                             @Html.LabelFor(model => model.Age)
                         </div>
                         <div class="editor-field" >
-                            @Html.TextBoxFor(model => model.Age, new { @class = "ReadonlyField"})
+                            @Html.TextBoxFor(model => model.Age, new { id="Age", @class="ReadonlyField"})
                         </div>                 
                       </td>             
             </tr>
@@ -314,20 +317,21 @@
                 }
             });
         });
-        $("#CandidateID").attr('readOnly', 'true');
-        $("Age").attr('readOnly', 'true');
+        $("#CandidateID").attr('readOnly', 'true');       
         $("#DOB").attr('readOnly', 'true');
-        $("#DOB").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", changeYear: true, changeMonth: true, minDate: "-110y", maxDate: "-18y" });
+        $("#DOB").attr("placeholder", "dd/MM/yyyy").datepicker({ dateFormat: "dd/mm/yy", changeYear: true, changeMonth: true, minDate: "-110y", maxDate: "-18y" }).val();
         $("#ConfirmBankAccountNo").bind('copy paste cut', function (e) {
             e.preventDefault();
         });
     });
-    $("#DOB").change(function () {
-        var dob = $("#DOB").val();
-        dob = new Date(dob);
+    $("#DOB").change(function() {        
+        //var dob = $("#DOB").val(); 
+        var dob = $('#DOB').datepicker('option', 'dateFormat', 'mm/dd/yy').val();
+        dob = new Date(dob);        
         var today = new Date();
         var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
-        $("#Age").val(age);
+        $("#Age").val(age);       
+        dob = $('#DOB').datepicker('option', 'dateFormat', 'dd/mm/yy').val();   
     });
    //$("#PH").val=$("#PH").is(':checked');
     

@@ -1,11 +1,11 @@
-﻿@model ICollection<Outsourcing.Models.ExternalLogin>
+﻿@model ICollection<DataLayer.Repository.ExternalLogin>
 
 @if (Model.Count > 0)
 {
     <h3>Registered external logins</h3>
     <table>
         <tbody>
-        @foreach (Outsourcing.Models.ExternalLogin externalLogin in Model)
+        @foreach (DataLayer.Repository.ExternalLogin externalLogin in Model)
         {
             <tr>
                 <td>@externalLogin.ProviderDisplayName</td>

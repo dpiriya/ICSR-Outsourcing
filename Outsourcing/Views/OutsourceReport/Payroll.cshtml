@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Payroll";
+}
+
+<h2>Payroll</h2>
+@using (Html.BeginForm("Payroll", "OutsourceReport"))
+{
+
+<div style="left:30px;position:relative;">
+    <h3>Download Payroll Data</h3>
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <table align="center">
+            <tr> <td><h3>Period Wise Report</h3></td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FromDate)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.FromDate)
+                        @Html.ValidationMessageFor(model => model.FromDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ToDate)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ToDate)
+                        @Html.ValidationMessageFor(model => model.ToDate)
+                    </div>
+                </td>
+            </tr>            
+                <tr>
+                    <td>
+                        <input type="submit" value="Download" name="Download" />
+                    </td>
+                </tr>
+            </table>
+</div>
+}

@@ -128,6 +128,7 @@
       <End Role="OutsourcingEmployeeDetail" EntitySet="OutsourcingEmployeeDetails" />
       <End Role="OutsourcingMeeting" EntitySet="OutsourcingMeetings" />
     </AssociationSet>
+    <EntitySet Name="myview" EntityType="RecruitModel.myview" />
   </EntityContainer>
   <ComplexType Name="ConsultancyProjectDetail_Result">
     <Property Type="String" Name="TITLE" Nullable="true" MaxLength="320" />
@@ -353,6 +354,7 @@
     <NavigationProperty Name="AppointmentMaster" Relationship="RecruitModel.FK_AppointmentProjectID" FromRole="AppointmentProject" ToRole="AppointmentMaster" />
     <NavigationProperty Name="OutSourcingDesignation" Relationship="RecruitModel.FK_ProjectDesignationCode" FromRole="AppointmentProject" ToRole="OutSourcingDesignation" />
     <NavigationProperty Name="OutsourcingMeeting" Relationship="RecruitModel.FK_AppointmentProjectMeetingID" FromRole="AppointmentProject" ToRole="OutsourcingMeeting" />
+    <Property Name="PartTime" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="FK_AppointmentProjectID">
     <End Type="RecruitModel.AppointmentMaster" Role="AppointmentMaster" Multiplicity="1" />
@@ -391,9 +393,9 @@
     <Property Name="DesignationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Qualification" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IITMExperience" Type="Boolean" Nullable="false" />
-    <Property Name="IIT_Experience" Type="Decimal" Precision="3" Scale="0" />
-    <Property Name="NONIIT_Experience" Type="Decimal" Precision="3" Scale="0" />
-    <Property Name="Total_Experience" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="IIT_Experience" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="NONIIT_Experience" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="Total_Experience" Type="Decimal" Precision="4" Scale="2" />
     <Property Name="ProjectType" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
     <Property Name="ProjectNo" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="ProjectTitle" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
@@ -425,6 +427,7 @@
     <NavigationProperty Name="OutsourcingOffer" Relationship="RecruitModel.FK_MeetingOrder" FromRole="OutsourcingMeeting" ToRole="OutsourcingOffer" />
     <NavigationProperty Name="OutSourcingDesignation" Relationship="RecruitModel.FK_OSMeetingDesignationCode" FromRole="OutsourcingMeeting" ToRole="OutSourcingDesignation" />
     <NavigationProperty Name="OutsourcingEmployeeDetails" Relationship="RecruitModel.FK_OSMeetingEmployeeID" FromRole="OutsourcingMeeting" ToRole="OutsourcingEmployeeDetail" />
+    <Property Name="PartTime" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="FK_AppointmentDetailsMinutes">
     <End Type="RecruitModel.OutsourcingMeeting" Role="OutsourcingMeeting" Multiplicity="1" />
@@ -561,4 +564,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="myview">
+    <Key>
+      <PropertyRef Name="employeeid" />
+    </Key>
+    <Property Name="orderid" Type="Int32" />
+    <Property Name="employeeid" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>
